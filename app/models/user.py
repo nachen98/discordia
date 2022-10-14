@@ -11,6 +11,15 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    # enabling bidirectional many-to-one relationship so that this class
+    # will include records it is associated to
+    messages = db.relationship('Message', back_populates='user')
+
+    # Many-to-many
+    # user-server
+    # will need a join table
+
+
     @property
     def password(self):
         return self.hashed_password
