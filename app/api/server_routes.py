@@ -9,7 +9,7 @@ from .auth_routes import validation_errors_to_error_messages
 server_routes = Blueprint('servers', __name__)
 
 # create new channel with server_id
-@server_routes.route('/<int:server_id/channels>', methods=['POST'])
+@server_routes.route('/<int:server_id>/channels', methods=['POST'])
 @login_required
 def create_channel():
 
@@ -71,7 +71,7 @@ def get_server_by_id(server_id):
 
 # create a regular server
 @server_routes.route('/regular', methods=['POST'])
-@login_required()
+@login_required
 def create_server():
     form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
