@@ -25,6 +25,8 @@ class User(db.Model, UserMixin):
         secondary=user_server,
         backref='serverUsers'
         )
+    # IMPORTANT: backref needs to be set to something different (server_Users?)
+    #               due to serverUsers already being used in server model
 
     @property
     def password(self):

@@ -33,6 +33,8 @@ class Server(db.Model):
         secondary=user_server,
         backref='inServers'
         )
+    # IMPORTANT: backref needs to be set to something different (in_Servers?)
+    #               due to inServers being used in User model
 
     def to_dict(self):
         return {
