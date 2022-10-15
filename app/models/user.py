@@ -11,8 +11,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    createdAt = db.Column(db.DateTime, nullable=False)
-    updatedAt = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
 
     # enabling bidirectional many-to-one relationship so that this class
@@ -20,11 +20,11 @@ class User(db.Model, UserMixin):
     messages = db.relationship('Message', back_populates='user')
 
     # many-to-many
-    inServers = db.relationship(
-        'Server',
-        secondary=user_server,
-        backref='serverUsers'
-        )
+    # in_servers = db.relationship(
+    #     'Server',
+    #     secondary=user_server,
+    #     backref='server_users_1'
+    #     )
     # IMPORTANT: backref needs to be set to something different (server_Users?)
     #               due to serverUsers already being used in server model
 
@@ -46,10 +46,13 @@ class User(db.Model, UserMixin):
             'email': self.email
         }
 
-    def to_dict_with_servers(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email,
-            'inServers': self.inServers
-        }
+    # def to_dict_with_servers(self):
+    #     return {
+    #         'id': self.id,
+    #         'username': self.username,
+    #         'email': self.email,
+    #         'in_servers_1': self.in_servers
+    #     }
+
+    def __repr__(self):
+        return f'<User, id={self.id}, username={self.username}>'

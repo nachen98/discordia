@@ -6,12 +6,12 @@ class Channel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     topic = db.Column(db.String(255), nullable=True)
-    isVoice = db.Column(db.Boolean, nullable=False)
-    createdAt = db.Column(db.DateTime, nullable=False)
-    updatedAt = db.Column(db.DateTime, nullable=False)
+    is_voice = db.Column(db.Boolean, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
     # Foreign Keys
-    serverId = db.Column(db.Integer, db.ForeignKey('servers.id'))
+    server_id = db.Column(db.Integer, db.ForeignKey('servers.id'))
 
     # enabling bidirectional many-to-one relationship so that
     # this class will include records it is associated to
@@ -25,6 +25,9 @@ class Channel(db.Model):
             'id': self.id,
             'name': self.name,
             'topic': self.topic,
-            'isVoice': self.isVoice,
+            'is_voice': self.is_voice,
             'messages': self.messages
         }
+
+    def __repr__(self):
+        return f'<Channel: id={self.id}, name={self.name}, topic={self.topic}, isVoice={self.is_voice}>'

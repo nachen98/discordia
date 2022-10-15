@@ -12,13 +12,13 @@ class Server(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    imageUrl = db.Column(db.String(255), nullable=True)
-    isDm = db.Column(db.Boolean, nullable=False)
-    createdAt = db.Column(db.DateTime, nullable=False)
-    updatedAt = db.Column(db.DateTime, nullable=False)
+    image_url = db.Column(db.String(255), nullable=True)
+    is_dm = db.Column(db.Boolean, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
     # Foreign Keys
-    ownerId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     # enabling bidirectional many-to-one relationship so that
     # this class will include records it is associated to
@@ -28,10 +28,10 @@ class Server(db.Model):
     channels = db.relationship('Channel', back_populates='server', cascade='all, delete')
 
     # many-to-many
-    serverUsers = db.relationship(
+    server_users = db.relationship(
         'User',
         secondary=user_server,
-        backref='inServers'
+        backref='in_servers'
         )
     # IMPORTANT: backref needs to be set to something different (in_Servers?)
     #               due to inServers being used in User model
@@ -40,9 +40,9 @@ class Server(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'imageUrl': self.imageUrl,
-            'isDm': self.isDm,
-            'ownerId': self.ownerId,
+            'imageUrl': self.image_url,
+            'isDm': self.is_dm,
+            'ownerId': self.owner_id,
         }
 
     # return server info with messages
@@ -51,8 +51,8 @@ class Server(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'imageUrl': self.imageUrl,
-            'isDm': self.isDm,
+            'imageUrl': self.image_url,
+            'is_dm': self.is_dm,
             'messages': self.messages
         }
 
@@ -60,9 +60,12 @@ class Server(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'imageUrl': self.imageUrl,
-            'isDm': self.isDm,
-            'ownerId': self.ownerId,
-            'users': self.serverUsers,
+            'imageUrl': self.image_url,
+            'isDm': self.is_dm,
+            'ownerId': self.owner_id,
+            'users': self.server_users,
             'channels': self.channels
         }
+
+    def __repr__(self):
+        return f'<Server, id={self.id}, is_dm={self.is_dm}>'
