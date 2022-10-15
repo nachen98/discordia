@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+from .server import user_server
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -10,15 +11,20 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    createdAt = db.Column(db.DateTime, nullable=False)
+    updatedAt = db.Column(db.DateTime, nullable=False)
+
 
     # enabling bidirectional many-to-one relationship so that this class
     # will include records it is associated to
     messages = db.relationship('Message', back_populates='user')
 
-    # Many-to-many
-    # user-server
-    # will need a join table
-
+    # many-to-many
+    inServers = db.relationship(
+        'Server',
+        secondary=user_server,
+        backref='serverUsers'
+        )
 
     @property
     def password(self):
@@ -36,4 +42,12 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email
+        }
+
+    def to_dict_with_servers(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'inServers': self.inServers
         }

@@ -12,7 +12,7 @@ class Message(db.Model):
     # Foreign Keys
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     channelId = db.Column(db.Integer, db.ForeignKey('channels.id'))
-    serverId = db.Column(db.Integer, db.ForeignKey('server.id'))
+    serverId = db.Column(db.Integer, db.ForeignKey('servers.id'))
 
     # enabling bidirectional many-to-one relationship so that this class
     # will include records it is associated to

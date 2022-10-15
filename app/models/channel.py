@@ -13,7 +13,18 @@ class Channel(db.Model):
     # Foreign Keys
     serverId = db.Column(db.Integer, db.ForeignKey('servers.id'))
 
-    # enabling bidirectional many-to-one relationship so that this class
-    # will include records it is associated to
-    messages = db.relationship('Message', back_populates='channel')
+    # enabling bidirectional many-to-one relationship so that
+    # this class will include records it is associated to
+    #
+    # delete all messages if channel is deleted
+    messages = db.relationship('Message', back_populates='channel', cascade='all, delete')
     server = db.relationship('Server', back_populates='channels')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'topic': self.topic,
+            'isVoice': self.isVoice,
+            'messages': self.messages
+        }
