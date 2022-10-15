@@ -14,7 +14,7 @@ def seed_users():
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
-    # db.session.commit()
+    db.session.commit()
 
     # Add in servers here so that the server objects
     # will have access to user objects
