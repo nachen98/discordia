@@ -8,6 +8,10 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.server_routes import server_routes
+from .api.channel_routes import channel_routes
+from flask_socketio import SocketIO, send, emit
+
 
 from .seeds import seed_commands
 
@@ -25,12 +29,26 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+origins = "*"
+if os.environ.get('FLASK_ENV') == 'production':
+    origins = [
+        "http://discordia-cgh.herokuapp.com",
+        "https://discordia-cgh.herokuapp.com"
+    ]
+
+socketio = SocketIO(cors_allowed_origins=origins)
+
+
+
+
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(server_routes, url_prefix='/api/servers')
+app.register_blueprint(channel_routes, url_prefix='/api/channels')
 db.init_app(app)
 Migrate(app, db)
 
@@ -70,3 +88,7 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
+if __name__ == "__main__":
+    socketio.run(app)
