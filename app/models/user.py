@@ -20,12 +20,12 @@ class User(db.Model, UserMixin):
     # enabling bidirectional many-to-one relationship so that this class
     # will include records it is associated to
     messages = db.relationship('Message', back_populates='user')
-
+    
     # many-to-many
     # in_servers = db.relationship(
     #     'Server',
     #     secondary=user_server,
-    #     backref='server_users_1'
+    #     backref='server_users_1'          <------- Change to back_populates=server_users
     #     )
     # IMPORTANT: backref needs to be set to something different (server_Users?)
     #               due to serverUsers already being used in server model

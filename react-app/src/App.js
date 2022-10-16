@@ -9,7 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
-
+import DirectMessageMain from './components/DirectMessageMain';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +49,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/splash' exact={true} >
           <SplashPage />
+        </Route>
+        <Route path='/channels/@me'>
+          <DirectMessageMain />
         </Route>
       </Switch>
     </BrowserRouter>

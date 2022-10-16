@@ -3,12 +3,24 @@
     text-decoration: none;
 }
 
+body {
+    margin: 0;
+}
+
 .ctr-algn-text {
     text-align: center;
 }
 
+.pos-rel{
+    position: relative;
+}
+
 .pos-abs {
     position: absolute;
+}
+
+.pos-sticky {
+    position: sticky;
 }
 
 .white-text {
