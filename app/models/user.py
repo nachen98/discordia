@@ -20,11 +20,11 @@ class User(db.Model, UserMixin):
     messages = db.relationship('Message', back_populates='user')
 
     # many-to-many
-    # in_servers = db.relationship(
-    #     'Server',
-    #     secondary=user_server,
-    #     backref='server_users_1'
-    #     )
+    in_servers = db.relationship(
+        'Server',
+        secondary=user_server,
+        back_populates='server_users'
+        )
     # IMPORTANT: backref needs to be set to something different (server_Users?)
     #               due to serverUsers already being used in server model
 
@@ -46,13 +46,13 @@ class User(db.Model, UserMixin):
             'email': self.email
         }
 
-    # def to_dict_with_servers(self):
-    #     return {
-    #         'id': self.id,
-    #         'username': self.username,
-    #         'email': self.email,
-    #         'in_servers_1': self.in_servers
-    #     }
+    def to_dict_with_servers(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'in_servers': self.in_servers
+        }
 
     def __repr__(self):
         return f'<User, id={self.id}, username={self.username}>'
