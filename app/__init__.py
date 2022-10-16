@@ -1,16 +1,19 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .models import db, User
+from .models import db, User, Server, Channel
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.channel_routes import channel_routes
 from flask_socketio import SocketIO, send, emit
+
+from .forms import ServerForm
+from datetime import datetime
 
 
 from .seeds import seed_commands
@@ -54,6 +57,53 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
+print("test------")
+
+
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    # form = ServerForm()
+    # if form.validate_on_submit():
+    #     print('hi there')
+    # return render_template("index.html", form=form)
+    form = ServerForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        print('hi there')
+        # name = form.data['name']
+        # print('form name ', name)
+        # if form['image_url']:
+        #     print( "EMPTY")
+        #     image_url = form.data['image_url']
+        # if form['image_url'] is None:
+        #     print(" None")
+        server = Server()
+        form.populate_obj(server)
+        server.is_dm = False
+        server.owner_id = 3
+        server.created_at = datetime.now()
+        server.updated_at = datetime.now()
+       
+        db.session.add(server)
+        db.session.commit()
+
+        channel = Channel()
+        channel.name="general"
+        channel.server_id = server.id
+        channel.created_at = datetime.now()
+        channel.updated_at = datetime.now()
+        channel.is_voice=False
+        channel.topic = ""
+        db.session.add(channel)
+        db.session.commit()
+        return server.to_dict(), 201
+        
+    
+    if form.errors:
+        return {'errors': form.errors}, 400
+
+    return render_template("index.html", form=form)
 
 
 # Since we are deploying with Docker and Flask,

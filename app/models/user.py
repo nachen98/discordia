@@ -51,7 +51,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'in_servers_1': self.in_servers
+            'in_servers': self.in_servers
         }
 
     def __repr__(self):

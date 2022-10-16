@@ -25,9 +25,18 @@ class Channel(db.Model):
             'id': self.id,
             'name': self.name,
             'topic': self.topic,
+            'is_voice': self.is_voice
+        }
+
+
+    def to_dict_with_messages(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'topic': self.topic,
             'is_voice': self.is_voice,
-            'messages': self.messages
+            'messages': [message.to_dict() for message in self.messages ]
         }
 
     def __repr__(self):
-        return f'<Channel: id={self.id}, name={self.name}, topic={self.topic}, isVoice={self.is_voice}>'
+        return f'<Channel: id={self.id}, name={self.name}, topic={self.topic}, is_voice={self.is_voice}>'
