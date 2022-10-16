@@ -3,8 +3,8 @@ from .db import db
 user_server = db.Table(
     'user_server',
     db.Model.metadata,
-    db.Column('userId', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('serverId', db.Integer, db.ForeignKey('servers.id'), primary_key=True)
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('server_id', db.Integer, db.ForeignKey('servers.id'), primary_key=True)
 )
 
 class Server(db.Model):
@@ -31,7 +31,7 @@ class Server(db.Model):
     server_users = db.relationship(
         'User',
         secondary=user_server,
-        backref='in_servers'
+        back_populates='in_servers'
         )
     # IMPORTANT: backref needs to be set to something different (in_Servers?)
     #               due to inServers being used in User model
@@ -40,8 +40,8 @@ class Server(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'imageUrl': self.image_url,
-            'isDm': self.is_dm,
+            'image_url': self.image_url,
+            'is_dm': self.is_dm,
             'ownerId': self.owner_id,
         }
 
@@ -51,7 +51,7 @@ class Server(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'imageUrl': self.image_url,
+            'image_url': self.image_url,
             'is_dm': self.is_dm,
             'messages': self.messages
         }
@@ -60,12 +60,12 @@ class Server(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'imageUrl': self.image_url,
-            'isDm': self.is_dm,
-            'ownerId': self.owner_id,
-            'users': self.server_users,
-            'channels': self.channels
+            'image_url': self.image_url,
+            'is_dm': self.is_dm,
+            'owner_id': self.owner_id,
+            'users': [user.to_dict() for user in self.server_users],
+            'channels': [channel.to_dict() for channel in self.channels]
         }
 
     def __repr__(self):
-        return f'<Server, id={self.id}, is_dm={self.is_dm}>'
+        return f'<Server, id={self.id}, is_dm={self.is_dm}, name={self.name}, image_url={self.image_url}>'

@@ -27,7 +27,7 @@ class Message(db.Model):
             'user_id': self.user_id,
             'server_id': self.server_id,
             'channel_id': self.channel_id,
-            'createdAt': self.created_at
+            'created_at': self.created_at
         }
 
     def __repr__(self):
