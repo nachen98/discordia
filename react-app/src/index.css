@@ -1,1 +1,58 @@
 /* TODO Add site wide styles */
+* {
+    text-decoration: none;
+}
+
+.ctr-algn-text {
+    text-align: center;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.white-text {
+    color: white;
+}
+
+.flx-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flx-col-justify-algn-ctr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flx-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flx-row-justify-ctr {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flx-row-justify-align-ctr {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.flx-row-space-btw {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flx-row-space-evenly {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
