@@ -31,7 +31,7 @@ class Server(db.Model):
     server_users = db.relationship(
         'User',
         secondary=user_server,
-        backref='in_servers'        # <------- Changed to back_populates
+        backref='in_servers'
         )
     # IMPORTANT: backref needs to be set to something different (in_Servers?)
     #               due to inServers being used in User model
