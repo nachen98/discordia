@@ -28,10 +28,74 @@ def seed_users():
         password='password',
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    mary = User(
+        username='mary',
+        email='mary@aa.io',
+        first_name='mary',
+        last_name='thomas',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    james = User(
+        username='james',
+        email='james@aa.io',
+        first_name='james',
+        last_name='robert',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    john = User(
+        username='john',
+        email='john@aa.io',
+        first_name='john',
+        last_name='black',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    linda = User(
+        username='linda',
+        email='linda@aa.io',
+        first_name='linda',
+        last_name='lee',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    steven = User(
+        username='steven',
+        email='steven@aa.io',
+        first_name='steven',
+        last_name='cain',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    nancy= User(
+        username='nancy',
+        email='nancy@aa.io',
+        first_name='nancy',
+        last_name='adams',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    betty = User(
+        username='betty',
+        email='betty@aa.io',
+        first_name='betty',
+        last_name='clark',
+        password='password',
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(mary)
+    db.session.add(james)
+    db.session.add(john)
+    db.session.add(linda)
+    db.session.add(steven)
+    db.session.add(nancy)
+    db.session.add(betty)
+    
     db.session.commit()
 
     # Add in servers here so that the server objects
