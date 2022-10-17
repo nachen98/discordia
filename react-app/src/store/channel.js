@@ -4,10 +4,10 @@ const UPDATE_ONE_CHANNEL = 'channels/updateOneChannel'
 const DELETE_ONE_CHANNEL = 'channels/deleteOneChannel'
 
 
-const loadOneChannel = (channelId) => {
+export const loadOneChannel = (channel) => {
     return {
         type: GET_ONE_CHANNEL_By_ID,
-        channelId
+        channel
     }
 }
 
@@ -99,7 +99,7 @@ const channelReducer = (state=initialState, action)=>{
 
         case GET_ONE_CHANNEL_By_ID:
             newState={...state}
-            newState=action.channelId
+            newState[action.channel.id]=action.channel
             return newState
 
         case CREATE_ONE_CHANNEL:

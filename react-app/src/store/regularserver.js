@@ -1,8 +1,9 @@
 const GET_ALL_REGULAR_SERVERS = '/regularservers/getAllServers';
 const GET_ONE_REGULAR_SERVER_By_ID = 'regularservers/getOneServer';
 const CREATE_ONE_REGULAR_SERVER = 'regularservers/createOneServer';
-const UPDATE_ONE_REGULAR_SERVER = 'regularservers/updateOneServer'
+const UPDATE_ONE_REGULAR_SERVER = 'regularservers/updateOneServer';
 const DELETE_ONE_REGULAR_SERVER = 'regularservers/deleteOneServer'
+
 
 const loadRegularServers=(list)=> {
     return {
@@ -11,10 +12,10 @@ const loadRegularServers=(list)=> {
     }
 }
 
-const loadOneRegularServer = (regularServerId) => {
+const loadOneRegularServer = (regularServer) => {
     return {
         type: GET_ONE_REGULAR_SERVER_By_ID,
-        regularServerId
+        regularServer
     }
 }
 
@@ -119,7 +120,7 @@ const regularServerReducer = (state=initialState, action)=>{
 
         case GET_ONE_REGULAR_SERVER_By_ID:
             newState={...state}
-            newState=action.regularServerId
+            newState[action.regularServer.id] = action.regularServer
             return newState
 
         case CREATE_ONE_REGULAR_SERVER:
