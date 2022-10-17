@@ -42,9 +42,13 @@ const deleteOneRegularServer=(regularServerId)=> {
 
 //thunk action creator
 export const getAllRegularServers =()=> async(dispatch)=>{
+    console.log("here!!!!!")
     const response = await fetch('/api/servers/regular/current')
+ 
     if(response.ok){
-        const list = await response.json()
+        const data = await response.json()
+        const list =data.result
+        console.log("list!!!!!!!!", list)
         dispatch(loadRegularServers(list))
     }
 }
@@ -115,6 +119,7 @@ const regularServerReducer = (state=initialState, action)=>{
             newState={...state};
             const newAllRegularServers={}
             action.list.forEach((server)=>{newAllRegularServers[server.id]=server})
+            console.log("action.list!!!!!!!", action.list)
             newState=newAllRegularServers
             return newState
 
