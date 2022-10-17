@@ -126,8 +126,12 @@ const regularServerReducer = (state=initialState, action)=>{
             newState={...state}
             newState[action.regularServer.id]=action.regularServer
             return newState
-        
+         
         case UPDATE_ONE_REGULAR_SERVER:
+            newState={...state, [action.regularServer.id]: action.regularServer}
+            return newState
+
+        case DELETE_ONE_REGULAR_SERVER:
             newState={...state}
             delete newState[action.regularServerId]
             return newState
