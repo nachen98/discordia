@@ -98,8 +98,8 @@ def index():
         db.session.add(channel)
         db.session.commit()
         return server.to_dict(), 201
-        
-    
+
+
     if form.errors:
         return {'errors': form.errors}, 400
 

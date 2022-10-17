@@ -9,7 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
-import DirectMessageMain from './components/DirectMessageMain';
+import Main from './components/Main';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {pathLocation.pathname !== '/splash' && <NavBar />}
+      {pathLocation.pathname === '/login' && <NavBar />}
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -51,7 +51,7 @@ function App() {
           <SplashPage />
         </Route>
         <Route path='/channels/@me'>
-          <DirectMessageMain />
+          <Main />
         </Route>
       </Switch>
     </BrowserRouter>
