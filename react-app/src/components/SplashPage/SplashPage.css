@@ -1,0 +1,58 @@
+#splashpage-container,
+.splash-nav {
+    min-width: 1024px
+}
+
+#splash-sect-1 {
+    background-color: #5865f2;
+    height: 626px;
+}
+
+#splash-sect-2,
+#splash-sect-4 {
+    height: 680px;
+    width: 100%;
+}
+
+#splash-sect-3,
+#splash-sect-5 {
+    height: 680px;
+    width: 100%;
+    background-color: #f6f6f6;
+}
+
+.section-contents {
+    max-width: 1150px;
+    gap: 120px;
+}
+
+.section-side-desc {
+    width: 380px;
+}
+
+.splash-sect-imgs {
+    height: 440px;
+    width: 678px;
+}
+
+.splash-intro-text {
+    max-width: 780px;
+    text-align: center;
+}
+
+.h3-intro-text {
+    margin: 0;
+}
+
+.splash-nav {
+    width: 100%;
+    max-width: 1180px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%)
+}
+
+.splash-nav-inner-links {
+    width: 80%;
+}

@@ -1,0 +1,37 @@
+#channel-or-dm-sidebar {
+    width: 250px;
+    height: 100vh;
+
+    gap: 10px;
+
+    background-color: var(--chat-sides-sidebar-bg-color);
+    color: var(--gray-text);
+}
+
+#server-banner-img {
+    width: 250px;
+    height: 135px;
+}
+
+#server-title {
+    box-sizing: border-box;
+    height: 50px;
+    border-bottom:0.5px solid rgb(35, 37, 39);
+}
+
+.server-channel-card {
+    width: 230px;
+    height: 35px;
+
+    padding: 0 5px;
+    margin: 0 10px;
+
+    box-sizing: border-box;
+
+    color: var(--gray-text);
+}
+
+.server-channel-card:hover {
+    border-radius: 5px;
+    background-color: var(--gray-hover);
+}
