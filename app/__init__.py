@@ -3,14 +3,14 @@ from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 
-from .models import db, User, Server, Channel
+from .models import db, User, Server, Channel, Message
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.channel_routes import channel_routes
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send, emit, send
 
 from .forms import ServerForm
 from datetime import datetime
@@ -39,7 +39,7 @@ if os.environ.get('FLASK_ENV') == 'production':
         "https://discordia-cgh.herokuapp.com"
     ]
 
-socketio = SocketIO(cors_allowed_origins=origins)
+socketio = SocketIO(app, cors_allowed_origins=origins)
 
 
 
@@ -57,53 +57,55 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
-print("test------")
 
+# return dm server and message info if there is, otherwise create a dm server then return
+@app.route('/api/dmservermessages/<int:to_user_id>')
+def get_dm_server_message(to_user_id):
 
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-    # form = ServerForm()
-    # if form.validate_on_submit():
-    #     print('hi there')
-    # return render_template("index.html", form=form)
-    form = ServerForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    cur_user_id = current_user.id
 
-    if form.validate_on_submit():
-        print('hi there')
-        # name = form.data['name']
-        # print('form name ', name)
-        # if form['image_url']:
-        #     print( "EMPTY")
-        #     image_url = form.data['image_url']
-        # if form['image_url'] is None:
-        #     print(" None")
-        server = Server()
-        form.populate_obj(server)
-        server.is_dm = False
-        server.owner_id = 3
-        server.created_at = datetime.now()
-        server.updated_at = datetime.now()
-       
-        db.session.add(server)
+    server_name = str(cur_user_id)+'-'+str(to_user_id) if cur_user_id<to_user_id else str(to_user_id)+'-'+str(cur_user_id)
+    server = Server.query.filter(Server.name == server_name).first()
+    if server :
+        return {"result" : server.to_dict_dm_server()}, 200
+    else :
+        new_dm_server = Server()
+        new_dm_server.name = server_name
+        new_dm_server.is_dm = True
+        new_dm_server.created_at = datetime.now()
+        new_dm_server.updated_at = datetime.now()
+        db.session.add(new_dm_server)
         db.session.commit()
+        cur_user = User.query.filter(User.id == cur_user_id)
+        to_user = User.query.filter(User.id == to_user_id)
 
-        channel = Channel()
-        channel.name="general"
-        channel.server_id = server.id
-        channel.created_at = datetime.now()
-        channel.updated_at = datetime.now()
-        channel.is_voice=False
-        channel.topic = ""
-        db.session.add(channel)
+        new_dm_server.server_users.append(cur_user)
+        new_dm_server.server_users.append(to_user)
         db.session.commit()
-        return server.to_dict(), 201
+        print ("new dm server instance ", new_dm_server.to_dict_dm_server())
+        return {"result" : new_dm_server.to_dict_dm_server()}, 200
 
 
-    if form.errors:
-        return {'errors': form.errors}, 400
 
-    return render_template("index.html", form=form)
+@socketio.on('message')
+def handle_direct_chat(message, data):
+    if message != "User connected!":
+        direct_message = Message()
+        direct_message.user_id =data['sender_id']
+        direct_message.server_id = data['dm_server_id']
+        direct_message.body =data['body']
+        direct_message.created_at = datetime.now()
+        direct_message.updated_at = datetime.now()
+        
+
+        db.session.add(direct_message)
+        db.session.commit()
+        print ("receive data ", data)
+        send(message, broadcast=True)
+    
+    #emit('direct_message', data, broadcast=True)
+
+
 
 
 # Since we are deploying with Docker and Flask,
