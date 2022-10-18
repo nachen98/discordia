@@ -1,0 +1,25 @@
+#server-sidebar {
+    width: 75px;
+    height: 100vh;
+    gap: 5px;
+
+    background-color: var(--server-sidebar-bg-color);
+}
+
+#dm-server-divider {
+    height: 2px;
+    width: 35px;
+    background-color: var(--chat-sides-sidebar-bg-color);
+}
+
+.server-sidebar-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    transition: border-radius 0.5s;
+}
+
+.server-sidebar-img:hover {
+    border-radius: 30%;
+}

@@ -1,0 +1,14 @@
+#users-list-sidebar {
+    height: calc(100vh - 50px);
+    width: 250px;
+
+    background-color: var(--chat-sides-sidebar-bg-color);
+}
+
+.user-card {
+    width: 200px;
+    height: 40px;
+    padding: 0 10px;
+
+    color: var(--gray-text)
+}

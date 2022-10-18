@@ -37,7 +37,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {pathLocation.pathname !== '/splash' && <NavBar />}
+      {pathLocation.pathname === '/login' && <NavBar />}
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -58,7 +58,7 @@ function App() {
           <SplashPage />
         </Route>
         <Route path='/channels/@me'>
-          <DirectMessageMain />
+          <Main />
         </Route>
       </Switch>
     </BrowserRouter>
