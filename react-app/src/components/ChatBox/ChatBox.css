@@ -57,3 +57,8 @@
 #send-message-textarea:focus {
     outline: none;
 }
+
+.message-char-count {
+    color: var(--gray-text);
+    align-self: flex-end;
+}

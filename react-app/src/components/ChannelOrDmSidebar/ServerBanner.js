@@ -2,8 +2,8 @@ const ServerBanner = ({ serverImg, serverName }) => {
     serverImg = false;
     if (!serverImg) {
         return (
-            <div id='server-title'>
-                hilsdkjflkasjdflksajdflkjsdlfjsdlf where in the world am I?!
+            <div id='server-title' className='white-text flx-row-align-ctr'>
+                {serverName}
             </div>
         )
     }

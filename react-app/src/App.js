@@ -15,7 +15,7 @@ import { getAllRegularServers } from './store/regularserver';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const pathLocation = useLocation()
+  const pathLocation = useLocation();
 
 
   useEffect(() => {
@@ -58,6 +58,9 @@ function App() {
           <SplashPage />
         </Route>
         <Route path='/channels/@me'>
+          <Main />
+        </Route>
+        <Route path='/channels/:serverId/:channelId'>
           <Main />
         </Route>
       </Switch>
