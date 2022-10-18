@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import './ChannelOrDmSidebar.css'
 import ServerBanner from './ServerBanner';
 
@@ -23,9 +23,11 @@ const ChannelOrDmSidebar = () => {
 
             {channels.map((channel, ind) =>{
                 return (
-                    <span key={ind} className='channel-names channel-text'>
-                        # {channel}
-                    </span>
+                    <NavLink to='/channels/@me' key={ind}>
+                        <div className='server-channel-card flx-row-align-ctr'>
+                            # {channel}
+                        </div>
+                    </NavLink>
                 )
             })}
         </div>

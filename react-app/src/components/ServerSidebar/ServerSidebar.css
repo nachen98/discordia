@@ -3,7 +3,7 @@
     height: 100vh;
     gap: 10px;
 
-    background-color: 	#282828;
+    background-color: var(--server-sidebar-bg-color);
 }
 
 .server-sidebar-img {

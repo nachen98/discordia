@@ -1,9 +1,20 @@
 /* TODO Add site wide styles */
 :root {
+    --server-sidebar-bg-color: rgb(32, 34, 37);
+    --chat-sides-sidebar-bg-color: rgb(47, 49, 54);
+    --dark-gray-bg-color: rgb(54, 57, 63);
+    --gray-hover: rgb(66, 70, 77);
 
+    --gray-text: rgb(118, 121, 127);
+    --off-white-text: rgb(254, 254, 242);
 }
 
 * {
+    text-decoration: none;
+    font-family: 'Open Sans';
+}
+
+a:visited {
     text-decoration: none;
 }
 
@@ -62,6 +73,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.flx-row-align-ctr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .flx-row-justify-align-ctr {

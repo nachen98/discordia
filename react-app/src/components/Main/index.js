@@ -2,7 +2,6 @@
 import ChannelOrDmSidebar from '../ChannelOrDmSidebar'
 import ChatBox from '../ChatBox'
 import ServerSidebar from '../ServerSidebar'
-import UsersListSidebar from '../UsersListSidebar'
 import './Main.css'
 
 const Main = () => {
@@ -14,7 +13,6 @@ const Main = () => {
             <ServerSidebar />
             <ChannelOrDmSidebar />
             <ChatBox />
-            <UsersListSidebar />
         </div>
     )
 }
