@@ -4,12 +4,15 @@ import session from './session'
 import regularServerReducer from './regularserver';
 import dmServerReducer from './dmserver';
 import channelReducer from './channel';
-
+import usersReducer from './users';
+import messagesReducer from './messages';
 const rootReducer = combineReducers({
   session,
   regularServerReducer,
   dmServerReducer,
-  channelReducer
+  channelReducer,
+  usersReducer,
+  messagesReducer
 });
 
 

@@ -1,9 +1,15 @@
+const GET_ALL_CHANNELS = 'channels/getAllChannels'
 const GET_ONE_CHANNEL_By_ID = 'channels/getOneChannel';
 const CREATE_ONE_CHANNEL = 'channels/createOneChannel';
 const UPDATE_ONE_CHANNEL = 'channels/updateOneChannel'
 const DELETE_ONE_CHANNEL = 'channels/deleteOneChannel'
 
-
+export const loadAllChannels = (channels) => {
+    return {
+        type: GET_ALL_CHANNELS,
+        channels
+    }
+}
 export const loadOneChannel = (channel) => {
     return {
         type: GET_ONE_CHANNEL_By_ID,
@@ -33,7 +39,6 @@ const deleteOneChannel=(channelId)=> {
 }
 
 //thunk action creator
-
 export const getOneChannel= (channelId) => async(dispatch) => {
     
     const response = await fetch(`/api/channels/${channelId}`)
@@ -97,6 +102,13 @@ const channelReducer = (state=initialState, action)=>{
     let newState={}
     switch(action.type){
 
+        case GET_ALL_CHANNELS:
+            newState={...state}
+            action.channels.forEach((channel)=> {
+                newState[channel.id]=channel
+            })
+            return newState
+            
         case GET_ONE_CHANNEL_By_ID:
             newState={...state}
             newState[action.channel.id]=action.channel
