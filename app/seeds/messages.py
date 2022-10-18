@@ -17,13 +17,55 @@ def seed_messages():
         updated_at=datetime.now())
 
     channel_msg_3 = Message(
+        body='Glad to be on this channel',
+        channel_id='1',
+        user_id=4,
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+
+    channel_msg_4 = Message(
+        body='What would you like to talk about here?',
+        channel_id='1',
+        user_id=3,
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+
+    channel_msg_5 = Message(
+        body='I am very interested in the food channel',
+        channel_id='1',
+        user_id=4,
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    
+    channel_msg_6 = Message(
+        body='Nice to see everyone here!',
+        channel_id='1',
+        user_id=5,
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    
+    channel_msg_7 = Message(
+        body='Where do you guys hang out?',
+        channel_id='1',
+        user_id=6,
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    
+    channel_msg_8 = Message(
+        body='I come from UK.',
+        channel_id='1',
+        user_id=5,
+        created_at=datetime.now(),
+        updated_at=datetime.now())
+    
+    channel_msg_9 = Message(
         body='Welcome to my server',
         channel_id='2',
         user_id=1,
         created_at=datetime.now(),
         updated_at=datetime.now())
 
-    channel_msg_4 = Message(
+    channel_msg_10 = Message(
         body='Cool!',
         channel_id='2',
         user_id=3,
@@ -80,6 +122,13 @@ def seed_messages():
     db.session.add(channel_msg_2)
     db.session.add(channel_msg_3)
     db.session.add(channel_msg_4)
+    db.session.add(channel_msg_5)
+    db.session.add(channel_msg_6)
+    db.session.add(channel_msg_7)
+    db.session.add(channel_msg_8)
+    db.session.add(channel_msg_9)
+    db.session.add(channel_msg_10)
+   
     db.session.add(dm_msg_1)
     db.session.add(dm_msg_2)
     db.session.add(dm_msg_3)
