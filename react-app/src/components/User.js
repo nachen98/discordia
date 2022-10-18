@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { io } from "socket.io-client";
+import { create_dm } from '../store/messages'
 
 let socket;
 
 function User() {
   const [user, setUser] = useState({});
-  
+  const dispatch = useDispatch();
   const [dmServer, setDmServer] = useState({})
   const [dmLoaded, setDmLoaded] = useState(false)
   const [chatBody, setChatBody] = useState("");
   const [messages, setMessages] = useState([])
   const { userId }  = useParams();
 
+
   const current_user = useSelector(state => state.session.user)
+  const msg = Object.values(useSelector(state => state.messagesReducer))
   
   console.log("current user :", current_user)
+  console.log("user component rendering  :")
+  console.log("msg is   :", msg)
 
   useEffect(() => {
     if (!userId) {
@@ -41,9 +46,10 @@ function User() {
   }, [userId]);
 
   useEffect(() => {
-    socket = io.connect("http://127.0.0.1:5000")
+    socket = io.connect("http://localhost:5000")
     socket.on('connect', function() {
-      socket.send("User connected!");
+      //socket.send("User connected!");
+      console.log("get connected !!")
   });
 
     return (() => {
@@ -54,7 +60,7 @@ function User() {
 
 
 
-  const sendMessage = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
     console.log("sender_id", current_user.id)
     console.log("dm_server_id", dmServer.id)
@@ -63,7 +69,25 @@ function User() {
     // let updatedAt = new Date()
 
     socket.send('message', { "sender_id": current_user.id, "dm_server_id": dmServer.id, 'body': chatBody });
-    messages.push(chatBody)
+
+      socket.on('hello', (data)=>{
+      console.log("RECEIEd data from server ",data)
+      let res = JSON.parse(data)
+      console.log("res body", res.body);
+      console.log("message list1: ",messages)
+      dispatch(create_dm(res))
+
+      
+      // setMessages((prev)=>{
+      //   console.log("messages arr: ",prev, res.body)
+      //   prev.push(res.body)
+      //   console.log("messages arr: 2 ",prev, res.body)
+      //   return prev;
+      
+      // })
+     
+    })
+    
     setChatBody("");
   };
 
@@ -100,8 +124,8 @@ function User() {
       <h3>Direct message</h3>
 
       <div>
-        {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
+        {msg.map((message, index) => (
+          <div key={index}>{message.body}</div>
         ))}
       </div>
       <div></div>

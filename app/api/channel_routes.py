@@ -31,7 +31,7 @@ def edit_channel(channel_id):
             form['csrf_token'].data = request.cookies['csrf_token']
             form.populate_obj(channel)
             db.session.commit()
-        return channel.to_dict_with_messages(), 200
+        return {"result" : channel.to_dict_with_messages()}, 200
     else:
         return {'errors': "channel not found"}, 404 
 

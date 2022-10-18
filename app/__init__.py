@@ -1,4 +1,5 @@
-import os
+from gc import callbacks
+import os,json
 from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -86,22 +87,40 @@ def get_dm_server_message(to_user_id):
         return {"result" : new_dm_server.to_dict_dm_server()}, 200
 
 
+@socketio.on('connect')
+def handle_connect(data):
+    print("~~~~~~!!!!!!")
+
+
 
 @socketio.on('message')
 def handle_direct_chat(message, data):
-    if message != "User connected!":
-        direct_message = Message()
-        direct_message.user_id =data['sender_id']
-        direct_message.server_id = data['dm_server_id']
-        direct_message.body =data['body']
-        direct_message.created_at = datetime.now()
-        direct_message.updated_at = datetime.now()
+    print ("data----", data)
+    direct_message = Message()
+    direct_message.user_id =data['sender_id']
+    direct_message.server_id = data['dm_server_id']
+    direct_message.body =data['body']
+    direct_message.created_at = datetime.now()
+    direct_message.updated_at = datetime.now()
+    # name_space = data['name-space']
+
+    db.session.add(direct_message)
+    db.session.commit()
+    # print ("receive data 1", direct_message.to_dict())
+    socketio.emit("hello", direct_message.to_dict(), callback=ack)
+    
         
 
-        db.session.add(direct_message)
-        db.session.commit()
-        print ("receive data ", data)
-        send(message, broadcast=True)
+
+@socketio.on('test')
+def handle_test(data):
+    
+    print ("receive data 2", data)
+    socketio.emit("hello", data, namespace='/chat')
+
+
+def ack():
+    print('message was received!')
     
     #emit('direct_message', data, broadcast=True)
 
