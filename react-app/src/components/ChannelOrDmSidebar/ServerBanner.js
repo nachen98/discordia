@@ -1,4 +1,13 @@
 const ServerBanner = ({ serverImg, serverName }) => {
+    serverImg = false;
+    if (!!serverImg) {
+        return (
+            <div>
+
+            </div>
+        )
+    }
+
     return (
         <>
             <img id='server-banner-img' className='pos-rel' src={serverImg} />
