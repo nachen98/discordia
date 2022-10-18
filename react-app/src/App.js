@@ -9,7 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
-import DirectMessageMain from './components/DirectMessageMain';
+import Main from './components/Main';
 import { getAllRegularServers } from './store/regularserver';
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
       await dispatch(getAllRegularServers());
     })();
   }, [dispatch])
-  
+
   if (!loaded) {
     return null;
   }
