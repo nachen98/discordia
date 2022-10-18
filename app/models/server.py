@@ -53,7 +53,7 @@ class Server(db.Model):
             'name': self.name,
             'image_url': self.image_url,
             'is_dm': self.is_dm,
-            'messages': self.messages
+            'messages': [message.to_dict() for message in self.messages]
         }
 
     def to_dict_with_users_and_channels(self):
