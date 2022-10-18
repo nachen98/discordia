@@ -1,9 +1,9 @@
 const ServerBanner = ({ serverImg, serverName }) => {
     serverImg = false;
-    if (!!serverImg) {
+    if (!serverImg) {
         return (
-            <div>
-
+            <div id='server-title'>
+                hilsdkjflkasjdflksajdflkjsdlfjsdlf where in the world am I?!
             </div>
         )
     }

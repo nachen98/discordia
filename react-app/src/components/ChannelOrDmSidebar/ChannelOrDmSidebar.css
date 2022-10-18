@@ -13,6 +13,12 @@
     height: 135px;
 }
 
+#server-title {
+    box-sizing: border-box;
+    height: 50px;
+    border-bottom:0.5px solid rgb(35, 37, 39);
+}
+
 .server-channel-card {
     width: 230px;
     height: 35px;
