@@ -1,3 +1,6 @@
+import { loadAllChannels } from "./channel";
+import { loadUsers } from "./users";
+
 const GET_ALL_REGULAR_SERVERS = '/regularservers/getAllServers';
 const GET_ONE_REGULAR_SERVER_By_ID = 'regularservers/getOneServer';
 const CREATE_ONE_REGULAR_SERVER = 'regularservers/createOneServer';
@@ -42,13 +45,30 @@ const deleteOneRegularServer=(regularServerId)=> {
 
 //thunk action creator
 export const getAllRegularServers =()=> async(dispatch)=>{
-    console.log("here!!!!!")
+    
     const response = await fetch('/api/servers/regular/current')
- 
+    
     if(response.ok){
         const data = await response.json()
         const list =data.result
-        console.log("list!!!!!!!!", list)
+        console.log("list!!!!!!!!!", list)
+
+        list.forEach((server)=> {
+            let channelIdArr=[]
+            let userIdArr=[]
+            dispatch(loadAllChannels(server.channels))
+            server.channels.forEach((channel)=> {
+                channelIdArr.push(channel.id)
+            })
+            server.channels=channelIdArr
+
+            dispatch(loadUsers(server.users))
+            server.users.forEach((user)=>{
+                userIdArr.push(user.id)
+            })
+            server.users=userIdArr
+
+        })
         dispatch(loadRegularServers(list))
     }
 }
@@ -113,13 +133,18 @@ export const deleteRegularServer=(regularServerId)=> async(dispatch)=> {
 const initialState= {}
 
 const regularServerReducer = (state=initialState, action)=>{
+
     let newState={}
     switch(action.type){
         case GET_ALL_REGULAR_SERVERS:
             newState={...state};
             const newAllRegularServers={}
-            action.list.forEach((server)=>{newAllRegularServers[server.id]=server})
-            console.log("action.list!!!!!!!", action.list)
+            action.list.forEach((server)=>{
+                newAllRegularServers[server.id]=server
+                
+             
+            })
+            // console.log("action.list!!!!!!!", action.list)
             newState=newAllRegularServers
             return newState
 

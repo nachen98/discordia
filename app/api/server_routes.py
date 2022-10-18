@@ -58,7 +58,7 @@ def get_dm_servers():
     result = []
     for server in servers:
         if server.is_dm:
-            result.append(server.to_dict())
+            result.append(server.to_dict_dm_server())
     return {"result" : result} , 200
  
 
