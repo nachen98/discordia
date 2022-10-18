@@ -7,9 +7,18 @@ from app.forms import ChannelForm
 
 channel_routes = Blueprint('channels', __name__)
 
+@channel_routes.route('/<int:channel_id>')
+@login_required
+def get_channel_info(channel_id):
+    channel = Channel.query.filter(Channel.id == channel_id).first()
+    if channel:
+        return {"result" : channel.to_dict_with_messages()}, 200
+
+    return {'errors': "channel not found"}, 404
+
 # edit a channel
 @channel_routes.route('/<int:channel_id>', methods=['POST'])
-#@login_required
+@login_required
 def edit_channel(channel_id):
     channel = Channel.query.filter(Channel.id == channel_id).first()
     print("edit channel:" , channel)
@@ -30,7 +39,7 @@ def edit_channel(channel_id):
 
 # delete a channel 
 @channel_routes.route('/<int:channel_id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_channel(channel_id):
     channel = Channel.query.filter(Channel.id == channel_id).first()
 
