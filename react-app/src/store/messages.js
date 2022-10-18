@@ -5,7 +5,7 @@ const CREATE_CHANNEL_MESSAGE = 'message/create_channel_message'
 const DELETE_CHANNEL_MESSAGE = 'message/delete_channel_message'
 const LOAD_MESSAGE_BY_CHANNEL = 'message/load_channel_message'
 
-const create_dm = (payload) => {
+export const create_dm = (payload) => {
     return {
         type : CREATE_DIRECT_MESSAGE,
         payload
@@ -44,8 +44,8 @@ export const loadMessagesByChannel = (payload) => {
 
 /**
  * get messages by channel thrunk
- * @param {*} channelId 
- * @returns 
+ * @param {*} channelId
+ * @returns
  */
 export const loadMessgesByChannelThunk = (channelId) => async (dispatch)=>{
     console.log("get there, channel id :",channelId )
@@ -55,7 +55,7 @@ export const loadMessgesByChannelThunk = (channelId) => async (dispatch)=>{
             const data = await response.json();
             dispatch(loadMessagesByChannel(data.result))
         }
-       
+
     }catch (error){
         console.log("error occured when loading channel data ",error)
         throw error
