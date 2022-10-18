@@ -11,11 +11,12 @@ import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
 import Main from './components/Main';
 import { getAllRegularServers } from './store/regularserver';
+import { getAllDmServers } from './store/dmserver';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const pathLocation = useLocation()
+  const pathLocation = useLocation();
 
 
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
   useEffect(()=> {
     (async()=> {
       await dispatch(getAllRegularServers());
+      await dispatch(getAllDmServers());
     })();
   }, [dispatch])
 
@@ -58,6 +60,9 @@ function App() {
           <SplashPage />
         </Route>
         <Route path='/channels/@me'>
+          <Main />
+        </Route>
+        <Route path='/channels/:serverId/:channelId'>
           <Main />
         </Route>
       </Switch>

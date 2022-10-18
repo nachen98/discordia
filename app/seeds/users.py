@@ -192,7 +192,7 @@ def seed_users():
     dm_server_4.server_users.append(james)
 
     dm_server_5.server_users.append(demo)
-    dm_server_5.server_users.append(mary)
+    dm_server_5.server_users.append(john)
 
     db.session.add(reg_server_1)
     db.session.add(reg_server_2)

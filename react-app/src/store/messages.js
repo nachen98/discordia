@@ -34,7 +34,7 @@ const deleteChannelMessage = (payload) => {
     }
 }
 
-const loadMessagesByChannel = (payload) => {
+export const loadMessagesByChannel = (payload) => {
     return {
         type : LOAD_MESSAGE_BY_CHANNEL,
         payload
