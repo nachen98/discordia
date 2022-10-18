@@ -35,7 +35,7 @@ class Channel(db.Model):
             'name': self.name,
             'topic': self.topic,
             'is_voice': self.is_voice,
-            'messages': [message.to_dict() for message in self.messages ]
+            'messages': [message.to_dict()  for message in self.messages ]
         }
 
     def __repr__(self):

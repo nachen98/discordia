@@ -1,5 +1,6 @@
 from http import server
 from .db import db
+import json
 
 class Message(db.Model):
     __tablename__ = 'messages'
@@ -21,14 +22,14 @@ class Message(db.Model):
     channel = db.relationship('Channel', back_populates='messages')
 
     def to_dict(self):
-        return {
+        return json.dumps({
             'id': self.id,
             'body': self.body,
             'user_id': self.user_id,
             'server_id': self.server_id,
             'channel_id': self.channel_id,
-            'created_at': self.created_at
-        }
+            'created_at': self.created_at 
+        }, default=str)
 
     def __repr__(self):
         return f'<Message, id={self.id}, body={self.body}, sender={self.user_id}, server={self.server_id}, channel={self.channel_id}>'
