@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
 import Main from './components/Main';
 import { getAllRegularServers } from './store/regularserver';
+import { getAllDmServers } from './store/dmserver';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +29,7 @@ function App() {
   useEffect(()=> {
     (async()=> {
       await dispatch(getAllRegularServers());
+      await dispatch(getAllDmServers());
     })();
   }, [dispatch])
 

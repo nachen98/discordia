@@ -1,3 +1,5 @@
+import { loadMessagesByChannel } from "./messages";
+
 const GET_ALL_DM_SERVERS = '/dmservers/getAllServers';
 // const GET_ONE_DM_SERVER_By_ID = 'dmservers/getOneServer';
 
@@ -21,6 +23,17 @@ export const getAllDmServers =()=> async(dispatch)=>{
     const response = await fetch('/api/servers/dm/current')
     if(response.ok){
         const list = await response.json()
+        console.log("list!!!!", list)
+
+        list.result.forEach(server=> {
+
+            dispatch(loadMessagesByChannel(server))
+            let messageIdArr=[]
+            server.messages.forEach(message=>{
+                messageIdArr.push(message.id)
+            })
+            server.messages=messageIdArr
+        })
         dispatch(loadDmServers(list))
     }
 }
@@ -35,7 +48,7 @@ const dmServerReducer = (state=initialState, action)=>{
         case GET_ALL_DM_SERVERS:
             newState={...state};
             const newAllDmServers={}
-            action.list.forEach((server)=>{newAllDmServers[server.id]=server})
+            action.list.result.forEach((server)=>{newAllDmServers[server.id]=server})
             newState=newAllDmServers
             return newState
         
