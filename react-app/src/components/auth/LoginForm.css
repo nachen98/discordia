@@ -2,28 +2,26 @@ body{
     background-image: url('../../img/login.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: cover;
 }
 
 #login-container{
-    /* position:relative */
-    /* height: 10em; */
+    position:relative;
+    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+
 }
 #login-box{
     background-color: var(--dark-gray-bg-color);
     width: 650px;
     height: auto;
     border-radius: 5px;
-    box-shadow: 0, 0, 0, 0.2 rgba(0, 0, 0, 0.2);
-    /* position: absolute;
+    position: absolute;
     margin: 0;
-    /* top: 50%;
-    left: 50%;
-    margin-right: -50%; */
-    /* transform: translate(-50%, -50%)  */
+    top: 50%;
+    transform: translate(0, -50%)
     
 }
 #inner-container{
@@ -70,7 +68,7 @@ input{
 }
 
 input:focus{
-    border-style: none;
+    outline: none;
 }
 
 #required-field{
@@ -101,3 +99,25 @@ input:focus{
     font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
     cursor: pointer
 }
+
+#error-messages{
+    font-family: "ABC Ginto Normal","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: rgb(243, 134, 136);
+    font-size: 12px;
+}
+
+#signup-meessage{
+    display:inline-flex
+}
+#need-account{
+    margin-right: 5px;
+    font-size: 12px;
+    color: rgb(186,186,190);
+}
+#linktosignup{
+    color: rgb(5, 164, 228);
+    font-size: 12px;
+}
+#linktosignup:hover{
+    text-decoration: underline;
+} 
