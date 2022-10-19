@@ -100,6 +100,10 @@ body {
     justify-content: space-evenly;
 }
 
+.red-text {
+    color: red;
+}
+
 .gray-bg {
     background-color: #757e8a;
 }

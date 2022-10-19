@@ -18,7 +18,7 @@ function User() {
 
   const current_user = useSelector(state => state.session.user)
   const msg = Object.values(useSelector(state => state.messagesReducer))
-  
+
   console.log("current user :", current_user)
   console.log("user component rendering  :")
   console.log("msg is   :", msg)
@@ -35,10 +35,10 @@ function User() {
   }, [userId]);
 
   useEffect(() => {
-    
+
     (async () => {
       const response = await fetch(`/api/dmservermessages/${userId}`);
-     
+
       const server = await response.json()
       console.log("dm server is ",server.result)
       setDmServer(server.result);
@@ -77,17 +77,17 @@ function User() {
       console.log("message list1: ",messages)
       dispatch(create_dm(res))
 
-      
+
       // setMessages((prev)=>{
       //   console.log("messages arr: ",prev, res.body)
       //   prev.push(res.body)
       //   console.log("messages arr: 2 ",prev, res.body)
       //   return prev;
-      
+
       // })
-     
+
     })
-    
+
     setChatBody("");
   };
 
@@ -131,7 +131,7 @@ function User() {
       <div></div>
        <label> current user: {current_user.username}</label>
        <br></br>
-       <label> To {user.username} :</label> 
+       <label> To {user.username} :</label>
        <input type="text" value={chatBody} onChange={onChangeMessage}></input>
        <br></br>
        <button>send</button>
@@ -140,4 +140,3 @@ function User() {
   );
 }
 export default User;
-
