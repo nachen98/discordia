@@ -45,9 +45,9 @@ const deleteOneRegularServer=(regularServerId)=> {
 
 //thunk action creator
 export const getAllRegularServers =()=> async(dispatch)=>{
-    
+
     const response = await fetch('/api/servers/regular/current')
-    
+
     if(response.ok){
         const data = await response.json()
         const list =data.result
@@ -74,12 +74,12 @@ export const getAllRegularServers =()=> async(dispatch)=>{
 }
 
 export const getOneRegularServer= (regularServerId) => async(dispatch) => {
-    
+
     const response = await fetch(`/api/servers/${regularServerId}`)
-    
+
     if(response.ok){
         const oneRegularServer = await response.json()
-       
+
         dispatch(loadOneRegularServer(oneRegularServer))
     }
 }
@@ -95,6 +95,19 @@ export const addOneRegularServer=(serverBody)=> async(dispatch)=> {
 
     if(response.ok){
         const newRegularServer = await response.json()
+        console.log('newRegularServer freshly created is ', newRegularServer)
+
+        const arrayOfChannelIds = newRegularServer.channels.map(channel => channel.id)
+        const arrayOfUserIds = newRegularServer.users.map(user => user.id)
+
+        // Dispatch to update the channels store
+        // No need to update the user slice of state since only the owner is in user list
+        // Meaning that the owner info (sessionUser) should already be in the store
+        dispatch(loadAllChannels(newRegularServer.channels))
+
+        newRegularServer.channels = arrayOfChannelIds
+        newRegularServer.users = arrayOfUserIds
+
         dispatch(createOneRegularServer(newRegularServer))
         return newRegularServer
     }else{
@@ -141,8 +154,8 @@ const regularServerReducer = (state=initialState, action)=>{
             const newAllRegularServers={}
             action.list.forEach((server)=>{
                 newAllRegularServers[server.id]=server
-                
-             
+
+
             })
             // console.log("action.list!!!!!!!", action.list)
             newState=newAllRegularServers
@@ -157,7 +170,7 @@ const regularServerReducer = (state=initialState, action)=>{
             newState={...state}
             newState[action.regularServer.id]=action.regularServer
             return newState
-         
+
         case UPDATE_ONE_REGULAR_SERVER:
             newState={...state, [action.regularServer.id]: action.regularServer}
             return newState
@@ -166,7 +179,7 @@ const regularServerReducer = (state=initialState, action)=>{
             newState={...state}
             delete newState[action.regularServerId]
             return newState
-        
+
         default:
             return state
     }

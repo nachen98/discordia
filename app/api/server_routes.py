@@ -92,7 +92,7 @@ def create_server():
         # add current user (also the owner) to the server
         server.server_users.append(user)
         db.session.add(server)
-        
+
         db.session.commit()
 
 
@@ -106,7 +106,7 @@ def create_server():
         channel.topic = ""
         db.session.add(channel)
         db.session.commit()
-        return server.to_dict(), 201
+        return server.to_dict_with_users_and_channels(), 201
 
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
