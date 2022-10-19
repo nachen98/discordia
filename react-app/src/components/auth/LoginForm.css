@@ -61,7 +61,7 @@ input{
     width: 100%;
     background-color: var(--server-sidebar-bg-color);
     height: 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     border-style: none;
     margin-bottom: 10px;
     color: rgb(186,186,190);
@@ -85,7 +85,8 @@ input:focus{
     border: none;
     color: var(--off-white-text);
     font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    cursor: pointer
+    cursor: pointer;
+    border-radius: 3px;
 }
 
 #demo-user{
@@ -97,13 +98,15 @@ input:focus{
     border: none;
     color: var(--off-white-text);
     font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    cursor: pointer
+    cursor: pointer;
+    border-radius: 3px;
 }
 
 #error-messages{
     font-family: "ABC Ginto Normal","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: rgb(243, 134, 136);
     font-size: 12px;
+    
 }
 
 #signup-meessage{
