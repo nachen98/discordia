@@ -1,21 +1,28 @@
 #server-sidebar {
     width: 75px;
     height: 100vh;
-    gap: 5px;
 
     background-color: var(--server-sidebar-bg-color);
 }
 
-#dm-server-divider {
+.dm-server-divider {
     height: 2px;
     width: 35px;
+    margin-top: 10px;
     background-color: var(--chat-sides-sidebar-bg-color);
 }
 
-#dm-server-nav {
-    height: 30px;
-    width: 30px;
+#dm-server-nav-logo {
+    height: 20px;
+    width: 25px;
+}
+
+.dm-server-nav {
     background-color: var(--chat-sides-sidebar-bg-color);
+}
+
+#dm-server-nav:hover {
+    background-color: #5865f2;
 }
 
 #dm-server-nav.on-dm-homepage-bg {
@@ -25,6 +32,8 @@
 .server-navlink {
     height: 50px;
     width: 50px;
+
+    margin-top: 10px;
     border-radius: 50%;
 }
 
@@ -65,4 +74,19 @@ div.active-server-sidebar-img,
 
 #server-title {
     padding: 15px;
+}
+
+.material-symbols-sharp {
+    font-size: 35px;
+}
+
+#add-server-btn {
+    cursor: pointer;
+    color: #3ba55d;
+    background-color: var(--chat-sides-sidebar-bg-color);
+}
+
+#add-server-btn:hover {
+    color: white;
+    background-color: #3ba55d;
 }

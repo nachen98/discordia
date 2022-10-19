@@ -99,3 +99,31 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.gray-bg {
+    background-color: #757e8a;
+}
+
+.purple-bg {
+    background-color: #5865f2;
+}
+
+.red-bg {
+    background-color: #ed4245;
+}
+
+.yellow-bg {
+    background-color: #faa61a;
+}
+
+.green-bg {
+    background-color: #3ba55c;
+}
+
+.material-symbols-sharp {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 48
+}

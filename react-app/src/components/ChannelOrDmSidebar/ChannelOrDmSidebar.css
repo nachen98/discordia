@@ -35,3 +35,20 @@
     border-radius: 5px;
     background-color: var(--gray-hover);
 }
+
+.dm-logo-container {
+    height: 30px;
+    width: 30px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.dm-logos {
+    height: 15px;
+    width: 18px;
+}
+
+.active-view {
+    background-color: var(--gray-hover);
+    border-radius: 5px;
+}

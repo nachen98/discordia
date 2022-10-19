@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom'
 import './UsersListSidebar.css'
 
+const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
+
 const UsersListSidebar = () => {
     const { serverId } = useParams();
     const allUsers = useSelector(state => state.usersReducer);
@@ -20,9 +22,15 @@ const UsersListSidebar = () => {
 
     return (
         <div id='users-list-sidebar' className='flx-col-algn-ctr'>
-            {serverUserIds.map((userId) => {
+            {serverUserIds.map((userId, ind) => {
+                const colorInd = userId % COLORS.length;
                 return (
                     <div key={userId} className='user-card flx-row-align-ctr'>
+
+                        <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}>
+                            <img className='dm-logos' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png' />
+                        </div>
+
                         {allUsers[userId].username}
                     </div>
                 )
