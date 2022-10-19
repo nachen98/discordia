@@ -1,0 +1,103 @@
+body{
+    background-image: url('../../img/login.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+#login-container{
+    /* position:relative */
+    /* height: 10em; */
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+#login-box{
+    background-color: var(--dark-gray-bg-color);
+    width: 650px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0, 0, 0, 0.2 rgba(0, 0, 0, 0.2);
+    /* position: absolute;
+    margin: 0;
+    /* top: 50%;
+    left: 50%;
+    margin-right: -50%; */
+    /* transform: translate(-50%, -50%)  */
+    
+}
+#inner-container{
+    margin: 30px 80px
+}
+#welcome{
+    font-size: 20px;
+    font-weight:bolder;
+    color: var(--off-white-text);
+    margin-top:20px;
+    margin-bottom: 10px
+
+}
+*{
+    font-family: 'Open Sans';
+}
+
+#under-welcome{
+    color: var(--gray-text);
+    margin-bottom: 10px
+}
+
+
+label{
+    color: var(--gray-text);
+    width:100%;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-family: "ABC Ginto Normal","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(186,186,190);
+}
+/* label:after { content: ": " } */
+input{
+    width: 100%;
+    background-color: var(--server-sidebar-bg-color);
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+    margin-bottom: 10px;
+    color: rgb(186,186,190);
+}
+
+input:focus{
+    border-style: none;
+}
+
+#required-field{
+    padding-left: 4px;
+    color: red
+}
+
+#login-button{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(77, 86,192);
+    height: 35px;
+    border: none;
+    color: var(--off-white-text);
+    font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    cursor: pointer
+}
+
+#demo-user{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(77, 86,192);
+    height: 35px;
+    border: none;
+    color: var(--off-white-text);
+    font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    cursor: pointer
+}
