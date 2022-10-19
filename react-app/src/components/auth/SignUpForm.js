@@ -9,10 +9,7 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [password, setPassword] = useState('');
-
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -40,12 +37,6 @@ const SignUpForm = () => {
   const updateUsername = (e) => {
     setUsername(e.target.value);
   };
-  // const updateFirstname = (e) => {
-  //   setFirstName(e.target.value);
-  // };
-  // const updateLastname = (e) => {
-  //   setLastName(e.target.value);
-  // };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -70,7 +61,7 @@ const SignUpForm = () => {
         <div id="signup-inner-container">
           <div id="create-an-account" className='flx-col-justify-algn-ctr'>Create an account</div>
           <form onSubmit={onSignUp}>
-            <div>
+            <div id="error-messages">
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
@@ -93,24 +84,6 @@ const SignUpForm = () => {
                 value={username}
               ></input>
             </div>
-            {/* <div>
-        <label>FIRST NAME</label>
-        <input
-          type='text'
-          name='first_name'
-          onChange={updateFirstname}
-          value={firstName}
-        ></input>
-      </div>
-      <div>
-        <label>LAST NAME</label>
-        <input
-          type='text'
-          name='last_name'
-          onChange={updateLastname}
-          value={lastName}
-        ></input>
-      </div> */}
             <div>
               <label>PASSWORD</label>
               <input

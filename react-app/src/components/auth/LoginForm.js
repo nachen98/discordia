@@ -15,8 +15,13 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+
     if (data) {
-      setErrors(data);
+      const formatedErrors=data.map(err=> {
+        const [_field, message]= err.split(":")
+        return message.slice(1)
+      })
+      setErrors(formatedErrors);
     }
   };
 
