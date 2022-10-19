@@ -60,7 +60,7 @@ def get_dm_servers():
         if server.is_dm:
             result.append(server.to_dict_dm_server())
     return {"result" : result} , 200
- 
+
 
 # get regular server details by id
 @server_routes.route('/<int:server_id>')
@@ -77,16 +77,24 @@ def create_server():
     form = ServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    user_id = current_user.id
+    user = User.query.get(user_id)
+
     if form.validate_on_submit():
-        
+
         server = Server()
         form.populate_obj(server)
         server.is_dm = False
         server.owner_id = current_user.id
         server.created_at = datetime.now()
         server.updated_at = datetime.now()
+
+        # add current user (also the owner) to the server
+        server.server_users.append(user)
         db.session.add(server)
+        
         db.session.commit()
+
 
         # once a regular server created, automatically create a "general" channel
         channel = Channel()
@@ -99,7 +107,7 @@ def create_server():
         db.session.add(channel)
         db.session.commit()
         return server.to_dict(), 201
-    
+
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -118,7 +126,7 @@ def edit_server(server_id):
             return server.to_dict(), 200
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     else:
-        return {'errors': "server not found"}, 404 
+        return {'errors': "server not found"}, 404
 
 
 
@@ -135,11 +143,3 @@ def delete_server(server_id):
         return {"message": "server successfully deleted"}, 200
     else:
         return {"errors": "server not found"}, 404
-        
-
-
-
-
-
-
-

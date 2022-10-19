@@ -1,21 +1,27 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addOneRegularServer } from "../../store/regularserver";
 
 
 const CreateServerForm = ({ setShowModal }) => {
+    const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const [newServerName, setNewServerName] = useState(`${user.username}'s server`);
     const [newServerIcon, setNewServerIcon] = useState('')
 
-    const handleCreateServer = e => {
+    const handleCreateServer = async e => {
         e.preventDefault();
 
         const newServer = {
             name: newServerName,
-            image_url: newServerIcon || null
         }
 
-        
+        // Will need to put some validations for this image url
+        if (newServerIcon.length > 0) {
+            newServer['image_url'] = newServerIcon
+        }
+
+        dispatch(addOneRegularServer(newServer))
     }
 
     return (

@@ -7,7 +7,7 @@ const ServerLogo = ({ server }) => {
 
     // NOTE: EDGECASE WHERE THERE IS A SERVER WITH NO CHANNELS!
     let navlinkPath = `/channels/${server.id}`
-    if (server.channels.length > 0)  navlinkPath = navlinkPath + `/${server.channels[0]}`
+    if (server.channels?.length > 0)  navlinkPath = navlinkPath + `/${server.channels[0]}`
 
     if (!server.image_url) {
         const serverNamePartition = server.name.split('-')
