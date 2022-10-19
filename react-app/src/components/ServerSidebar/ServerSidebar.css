@@ -76,17 +76,13 @@ div.active-server-sidebar-img,
     padding: 15px;
 }
 
-.material-symbols-sharp {
-    font-size: 35px;
-}
-
-#add-server-btn {
+#add-server-logo {
     cursor: pointer;
     color: #3ba55d;
     background-color: var(--chat-sides-sidebar-bg-color);
 }
 
-#add-server-btn:hover {
+#add-server-logo:hover {
     color: white;
     background-color: #3ba55d;
 }

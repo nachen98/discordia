@@ -1,0 +1,26 @@
+.material-symbols-sharp {
+    font-size: 35px;
+}
+
+#create-server-form-container {
+    height: 400px;
+    width: 450px;
+    background-color: var(--off-white-text);
+}
+
+#create-server-form {
+    width: 100%;
+}
+
+#create-server-name-input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background-color: #e3e5e8;
+}
+
+.create-server-btn {
+    background-color: #5865f2;
+}

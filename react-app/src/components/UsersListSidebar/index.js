@@ -21,7 +21,7 @@ const UsersListSidebar = () => {
     const serverUserIds = server.users
 
     return (
-        <div id='users-list-sidebar' className='flx-col-algn-ctr'>
+        <div id='users-list-sidebar' className='flx-col-align-ctr'>
             {serverUserIds.map((userId, ind) => {
                 const colorInd = userId % COLORS.length;
                 return (

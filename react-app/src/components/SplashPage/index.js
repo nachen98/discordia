@@ -4,7 +4,7 @@ import './SplashPage.css'
 const SplashPage = () => {
     return (
         <div id='splashpage-container' className={`flx-col`}>
-            <div id='splash-sect-1' className={`flx-col-justify-algn-ctr pos-rel`}>
+            <div id='splash-sect-1' className={`flx-col-justify-align-ctr pos-rel`}>
                 <div className='section-contents'>
                     <nav className='splash-nav flx-row-space-btw pos-abs'>
                         <NavLink className='white-text' to='/'>Discordia Logo</NavLink>
@@ -55,9 +55,9 @@ const SplashPage = () => {
                 </div>
             </div>
 
-            <div id='splash-sect-5' className='flx-col-justify-algn-ctr'>
-                <div className='section-contents flx-col-justify-algn-ctr'>
-                    <div className='flx-col-justify-algn-ctr ctr-algn-text'>
+            <div id='splash-sect-5' className='flx-col-justify-align-ctr'>
+                <div className='section-contents flx-col-justify-align-ctr'>
+                    <div className='flx-col-justify-align-ctr ctr-align-text'>
                         <h1>RELIABLE TECH FOR STAYING CLOSE</h1>
                         <h3>Low-latency voice and video feels like you’re in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share.</h3>
                     </div>

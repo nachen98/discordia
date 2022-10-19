@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
+import CreateServerModal from '../CreateServerModal'
 import ServerLogo from './ServerLogo'
 
 import './ServerSidebar.css'
@@ -25,7 +26,7 @@ const ServerSidebar = () => {
     ]
 
     return (
-        <div id='server-sidebar' className='flx-col-algn-ctr'>
+        <div id='server-sidebar' className='flx-col-align-ctr'>
 
             <NavLink
             activeClassName='active-server'
@@ -49,10 +50,8 @@ const ServerSidebar = () => {
 
             <div className='dm-server-divider'></div>
 
-            <div id='add-server-btn' className='server-navlink server-sidebar-img flx-row-justify-align-ctr'>
-                <span class="material-symbols-sharp">
-                    add
-                </span>
+            <div id='add-server-logo' className='server-navlink server-sidebar-img flx-row-justify-align-ctr'>
+                <CreateServerModal />
             </div>
 
         </div>
