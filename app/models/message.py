@@ -22,14 +22,14 @@ class Message(db.Model):
     channel = db.relationship('Channel', back_populates='messages')
 
     def to_dict(self):
-        return json.dumps({
+        return {
             'id': self.id,
             'body': self.body,
             'user_id': self.user_id,
             'server_id': self.server_id,
             'channel_id': self.channel_id,
-            'created_at': self.created_at 
-        }, default=str)
+            'created_at': str(self.created_at)
+        }
 
     def __repr__(self):
         return f'<Message, id={self.id}, body={self.body}, sender={self.user_id}, server={self.server_id}, channel={self.channel_id}>'

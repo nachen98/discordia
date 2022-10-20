@@ -12,6 +12,7 @@ import SplashPage from './components/SplashPage';
 import Main from './components/Main';
 import { getAllRegularServers } from './store/regularserver';
 import { getAllDmServers } from './store/dmserver';
+import { loadMessgesByChannelThunk} from'./store/messages';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

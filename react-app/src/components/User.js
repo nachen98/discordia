@@ -68,7 +68,7 @@ function User() {
     // let createdAt = new Date()
     // let updatedAt = new Date()
 
-    socket.send('message', { "sender_id": current_user.id, "dm_server_id": dmServer.id, 'body': chatBody });
+    socket.send('message', { "sender_id": current_user.id, "channel_message": false, "dm_server_id": dmServer.id, 'body': chatBody });
 
       socket.on('hello', (data)=>{
       console.log("RECEIEd data from server ",data)

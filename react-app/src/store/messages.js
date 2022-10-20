@@ -19,7 +19,7 @@ const delete_dm = (payload) => {
     }
 }
 
-const createChannelMessage = (payload) => {
+export const createChannelMessage = (payload) => {
     return {
         type : CREATE_CHANNEL_MESSAGE,
         payload
@@ -53,6 +53,7 @@ export const loadMessgesByChannelThunk = (channelId) => async (dispatch)=>{
         const response = await fetch(`/api/channels/${channelId}`)
         if (response.ok){
             const data = await response.json();
+            console.log("DATA ---" , data)
             dispatch(loadMessagesByChannel(data.result))
         }
 
@@ -64,23 +65,31 @@ export const loadMessgesByChannelThunk = (channelId) => async (dispatch)=>{
 
 
 
+
 const initialState = {};
 const messagesReducer = (state = initialState, action) =>{
     console.log("********** Action in messagesReducer ************", action)
     let newState = { ...state }
     switch (action.type){
         case CREATE_DIRECT_MESSAGE :
+            newState[action.payload.id] = action.payload;
             return newState;
         case DELETE_DIRECT_MESSAGE :
             return newState;
         case CREATE_CHANNEL_MESSAGE :
+            console.log("type of return ", typeof action.payload)
+            newState[action.payload.id] = action.payload;
             return newState;
         case DELETE_CHANNEL_MESSAGE :
             return newState;
         case LOAD_MESSAGE_BY_CHANNEL :
+            console.log('???????? state111 ', newState)
             action.payload.messages.forEach(message => {
+                console.log('???????? message ', message.id)
+                
                 newState[message.id] = message
             });
+            console.log('???????? state   222', newState)
             return newState
         default :
             return state
