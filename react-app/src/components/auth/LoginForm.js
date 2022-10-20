@@ -38,7 +38,7 @@ const LoginForm = () => {
     dispatch(login('demo@aa.io', 'password'))
   }
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/channels/@me' />;
   }
 
   return (
