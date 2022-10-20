@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const SplashPage = () => {
     return (
         <div id='splashpage-container' className={`flx-col`}>
-            <div id='splash-sect-1' className={`flx-col-justify-algn-ctr pos-rel`}>
+            <div id='splash-sect-1' className={`flx-col-justify-align-ctr pos-rel`}>
                 <div className='section-contents'>
                     <nav className='splash-nav flx-row-space-btw pos-abs'>
                         <NavLink className='white-text' to='/'>Discordia Logo</NavLink>
@@ -74,10 +74,10 @@ const SplashPage = () => {
             <Link to={"/sign-up"}>
             <button id="splash-signup-button" >Sign up</button>
             </Link>
-            
-            
+
+
             </div>
-           
+
            </div>
         </div>
     )

@@ -8,15 +8,38 @@
     color: var(--gray-text);
 }
 
+#settings-dropdown-logo {
+    height: 15px;
+    width: 15px;
+    filter: brightness(0)
+}
+
+#server-name {
+    display: block;
+    width: 200px;
+    height: 22px;
+    box-sizing: border-box;
+
+    overflow: clip;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-weight: 500;
+}
+
 #server-banner-img {
     width: 250px;
     height: 135px;
 }
 
-#server-title {
+#server-text-only-title {
     box-sizing: border-box;
     height: 50px;
     border-bottom:0.5px solid rgb(35, 37, 39);
+}
+
+.server-title {
+    padding: 15px;
 }
 
 .server-channel-card {
@@ -34,4 +57,46 @@
 .server-channel-card:hover {
     border-radius: 5px;
     background-color: var(--gray-hover);
+}
+
+.dm-logo-container {
+    height: 30px;
+    width: 30px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.dm-logos {
+    height: 15px;
+    width: 18px;
+}
+
+.active-view {
+    background-color: var(--gray-hover);
+    border-radius: 5px;
+}
+
+.server-name-offset {
+    top: 0;
+    left: 0;
+    padding: 15px;
+}
+
+.server-title-container {
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 250px;
+}
+
+.server-title:hover {
+    background-color: var(--server-name-hover);
+}
+
+#server-text-only-title.dm-server-banner {
+    cursor: default;
+}
+
+#server-text-only-title.dm-server-banner:hover {
+    background-color: var(--chat-sides-sidebar-bg-color);
 }

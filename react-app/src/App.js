@@ -65,6 +65,9 @@ function App() {
         <Route path='/channels/:serverId/:channelId'>
           <Main />
         </Route>
+        <Route path='/channels/:serverId'>
+          <Main />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
