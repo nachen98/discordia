@@ -72,3 +72,11 @@
 .server-title:hover {
     background-color: var(--server-name-hover);
 }
+
+#server-text-only-title.dm-server-banner {
+    cursor: default;
+}
+
+#server-text-only-title.dm-server-banner:hover {
+    background-color: var(--chat-sides-sidebar-bg-color);
+}

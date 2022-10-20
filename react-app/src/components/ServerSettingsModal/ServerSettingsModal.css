@@ -1,0 +1,129 @@
+#server-settings-modal {
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+}
+
+#server-settings-nav {
+    width: 25%;
+    padding: 100px 0;
+
+    color: var(--off-white-text);
+    background-color: #2f3136;
+}
+
+#server-settings-nav > div {
+    width: 200px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: auto;
+    margin-bottom: 2px;
+}
+
+div#current-server {
+    padding-top: 0px;
+
+    font-size: small;
+    color: var(--gray-text)
+}
+
+#right-main-content {
+    width: 75%;
+
+    box-sizing: border-box;
+    padding: 100px 20px;
+    background-color: #36393f;
+}
+
+#overview-content {
+    width: 80%;
+
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+#close-server-settings {
+    align-items: center;
+    gap: 5px;
+
+    border: none;
+    margin-bottom: auto;
+    background-color: transparent;
+
+    color: #9a9ca0;
+    font-weight: bold;
+}
+
+#close-server-settings:hover {
+    cursor: pointer;
+    color: var(--off-white-text);
+}
+
+#close-server-settings:hover #close-server-modal-logo{
+    border-radius: 50%;
+    box-shadow: 0 0 5px;
+}
+
+#delete-server-logo {
+    height: 20px;
+}
+
+#overview-div {
+    border-radius: 5px;
+    background-color: #42464d;
+}
+
+#delete-server-div {
+    align-items: center;
+    border-radius: 5px;
+}
+
+#delete-server-div:hover {
+    cursor: pointer;
+    background-color: #42464d;
+}
+
+#close-server-modal-logo {
+    height: 50px;
+    background-color: transparent;
+}
+
+#overview-header {
+    font-size: x-large;
+    color: var(--off-white-text)
+}
+
+#edit-server-form > * {
+    margin-top: 5px;
+    color: var(--off-white-text);
+}
+
+.edit-server-input {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--server-sidebar-bg-color);
+    border: none;
+}
+
+.edit-server-input:focus {
+    outline: none;
+}
+
+#submit-server-edit {
+    cursor: pointer;
+    width: fit-content;
+
+    border-radius: 5px;
+    border: none;
+    padding: 5px 15px;
+    margin-top: 10px;
+    margin-left: auto;
+
+    font-size: medium;
+    background-color: #2d7d46;
+}
+
+span > span {
+    font-size: xx-small;
+}
