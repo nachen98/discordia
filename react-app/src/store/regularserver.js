@@ -95,7 +95,6 @@ export const addOneRegularServer=(serverBody)=> async(dispatch)=> {
 
     if(response.ok){
         const newRegularServer = await response.json()
-        console.log('newRegularServer freshly created is ', newRegularServer)
 
         const arrayOfChannelIds = newRegularServer.channels.map(channel => channel.id)
         const arrayOfUserIds = newRegularServer.users.map(user => user.id)

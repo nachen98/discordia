@@ -1,8 +1,13 @@
+#server-sidebar::-webkit-scrollbar {
+    width: 0px;
+}
+
 #server-sidebar {
+    min-height: 100vh;
     width: 75px;
-    height: 100vh;
 
     background-color: var(--server-sidebar-bg-color);
+    overflow-y: scroll;
 }
 
 .dm-server-divider {
@@ -72,11 +77,12 @@ div.active-server-sidebar-img,
     background-color: #5865f2;
 }
 
-#server-title {
+/* #server-title {
     padding: 15px;
-}
+} */
 
 #add-server-logo {
+    margin-bottom: 10px;
     cursor: pointer;
     color: #3ba55d;
     background-color: var(--chat-sides-sidebar-bg-color);

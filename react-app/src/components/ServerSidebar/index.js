@@ -30,7 +30,7 @@ const ServerSidebar = () => {
 
             <NavLink
             activeClassName='active-server'
-            className={`server-navlink server-sidebar-img dm-server-nav flx-row-justify-align-ctr`}
+            className={`server-navlink server-sidebar-img dm-server-nav flx-row-justify-align-ctr flx-shrink-null`}
             to='/channels/@me'>
                 <img
                     id='dm-server-nav-logo'
@@ -40,7 +40,7 @@ const ServerSidebar = () => {
                 />
             </NavLink>
 
-            <div className='dm-server-divider'></div>
+            <div className='dm-server-divider flx-shrink-null'></div>
 
             {serversArr.map((server) => {
                 return (
@@ -48,9 +48,9 @@ const ServerSidebar = () => {
                 )
             })}
 
-            <div className='dm-server-divider'></div>
+            <div className='dm-server-divider flx-shrink-null'></div>
 
-            <div id='add-server-logo' className='server-navlink server-sidebar-img flx-row-justify-align-ctr'>
+            <div id='add-server-logo' className='server-navlink server-sidebar-img flx-row-justify-align-ctr flx-shrink-null'>
                 <CreateServerModal />
             </div>
 

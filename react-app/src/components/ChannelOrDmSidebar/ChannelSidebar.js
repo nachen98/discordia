@@ -28,7 +28,7 @@ const ChannelSidebar = () => {
 
     return (
         <div id='channel-or-dm-sidebar' className='flx-col'>
-            <ServerBanner serverName={server.name} serverImg={server.image_url}/>
+            <ServerBanner isDm={false} serverName={server.name} serverImg={server.image_url}/>
 
             {channels.map((channel) =>{
                 const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''

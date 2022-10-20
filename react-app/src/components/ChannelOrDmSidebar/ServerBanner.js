@@ -1,8 +1,8 @@
-const ServerBanner = ({ serverImg, serverName }) => {
-    serverImg = false;
+const ServerBanner = ({ isDm, serverImg, serverName }) => {
+
     if (!serverImg) {
         return (
-            <div id='server-title' className='white-text flx-row-align-ctr'>
+            <div id='server-text-only-title' className={`white-text flx-row-space-btw server-title ${isDm ? '' : 'server-title-container'}`}>
                 {serverName}
             </div>
         )
@@ -10,10 +10,13 @@ const ServerBanner = ({ serverImg, serverName }) => {
 
     return (
         <>
-            <img id='server-banner-img' className='pos-rel' src={serverImg} />
+            <div id='server-banner-container' className='pos-rel'>
+                <img id='server-banner-img' src={serverImg} />
 
-            <div className='pos-abs white-text'>
-                {serverName}
+                <div className='pos-abs white-text server-name-offset flx-row-space-btw server-title-container'>
+                    <span>{serverName}</span>
+                    <span>setting button</span>
+                </div>
             </div>
         </>
     )

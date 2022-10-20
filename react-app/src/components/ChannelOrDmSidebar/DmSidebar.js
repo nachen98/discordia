@@ -25,7 +25,7 @@ const DmSidebar = () => {
     return (
         <div id='channel-or-dm-sidebar' className='flx-col'>
 
-            <ServerBanner serverName='Direct Messages' />
+            <ServerBanner isDm={true} serverName='Direct Messages' />
 
             {allDmServers.map((dmServer, ind) =>{
                 const activeView = parseInt(activeDmServerId) === dmServer.id ? 'active-view' : ''

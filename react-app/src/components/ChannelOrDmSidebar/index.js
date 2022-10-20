@@ -36,7 +36,6 @@ const ChannelOrDmSidebar = () => {
         setServername(server.name)
     }, [serverIdInt])
 
-    console.log('serverId is :', serverId)
     if (!parseInt(serverId)) return <DmSidebar />
     else return <ChannelSidebar />
 
@@ -50,7 +49,7 @@ const ChannelOrDmSidebar = () => {
     //
     //
     //
-    //
+    // Keeping code down below for notes
 
     // IF pathLocation.pathname === '/channels/@me' change the way that it is rendered
     // Will have to pass in dmServers rather than channels

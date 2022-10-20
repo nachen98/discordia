@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { addOneRegularServer } from "../../store/regularserver";
 
 
 const CreateServerForm = ({ setShowModal }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = useSelector(state => state.session.user);
     const [newServerName, setNewServerName] = useState(`${user.username}'s server`);
     const [newServerIcon, setNewServerIcon] = useState('')
@@ -22,6 +24,9 @@ const CreateServerForm = ({ setShowModal }) => {
         }
 
         dispatch(addOneRegularServer(newServer))
+        .then(createdServer=> history.push(`/channels/${createdServer.id}/${createdServer.channels[0]}`))
+        .then(() => setShowModal(false))
+
     }
 
     return (

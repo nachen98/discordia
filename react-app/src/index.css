@@ -4,6 +4,7 @@
     --chat-sides-sidebar-bg-color: rgb(47, 49, 54);
     --dark-gray-bg-color: rgb(54, 57, 63);
     --gray-hover: rgb(66, 70, 77);
+    --server-name-hover: #3c3f45;
 
     --gray-text: rgb(118, 121, 127);
     --off-white-text: rgb(254, 254, 242);
@@ -130,4 +131,8 @@ body {
     'wght' 300,
     'GRAD' 0,
     'opsz' 48
+}
+
+.flx-shrink-null {
+    flex-shrink: 0;
 }

@@ -13,10 +13,14 @@
     height: 135px;
 }
 
-#server-title {
+#server-text-only-title {
     box-sizing: border-box;
     height: 50px;
     border-bottom:0.5px solid rgb(35, 37, 39);
+}
+
+.server-title {
+    padding: 15px;
 }
 
 .server-channel-card {
@@ -51,4 +55,20 @@
 .active-view {
     background-color: var(--gray-hover);
     border-radius: 5px;
+}
+
+.server-name-offset {
+    top: 0;
+    left: 0;
+    padding: 15px;
+}
+
+.server-title-container {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 250px;
+}
+
+.server-title:hover {
+    background-color: var(--server-name-hover);
 }
