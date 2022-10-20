@@ -45,8 +45,9 @@ export const getOneChannel= (channelId) => async(dispatch) => {
     
     if(response.ok){
         const oneChannel = await response.json()
+        console.log("get one channel data ", oneChannel.result)
        
-        dispatch(loadOneChannel(oneChannel))
+        dispatch(loadOneChannel(oneChannel.result))
     }
 }
 
@@ -104,6 +105,8 @@ const channelReducer = (state=initialState, action)=>{
 
         case GET_ALL_CHANNELS:
             newState={...state}
+            console.log("new state load all channel ", newState)
+            console.log(" action @@@@@@", action)
             action.channels.forEach((channel)=> {
                 newState[channel.id]=channel
             })
@@ -111,7 +114,11 @@ const channelReducer = (state=initialState, action)=>{
             
         case GET_ONE_CHANNEL_By_ID:
             newState={...state}
+            console.log("new state chanel!!!!!!!---1" ,newState)
+            console.log("action.chanel!!!!!!!" ,action.channel)
+
             newState[action.channel.id]=action.channel
+            console.log("new state chanel!!!!!!!---2" ,newState)
             return newState
 
         case CREATE_ONE_CHANNEL:

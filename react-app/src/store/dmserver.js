@@ -23,7 +23,7 @@ export const getAllDmServers =()=> async(dispatch)=>{
     const response = await fetch('/api/servers/dm/current')
     if(response.ok){
         const list = await response.json()
-        console.log("list!!!!", list)
+        console.log("list!!!!!!!!!!!!!", list)
 
         list.result.forEach(server=> {
 

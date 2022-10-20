@@ -51,7 +51,7 @@ export const getAllRegularServers =()=> async(dispatch)=>{
     if(response.ok){
         const data = await response.json()
         const list =data.result
-        console.log("list!!!!!!!!!", list)
+        console.log("list!!!!!!!!!-----", list)
 
         list.forEach((server)=> {
             let channelIdArr=[]

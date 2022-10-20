@@ -96,21 +96,32 @@ def handle_connect(data):
 @socketio.on('message')
 def handle_direct_chat(message, data):
     print ("data----", data)
-    direct_message = Message()
-    direct_message.user_id =data['sender_id']
-    direct_message.server_id = data['dm_server_id']
-    direct_message.body =data['body']
-    direct_message.created_at = datetime.now()
-    direct_message.updated_at = datetime.now()
+    message = Message()
+    if data["is_channel_message"]:
+        message.channel_id =data['channel_id']
+    else:   
+        message.server_id = data['dm_server_id']
+        
+    message.user_id =data['sender_id']
+    message.body =data['body']
+    message.created_at = datetime.now()
+    message.updated_at = datetime.now()
+    
     # name_space = data['name-space']
 
-    db.session.add(direct_message)
+    db.session.add(message)
     db.session.commit()
     # print ("receive data 1", direct_message.to_dict())
-    socketio.emit("hello", direct_message.to_dict(), callback=ack)
+    socketio.emit("hello", message.to_dict(), broadCast=True)
     
         
+@socketio.event
+def connect(sid):
+    print('connect ', sid)
 
+@socketio.event
+def disconnect(sid):
+    print('disconnect ', sid)
 
 @socketio.on('test')
 def handle_test(data):

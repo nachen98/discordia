@@ -64,7 +64,7 @@ class Server(db.Model):
             'is_dm': self.is_dm,
             'owner_id': self.owner_id,
             'users': [user.to_dict() for user in self.server_users],
-            'channels': [channel.to_dict() for channel in self.channels]
+            'channels': [channel.to_dict_with_messages() for channel in self.channels]
         }
 
     def __repr__(self):
