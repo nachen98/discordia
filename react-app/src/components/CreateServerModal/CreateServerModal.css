@@ -56,6 +56,20 @@ h3#create-server-desc {
     font-size: x-small;
 }
 
+.server-name-length {
+    margin-left: 390px;
+    font-size: small;
+}
+
+.server-name-length-color {
+    color: var(--gray-text);
+}
+
+.server-icon-err-msg {
+    display: block;
+    font-size: small;
+}
+
 #create-server-bottom {
     justify-content: flex-end;
     box-sizing: border-box;

@@ -136,3 +136,7 @@ body {
 .flx-shrink-null {
     flex-shrink: 0;
 }
+
+.dis-none {
+    display: none;
+}

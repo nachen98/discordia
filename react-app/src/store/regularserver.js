@@ -117,7 +117,7 @@ export const addOneRegularServer=(serverBody)=> async(dispatch)=> {
 
 export const updateRegularServer = (serverBody, regularServerId) => async(dispatch)=> {
     const response = await fetch(`/api/servers/regular/${regularServerId}`, {
-        method: "PUT",
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
@@ -171,7 +171,9 @@ const regularServerReducer = (state=initialState, action)=>{
             return newState
 
         case UPDATE_ONE_REGULAR_SERVER:
-            newState={...state, [action.regularServer.id]: action.regularServer}
+            // newState={...state, [action.regularServer.id]: action.regularServer}
+            newState = {...state}
+            newState[action.regularServer.id] = {...state[action.regularServer.id], ...action.regularServer}
             return newState
 
         case DELETE_ONE_REGULAR_SERVER:

@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addOneRegularServer } from "../../store/regularserver";
 
+const imageExtensions = [
+    'jpeg',
+    'jpg',
+    'png'
+]
 
 const CreateServerForm = ({ setShowModal }) => {
     const dispatch = useDispatch();
@@ -10,9 +15,37 @@ const CreateServerForm = ({ setShowModal }) => {
     const user = useSelector(state => state.session.user);
     const [newServerName, setNewServerName] = useState(`${user.username}'s server`);
     const [newServerIcon, setNewServerIcon] = useState('')
+    const [serverNameLengthErr, setServerNameLengthErr] = useState('server-name-length-color')
+    const [serverIconErrMsg, setServerIconErrMsg] = useState('');
+
+    useEffect(() => {
+        if (newServerName.length > 50) setServerNameLengthErr('red-text')
+        else setServerNameLengthErr('server-name-length-color')
+    }, [newServerName])
 
     const handleCreateServer = async e => {
         e.preventDefault();
+
+        let errors = false;
+        if (!newServerName.length) {
+            errors = true;
+        }
+
+        if (newServerName.length > 50) {
+            errors = true;
+        }
+
+        if (newServerIcon) {
+            const imgUrlParts = newServerIcon.split('.')
+            const newServerImgExt = imgUrlParts[imgUrlParts.length - 1];
+
+            if (!imageExtensions.includes(newServerImgExt.toLowerCase())) {
+                setServerIconErrMsg('Invalid image URL. (jpeg, jpg, png supported)')
+                errors = true;
+            }
+        }
+
+        if (errors) return;
 
         const newServer = {
             name: newServerName,
@@ -39,21 +72,24 @@ const CreateServerForm = ({ setShowModal }) => {
                     <input
                         id='create-server-img-input'
                         className='create-server-input'
-                        placeholder="Please enter an image url"
+                        placeholder="Please enter an image url."
                         type='text'
                         value={newServerIcon}
                         onChange={e => setNewServerIcon(e.target.value)}
                     />
+                    <span className={`server-icon-err-msg red-text`}>{serverIconErrMsg} &nbsp;</span>
                 </label>
                 <label className='create-server-label'>
                     <span className='create-server-label-text'>SERVER NAME</span><span id='create-server-req-star' className='red-text'>*</span>
                     <input
                         id='create-server-name-input'
                         className='create-server-input'
+                        placeholder='This field is required. 50 chars max.'
                         type='text'
                         value={newServerName}
                         onChange={e => setNewServerName(e.target.value)}
                     />
+                    <span className={`server-name-length ${serverNameLengthErr}`}>{newServerName.length}</span>
                 </label>
             </form>
 

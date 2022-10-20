@@ -8,6 +8,25 @@
     color: var(--gray-text);
 }
 
+#settings-dropdown-logo {
+    height: 15px;
+    width: 15px;
+    filter: brightness(0)
+}
+
+#server-name {
+    display: block;
+    width: 200px;
+    height: 22px;
+    box-sizing: border-box;
+
+    overflow: clip;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-weight: 500;
+}
+
 #server-banner-img {
     width: 250px;
     height: 135px;
@@ -64,6 +83,7 @@
 }
 
 .server-title-container {
+    align-items: center;
     cursor: pointer;
     box-sizing: border-box;
     width: 250px;

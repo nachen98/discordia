@@ -61,8 +61,9 @@ div#current-server {
 }
 
 #close-server-settings:hover #close-server-modal-logo{
-    border-radius: 50%;
-    box-shadow: 0 0 5px;
+    /* border-radius: 50%;
+    box-shadow: 0 0 1px; */
+    filter: brightness(10)
 }
 
 #delete-server-logo {
@@ -94,9 +95,18 @@ div#current-server {
     color: var(--off-white-text)
 }
 
-#edit-server-form > * {
-    margin-top: 5px;
+.edit-server-input-header,
+.edit-server-input,
+#submit-server-edit {
     color: var(--off-white-text);
+}
+
+.edit-server-err {
+    height: 15px;
+    margin-bottom: 15px;
+    font-size: small;
+
+    color: #d67a7d;
 }
 
 .edit-server-input {
@@ -104,6 +114,7 @@ div#current-server {
     padding: 10px;
     background-color: var(--server-sidebar-bg-color);
     border: none;
+    margin-top: 5px;
 }
 
 .edit-server-input:focus {
