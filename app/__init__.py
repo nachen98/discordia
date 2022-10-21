@@ -64,6 +64,7 @@ CORS(app)
 def get_dm_server_message(to_user_id):
 
     cur_user_id = current_user.id
+    print("------------------ id", cur_user_id, to_user_id)
 
     server_name = str(cur_user_id)+'-'+str(to_user_id) if cur_user_id<to_user_id else str(to_user_id)+'-'+str(cur_user_id)
     server = Server.query.filter(Server.name == server_name).first()
@@ -77,14 +78,29 @@ def get_dm_server_message(to_user_id):
         new_dm_server.updated_at = datetime.now()
         db.session.add(new_dm_server)
         db.session.commit()
-        cur_user = User.query.filter(User.id == cur_user_id)
-        to_user = User.query.filter(User.id == to_user_id)
+        cur_user = User.query.filter(User.id == cur_user_id).first()
+        to_user = User.query.filter(User.id == to_user_id).first()
 
+        print ("-----------backend current user ", to_user)
+        print ("--------------backend to user ", cur_user)
         new_dm_server.server_users.append(cur_user)
         new_dm_server.server_users.append(to_user)
         db.session.commit()
         print ("new dm server instance ", new_dm_server.to_dict_dm_server())
         return {"result" : new_dm_server.to_dict_dm_server()}, 200
+
+
+
+
+@app.route('/api/messages/<int:dm_server_id>')
+def get_messages_by_dm_id(dm_server_id):
+    server = Server.query.filter(Server.id == dm_server_id).first()
+    if server :
+        return {"result" : server.to_dict_dm_server()}, 200
+    else:
+        return {'errors': "dm_server not found"}, 404 
+
+
 
 
 @socketio.on('connect')
@@ -96,6 +112,7 @@ def handle_connect(data):
 @socketio.on('message')
 def handle_direct_chat(message, data):
     print ("data----", data)
+    print ("begin 1 ----", datetime.now())
     message = Message()
     if data["is_channel_message"]:
         message.channel_id =data['channel_id']
@@ -112,28 +129,22 @@ def handle_direct_chat(message, data):
     db.session.add(message)
     db.session.commit()
     # print ("receive data 1", direct_message.to_dict())
+    print ("begin 2 ----", datetime.now())
     socketio.emit("hello", message.to_dict(), broadCast=True)
+    print ("begin 3 ----", datetime.now())
     
-        
-@socketio.event
-def connect(sid):
-    print('connect ', sid)
 
-@socketio.event
-def disconnect(sid):
-    print('disconnect ', sid)
-
-@socketio.on('test')
-def handle_test(data):
+# @socketio.on('test')
+# def handle_test(data):
     
-    print ("receive data 2", data)
-    socketio.emit("hello", data, namespace='/chat')
+#     print ("receive data 2", data)
+#     socketio.emit("hello", data, namespace='/chat')
 
 
-def ack():
-    print('message was received!')
+# def ack():
+#     print('message was received!')
     
-    #emit('direct_message', data, broadcast=True)
+#     #emit('direct_message', data, broadcast=True)
 
 
 

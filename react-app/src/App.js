@@ -60,15 +60,16 @@ function App() {
         <Route path='/splash' exact={true} >
           <SplashPage />
         </Route>
-        <Route path='/channels/@me'>
+        <Route path='/channels/@me' exact={true}>
           <Main />
         </Route>
-        <Route path='/channels/:serverId/:channelId'>
+        <Route path='/channels/@me/:serverId' exact={true}>
           <Main />
         </Route>
-        <Route path='/channels/:serverId'>
+        <Route path='/channels/:serverId/:channelId' exact={true}>
           <Main />
         </Route>
+        
       </Switch>
     </BrowserRouter>
   );

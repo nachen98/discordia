@@ -10,7 +10,7 @@ const CreateServerModal = () => {
     return (
         <>
         {/* <button id='modal-login' onClick={() => setShowModal(true)}>Create Server</button> */}
-        <span id='create-server' class="material-symbols-sharp" onClick={() => setShowModal(true)}>
+        <span id='create-server' className="material-symbols-sharp" onClick={() => setShowModal(true)}>
             add
         </span>
         {showModal && (
