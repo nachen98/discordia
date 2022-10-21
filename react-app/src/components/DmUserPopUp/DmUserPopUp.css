@@ -1,0 +1,78 @@
+.dm-user-pop-up-container {
+    width: 340px;
+    min-height: 345px;
+
+    top: 0;
+    left: -360px;
+
+    border-radius: 5px;
+    background-color: #292b2f;
+}
+
+.dm-user-pop-up-container:hover {
+    cursor: default;
+}
+
+.pop-up-profile-img {
+    height: 40px;
+    width: 50px;
+}
+
+.pop-up-profile-img-container {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+
+.profile-pic-bg {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+
+    top: 20px;
+    left: 20px;
+
+    background-color: #292b2f;
+}
+
+.user-popup-banner {
+    display: block;
+    height: calc(340px / 5);
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+#dm-pop-up__user-profile {
+    flex-grow: 1;
+    margin: 60px 15px 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #18191c;
+}
+
+#dm-pop-up__username {
+    width: 100%;
+
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-text);
+
+    font-size: large;
+    color: var(--off-white-text)
+}
+
+#send-dm {
+    margin-top: auto;
+}
+
+.send-dm-input {
+    padding: 5px;
+}
+
+#send-user-a-msg {
+    margin-top: auto;
+}
+
+#spiderman {
+    margin: 10px;
+    object-fit: contain;
+}

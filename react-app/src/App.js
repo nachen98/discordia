@@ -42,34 +42,39 @@ function App() {
     <BrowserRouter>
       {pathLocation.pathname === '/login' && <NavBar />}
       <Switch>
+
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
+
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+
+        <Route path='/' exact={true} >
+          <SplashPage />
+        </Route>
+
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
+
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+
+        <ProtectedRoute path='/channels/@me' exact={true}>
+          <Main />
         </ProtectedRoute>
-        <Route path='/splash' exact={true} >
-          <SplashPage />
-        </Route>
-        <Route path='/channels/@me' exact={true}>
+
+        <ProtectedRoute path='/channels/@me/:serverId' exact={true}>
           <Main />
-        </Route>
-        <Route path='/channels/@me/:serverId' exact={true}>
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/channels/:serverId/:channelId' exact={true}>
           <Main />
-        </Route>
-        <Route path='/channels/:serverId/:channelId' exact={true}>
-          <Main />
-        </Route>
-        
+        </ProtectedRoute>
+
       </Switch>
     </BrowserRouter>
   );

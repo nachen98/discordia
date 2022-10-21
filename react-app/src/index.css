@@ -140,3 +140,7 @@ body {
 .dis-none {
     display: none;
 }
+
+.left-algn-text {
+    text-align: left;
+}
