@@ -29,7 +29,7 @@ const ChatBox = ({socket}) => {
     const [currentServerId, setCurrentServerId] = useState(serverId)
 
     const channels = useSelector(state => state.channelReducer)
-    const users = Object.values(useSelector(state => state.usersReducer))
+    const users = useSelector(state => state.usersReducer)
     const current_user = useSelector(state => state.session.user)
     const msg = Object.values(useSelector(state => state.messagesReducer))
     const allRegularServers = useSelector(state => state.regularServerReducer)
@@ -80,7 +80,10 @@ const ChatBox = ({socket}) => {
 
     const currentServer = allRegularServers[serverId] ? allRegularServers[serverId] : allDmServers[serverId]
 
-    isDmServer = currentServer.is_dm
+    if (currentServer){
+        isDmServer = currentServer.is_dm
+    }
+    
 
     const listenForEnter = (e) => {
         if (e.key === "Enter") {
@@ -141,12 +144,13 @@ const ChatBox = ({socket}) => {
         }
     }
     console.log("dataObj: ", dateObj)
-    
+    console.log("dataObj--users" ,users);
     const messageContainer = Object.keys(dateObj).map((key, index) =>{
         return (
             <div key = {index} className='all-messages-container'>
                     <div className='date-divider'> {getMonthYear(key)}</div>
                     {  dateObj[key].sort((a,b) =>a.id-b.id).map((item, idx) =>{
+                        console.log("item-------", item,index)
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <img className='channel-message-user-profile-image'src={profileimage} alt={"bb"}/>

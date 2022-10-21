@@ -10,7 +10,7 @@ const DmChatBox = ({dmMessages, socket}) =>{
     const {serverId} = useParams();
 
     const dispatch = useDispatch();
-    const users = Object.values(useSelector(state => state.usersReducer))
+    const users = useSelector(state => state.usersReducer)
     const current_user = useSelector(state => state.session.user)
     const [messageInput, setMessageInput] = useState('')
     const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
@@ -63,6 +63,7 @@ const DmChatBox = ({dmMessages, socket}) =>{
         }
     }
     console.log("dataObj: ", dateObj)
+    console.log("dataObj--users1" ,users);
 
 
     const messageContainer = Object.keys(dateObj).map((key, index) =>{
