@@ -32,7 +32,6 @@
 } */
 .create-channel-label {
     margin-top: 25px;
-    margin-left: 10px;
    
 }
 
@@ -63,7 +62,8 @@
 }
 .create-channel-label-text {
     font-size: small;
-    
+    margin-bottom: 10px;
+    display:block
 }
 
 #create-channel-req-star {
