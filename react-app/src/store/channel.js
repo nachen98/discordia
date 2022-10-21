@@ -1,3 +1,5 @@
+import { addServerChannelUpdate} from "./regularserver"
+
 const GET_ALL_CHANNELS = 'channels/getAllChannels'
 const GET_ONE_CHANNEL_By_ID = 'channels/getOneChannel';
 const CREATE_ONE_CHANNEL = 'channels/createOneChannel';
@@ -51,8 +53,10 @@ export const getOneChannel= (channelId) => async(dispatch) => {
     }
 }
 
-export const addOneChannel=(channelBody)=> async(dispatch)=> {
-    const response = await fetch(`/api/servers/${channelBody.serverId}>/channels`, {
+export const addOneChannel=(channelBody, serverId)=> async(dispatch)=> {
+    console.log("channelBody is !!!!!!!!!!", channelBody)
+    console.log("serverId is!!!!!!!!!!!!!!!", serverId)
+    const response = await fetch(`/api/servers/${serverId}/channels`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -64,6 +68,7 @@ export const addOneChannel=(channelBody)=> async(dispatch)=> {
         const newChannel = await response.json()
         dispatch(createOneChannel(newChannel))
         console.log('newChannel!!!!!!!!!', newChannel)
+        dispatch(addServerChannelUpdate(serverId, newChannel.id))
         return newChannel
     }else{
         const result = await response.json()

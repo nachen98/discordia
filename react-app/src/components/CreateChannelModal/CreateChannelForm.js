@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { addOneChannel } from "../../store/channel";
 import "./CreateChannelForm.css"
 import "../../index.css"
 export const CreateChannelForm=({ setShowModal })=>{
+    const {serverId} = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
     const [newChannelName, setNewChannelName] = useState('new-channel');
@@ -31,8 +32,8 @@ export const CreateChannelForm=({ setShowModal })=>{
         const newChannel ={
             name: newChannelName,
         }
-        dispatch(addOneChannel(newChannel))
-        .then(createdChannel => history.push(`/channels/${createdChannel.serverId}/${createdChannel.id}`))
+        dispatch(addOneChannel(newChannel, serverId))
+        .then(createdChannel => history.push(`/channels/${serverId}/${createdChannel.id}`))
         .then(()=>setShowModal(false))
     }
 

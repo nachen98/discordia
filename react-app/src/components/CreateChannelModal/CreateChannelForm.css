@@ -31,13 +31,14 @@
    
 } */
 .create-channel-label {
-    margin-top: 35px;
+    margin-top: 25px;
     margin-left: 10px;
    
 }
 
 #create-channel-name-input{
     padding-left: 20px;
+    background-color: black;
 }
 #channel-name-input{
     position:relative;
@@ -62,6 +63,7 @@
 }
 .create-channel-label-text {
     font-size: small;
+    
 }
 
 #create-channel-req-star {
@@ -85,7 +87,7 @@
 #create-channel-bottom {
     justify-content: flex-end;
     box-sizing: border-box;
-    width: 100%;
+   
 
     border-radius: 0 0 5px 5px;
 
@@ -103,7 +105,7 @@
 #create-channel-btn {
     cursor: pointer;
     box-sizing: border-box;
-    width: 100px;
+    width: 150px;
     height: 40px;
 
     border-radius: 5px;
@@ -112,6 +114,7 @@
 
     color: white;
     background-color: #5865f2;
+    margin-bottom: 20px
 }
 
 #close-create-channel-btn {

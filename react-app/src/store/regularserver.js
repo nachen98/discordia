@@ -6,7 +6,7 @@ const GET_ONE_REGULAR_SERVER_By_ID = 'regularservers/getOneServer';
 const CREATE_ONE_REGULAR_SERVER = 'regularservers/createOneServer';
 const UPDATE_ONE_REGULAR_SERVER = 'regularservers/updateOneServer';
 const DELETE_ONE_REGULAR_SERVER = 'regularservers/deleteOneServer'
-
+const UPDATE_SERVER_CHANNELS = 'regularservers/updateServerChannel'
 
 const loadRegularServers=(list)=> {
     return {
@@ -43,6 +43,14 @@ const deleteOneRegularServer=(regularServerId)=> {
     }
 }
 
+export const addServerChannelUpdate = (serverId, channelId) =>{
+    return {
+        type: UPDATE_SERVER_CHANNELS,
+        serverId, 
+        channelId
+
+    }
+}
 //thunk action creator
 export const getAllRegularServers =()=> async(dispatch)=>{
 
@@ -179,6 +187,12 @@ const regularServerReducer = (state=initialState, action)=>{
         case DELETE_ONE_REGULAR_SERVER:
             newState={...state}
             delete newState[action.regularServerId]
+            return newState
+        
+        case UPDATE_SERVER_CHANNELS:
+            newState={...state}
+            newState[action.serverId] = {...newState[action.serverId]}
+            newState[action.serverId].channels = [...newState[action.serverId].channels, action.channelId]
             return newState
 
         default:
