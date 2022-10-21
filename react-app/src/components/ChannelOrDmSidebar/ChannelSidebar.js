@@ -33,11 +33,18 @@ const ChannelSidebar = () => {
             {channels.map((channel) =>{
                 const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
                 return (
-                    <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id}>
+                    <>
+                     <div id='text-channels' className="flx-row-space-btw">
+                        TEXT CHANNELS
+                        <i class="fa-solid fa-plus" style="cursor:pointer;" title="Create Channel"></i>
+                     </div>
+                     <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id}>
                         <div className={`server-channel-card flx-row-align-ctr ${activeView}`}>
                             # {channel.name}
                         </div>
                     </NavLink>
+                    </>
+                   
                 )
             })}
         </div>

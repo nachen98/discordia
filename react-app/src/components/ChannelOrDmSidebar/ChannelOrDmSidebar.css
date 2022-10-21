@@ -100,3 +100,10 @@
 #server-text-only-title.dm-server-banner:hover {
     background-color: var(--chat-sides-sidebar-bg-color);
 }
+
+#text-channels{
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 13px;
+    font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
