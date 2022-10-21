@@ -1,9 +1,10 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import './SplashPage.css'
-import { Link } from "react-router-dom"
+
 const SplashPage = () => {
     return (
         <div id='splashpage-container' className={`flx-col`}>
+
             <div id='splash-sect-1' className={`flx-col-justify-align-ctr pos-rel`}>
                 <div className='section-contents'>
                     <nav className='splash-nav flx-row-space-btw pos-abs'>
@@ -68,17 +69,16 @@ const SplashPage = () => {
                     <img className='splash-sect-imgs' src='https://i.imgur.com/c80M4cI.png'/>
                 </div>
             </div>
-           <div id='splash-sect-6'>
-            <div id='splash-sect-6-inner-container' class="flx-row-space-btw">
-            <div>discordia logo</div>
-            <Link to={"/sign-up"}>
-            <button id="splash-signup-button" >Sign up</button>
-            </Link>
 
-
+            <div id='splash-sect-6'>
+                <div id='splash-sect-6-inner-container' class="flx-row-space-btw">
+                    <div>discordia logo</div>
+                    <NavLink to={"/sign-up"}>
+                        <button id="splash-signup-button" >Sign up</button>
+                    </NavLink>
+                </div>
             </div>
 
-           </div>
         </div>
     )
 }

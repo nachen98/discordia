@@ -19,3 +19,8 @@
     border-radius: 10px;
     background-color: var(--gray-hover);
 }
+
+.popup-active {
+    border-radius: 10px;
+    background-color: var(--gray-hover);
+}
