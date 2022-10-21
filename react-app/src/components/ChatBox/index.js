@@ -116,7 +116,7 @@ const ChatBox = ({socket}) => {
     }
 
     if (isDmServer && isLoaded){
-        const dmMessages = msg.filter(server_id => parseInt(server_id) === parseInt(serverId));
+        const dmMessages = msg.filter(message=> parseInt(message.server_id) === parseInt(serverId));
         return <DmChatBox  socket={socket} dmMessages={dmMessages}/>
     } 
    
