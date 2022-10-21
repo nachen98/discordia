@@ -63,15 +63,15 @@ function App() {
           <User />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/channels/@me'>
+        <ProtectedRoute path='/channels/@me' exact={true}>
           <Main />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/channels/:serverId/:channelId'>
+        <ProtectedRoute path='/channels/@me/:serverId' exact={true}>
           <Main />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/channels/:serverId'>
+        <ProtectedRoute path='/channels/:serverId/:channelId' exact={true}>
           <Main />
         </ProtectedRoute>
 
