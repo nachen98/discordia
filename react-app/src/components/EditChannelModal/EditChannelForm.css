@@ -154,3 +154,40 @@
   [tooltip][flow^="right"]:hover::after {
     animation: tooltips-horz 300ms ease-out forwards;
   }
+
+  #update-channel-form-container {
+    border-radius: 5px;
+
+    box-sizing: border-box;
+    height: auto;
+    width: 450px;
+
+    background-color: rgb(54, 57,63);
+}
+
+#update-channel-header {
+  margin-top: 15px;
+  width: 95%;
+ 
+  color: var(--off-white-text);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+#update-channel-form{
+  width: 90%
+}
+#update-chanel-label{
+  margin-top: 25px;
+ 
+}
+#update-channel-name-input{
+
+  
+  background-color: black;
+}
+
+#update-channel-topic-input{
+  
+  background-color: black;
+}

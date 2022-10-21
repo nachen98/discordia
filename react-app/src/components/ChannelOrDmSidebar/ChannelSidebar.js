@@ -42,7 +42,7 @@ const ChannelSidebar = () => {
                         {showModal && (
                         <Modal><CreateChannelForm setShowModal={setShowModal}/></Modal>)} */}
             </div>
-            {channels.map((channel) => {
+            {!!channels.length && channels.map((channel) => {
                 const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
                 return (
                     <>
@@ -52,7 +52,7 @@ const ChannelSidebar = () => {
                                     # {channel.name}
                                 </div>
                             </NavLink>
-                            <EditChannelModal />
+                            <EditChannelModal channelId={channel.id}/>
                         </div>
 
 

@@ -3,7 +3,7 @@ import { Modal } from "../../context/Modal";
 import EditChannelForm from "./EditChannelForm";
 import './EditChannelForm.css'
 
-const EditChannelModal = () => {
+const EditChannelModal = ({channelId}) => {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -13,7 +13,7 @@ const EditChannelModal = () => {
         </span>
         {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-                <EditChannelForm setShowModal={setShowModal}/>
+                <EditChannelForm channelId={channelId} setShowModal={setShowModal}/>
             </Modal>
         )}
     </>

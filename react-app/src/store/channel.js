@@ -1,4 +1,4 @@
-import { addServerChannelUpdate} from "./regularserver"
+import { addServerChannelUpdate, deleteServerChannel} from "./regularserver"
 
 const GET_ALL_CHANNELS = 'channels/getAllChannels'
 const GET_ONE_CHANNEL_By_ID = 'channels/getOneChannel';
@@ -78,7 +78,7 @@ export const addOneChannel=(channelBody, serverId)=> async(dispatch)=> {
 
 export const updateChannel = (channelBody, channelId) => async(dispatch)=> {
     const response = await fetch(`/api/channels/${channelId}`, {
-        method: "PUT",
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
@@ -86,19 +86,23 @@ export const updateChannel = (channelBody, channelId) => async(dispatch)=> {
     }).catch(res=>res)
     if(response.ok){
         const updatedChannel=await response.json()
+        console.log('updatedChannel!!!!!!!!!!', updatedChannel)
         dispatch(updateOneChannel(updatedChannel))
+        return updatedChannel
     }else{
         const result = await response.json();
         return result
     }
 }
 
-export const deleteChannel=(channelId)=> async(dispatch)=> {
+export const deleteChannel=(serverId, channelId)=> async(dispatch)=> {
     const response = await fetch(`/api/channels/${channelId}`, {
         method: "DELETE"
     });
     if(response.ok){
+        dispatch(deleteServerChannel(serverId,channelId))
         dispatch(deleteOneChannel(channelId))
+        
     }
 }
 
@@ -133,7 +137,7 @@ const channelReducer = (state=initialState, action)=>{
             return newState
         
         case UPDATE_ONE_CHANNEL:
-            newState={...state, [action.channel.id]: action.channel}
+            newState={...state, [action.channel.result.id]: action.channel.result}
             return newState
         
         case DELETE_ONE_CHANNEL:
