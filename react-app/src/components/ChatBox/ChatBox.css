@@ -1,4 +1,11 @@
-#main-chat {
+#channel-main-chat {
+    height: 100vh;
+    width: calc(100vw - 75px - 250px);
+    background-color: var(--dark-gray-bg-color);
+    flex-wrap: wrap;
+}
+
+#dm-main-chat {
     height: 100vh;
     width: calc(100vw - 75px - 250px);
     background-color: var(--dark-gray-bg-color);
@@ -21,6 +28,14 @@
     width: calc(100vw - 75px - 250px - 250px);
     box-sizing: border-box;
 }
+
+#dm-chat-window {
+    justify-content: flex-end;
+
+    width: calc(100vw - 75px - 250px - 250px);
+    box-sizing: border-box;
+}
+
 
 #message-window {
     width: calc(100vw - 75px - 250px - 250px);

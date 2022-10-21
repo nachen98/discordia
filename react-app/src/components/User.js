@@ -45,18 +45,18 @@ function User() {
     })();
   }, [userId]);
 
-  useEffect(() => {
-    socket = io.connect("http://localhost:5000")
-    socket.on('connect', function() {
-      //socket.send("User connected!");
-      console.log("get connected !!")
-  });
+  // useEffect(() => {
+  //   socket = io.connect("http://localhost:5000")
+  //   socket.on('connect', function() {
+  //     //socket.send("User connected!");
+  //     console.log("get connected !!")
+  // });
 
-    return (() => {
-      console.log("socket disconnected")
-      socket.disconnect();
-    });
-  }, []);
+  //   return (() => {
+  //     console.log("socket disconnected")
+  //     socket.disconnect();
+  //   });
+  // }, []);
 
 
 
