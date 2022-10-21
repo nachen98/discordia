@@ -52,7 +52,7 @@ export const getOneChannel= (channelId) => async(dispatch) => {
 }
 
 export const addOneChannel=(channelBody)=> async(dispatch)=> {
-    const response = await fetch(`/api/channels`, {
+    const response = await fetch(`/api/servers/${channelBody.serverId}>/channels`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -63,6 +63,7 @@ export const addOneChannel=(channelBody)=> async(dispatch)=> {
     if(response.ok){
         const newChannel = await response.json()
         dispatch(createOneChannel(newChannel))
+        console.log('newChannel!!!!!!!!!', newChannel)
         return newChannel
     }else{
         const result = await response.json()
