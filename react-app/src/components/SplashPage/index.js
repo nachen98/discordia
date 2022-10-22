@@ -60,9 +60,9 @@ const SplashPage = () => {
                 </div>
             </div>
 
-            <div id='splash-sect-5' className='flx-col-justify-algn-ctr'>
-                <div className='section-contents flx-col-justify-algn-ctr'>
-                    <div className='flx-col-justify-algn-ctr ctr-algn-text'>
+            <div id='splash-sect-5' className='flx-row-justify-align-ctr'>
+                <div className='section-contents flx-row-justify-align-ctr'>
+                    <div className='flx-row-justify-algn-ctr ctr-align-text'>
                     <h1>Lorem ipsum dolor sit amet</h1>
                         <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
                     </div>
