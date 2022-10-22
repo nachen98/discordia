@@ -71,7 +71,7 @@ const SplashPage = () => {
             </div>
 
             <div id='splash-sect-6'>
-                <div id='splash-sect-6-inner-container' class="flx-row-space-btw">
+                <div id='splash-sect-6-inner-container' className="flx-row-space-btw">
                     <div>discordia logo</div>
                     <NavLink to={"/sign-up"}>
                         <button id="splash-signup-button" >Sign up</button>

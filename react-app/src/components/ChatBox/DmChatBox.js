@@ -1,22 +1,26 @@
+
 import { useSelector ,useDispatch} from "react-redux";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMonthYear } from "../../utils/helper";
 import { create_dm} from "../../store/messages"
+import { useEffect } from 'react'
+import {io} from 'socket.io-client'
+import { addChannelMessage } from '../../store/channel'
+import { addDmServerMessage } from '../../store/dmserver'
+import { createChannelMessage } from '../../store/messages'
+// let socket
 
-const DmChatBox = ({dmMessages, socket}) =>{
+const DmChatBox = ({socket, dmMessages}) =>{
 
     console.log("get dm messages " , dmMessages)
     const {serverId} = useParams();
-
     const dispatch = useDispatch();
     const users = useSelector(state => state.usersReducer)
     const current_user = useSelector(state => state.session.user)
     const [messageInput, setMessageInput] = useState('')
     const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
     //const colorInd = users[ind] % COLORS.length; 
-
-
     
     const handleMessageInput = (e) => {
         setMessageInput(e.target.value)
@@ -29,8 +33,7 @@ const DmChatBox = ({dmMessages, socket}) =>{
 
     const handleMessageSubmit = async (e) => {
        e.preventDefault();
-       console.log("status of socket", socket.connected)
-       console.log("before sending...", new Date())
+       console.log("status of socket", socket)
        socket.send('message', 
         {   
             "sender_id": current_user.id, 
@@ -38,16 +41,7 @@ const DmChatBox = ({dmMessages, socket}) =>{
             "dm_server_id": serverId, 
             "body": messageInput 
         })
-        console.log("after sending...", new Date())
-        // socket.on('hello', (data)=>{
-        //     console.log("after receiving 1...", new Date())
-        //     console.log("received message from server", data)
-        //     console.log("received broadcast msg, socket id:", socket.id) 
-        //     dispatch(create_dm(data))
-        //     console.log("after receiving 2...", new Date())
-        //     setMessageInput("")
-        //     console.log("after receiving 3...", new Date())
-        // })     
+        
         setMessageInput('');
     }
 

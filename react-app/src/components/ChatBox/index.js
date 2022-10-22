@@ -10,10 +10,12 @@ import {createChannelMessage } from "../../store/messages"
 import profileimage from './profileimage.png'
 import { getMonthYear } from '../../utils/helper';
 import DmChatBox from './DmChatBox';
+import { addChannelMessage } from '../../store/channel'
+import { addDmServerMessage } from '../../store/dmserver'
+import { create_dm} from "../../store/messages"
+let socket
 
-
-const ChatBox = ({socket}) => {
-    //let socket;
+const ChatBox = () => {
 
     console.log('chatbox rendering....');
     const {channelId} = useParams();
@@ -22,8 +24,6 @@ const ChatBox = ({socket}) => {
     const [isLoaded, setLoaded]= useState(false)
   
     let isDmServer;
-    //const
-    console.log("get socket from main component ..", socket)
   
     const dispatch = useDispatch();
     const [currentServerId, setCurrentServerId] = useState(serverId)
@@ -31,10 +31,50 @@ const ChatBox = ({socket}) => {
     const channels = useSelector(state => state.channelReducer)
     const users = useSelector(state => state.usersReducer)
     const current_user = useSelector(state => state.session.user)
-    const msg = Object.values(useSelector(state => state.messagesReducer))
+    const msg =Object.values(useSelector(state => state.messagesReducer))
     const allRegularServers = useSelector(state => state.regularServerReducer)
     const allDmServers = useSelector(state => state.dmServerReducer)
     const [messageInput, setMessageInput] = useState('')
+    useEffect(() => {
+        // create websocket/connect
+        socket = io();
+        console.log('-===================== CREATE A NEW socket instance =====ChatBox=================-.', socket)
+        socket.connect("http://localhost:5000")
+        socket.on('connect', ()=>{
+            console.log("socket in ChatBox connected -- value", socket.connected)
+        });
+        socket.on('disconnect', ()=>{
+            console.log("socket in ChatBox disconnected ")
+        });
+        socket.on("connect_error", (err) => {
+            console.log("connect_error in ChatBox: ", err)
+            console.log(`connect_error in ChatBox due to ${err.message}`);
+        });
+        console.log("socket init..", socket)
+
+        socket.on('hello', (data)=>{
+            console.log("after receiving 1...", new Date())
+            console.log("received message from server in Chatbox", data)
+            console.log("received broadcast msg, socket id:", socket.id) 
+            console.log("c/////////// id ",data.channel_id )
+            if (data.channel_id){
+                dispatch(createChannelMessage(data));
+                dispatch(addChannelMessage(data.id, data.channel_id));
+                //dispatch(createChannelMessage(data));
+            } else{
+                console.log("c/////////// id ",data.channel_id)
+                dispatch(create_dm(data));
+                dispatch(addDmServerMessage(data.id, data.server_id));
+            }
+        console.log("after receiving 2...", new Date())
+    })
+
+       
+        return (() => {
+            socket.disconnect()
+        })
+    }, [])
+    
 
     
 
@@ -42,7 +82,7 @@ const ChatBox = ({socket}) => {
         if (!channelId) return;
         //dispatch(messageActions.loadDMServerMessagesByRecipintId(+recipintId));
         dispatch(messageActions.loadMessgesByChannelThunk(+channelId));
-    },[dispatch]);
+    },[dispatch,channelId]);
 
 
 
@@ -81,6 +121,7 @@ const ChatBox = ({socket}) => {
     const currentServer = allRegularServers[serverId] ? allRegularServers[serverId] : allDmServers[serverId]
 
     if (currentServer){
+        console.log("current server is --", currentServer);
         isDmServer = currentServer.is_dm
     }
     
@@ -116,6 +157,7 @@ const ChatBox = ({socket}) => {
         //     setMessageInput("")
         //     console.log("after receiving 3...", new Date())
         // })     
+        setMessageInput('');
     }
 
     if (isDmServer && isLoaded){
@@ -123,16 +165,16 @@ const ChatBox = ({socket}) => {
         return <DmChatBox  socket={socket} dmMessages={dmMessages}/>
     } 
    
-     const channel = channels[channelId]
-    // if (!channel || !channel.messages){  
-    //     return <span>Loading................... </span>
-    // }
+    const channel = channels[channelId]
+    if (!channel || !channel.messages){  
+        return <span>Loading................... </span>
+    }
 
    
-    let messageArr = Object.values(msg)
+    let messageArr = msg
     const dateObj = {}
     for (let i=0; i< messageArr.length;i++){
-        if (messageArr[i].channel_id === null || messageArr[i].channel_id !== channelId ) continue;
+        if (messageArr[i].channel_id === null || messageArr[i].channel_id !== +channelId ) continue;
         let created_date = messageArr[i].created_at.substring(0,10)
         if ( Object.keys(dateObj).includes(created_date)){
             dateObj[created_date].push(messageArr[i])
@@ -143,7 +185,8 @@ const ChatBox = ({socket}) => {
             newArr.push(messageArr[i])
         }
     }
-    console.log("dataObj: ", dateObj)
+    console.log("channel message dataObj: ", messageArr)
+    console.log("channel message reducer: ", msg);
     console.log("dataObj--users" ,users);
     const messageContainer = Object.keys(dateObj).map((key, index) =>{
         return (
@@ -168,11 +211,11 @@ const ChatBox = ({socket}) => {
             </div>   
         )
     })
-
+ 
 
     return (
         <div id='channel-main-chat' className='flx-row'>
-            <div id='chat-nav' className='flx-row-align-ctr'>Channel name and (optional) topic goes here</div>
+            <div id='chat-nav' className='flx-row-align-ctr'> {`# ${channel.name}`} </div>
 
             <div id='chat-window' className='flx-col'>
                 <div id='message-window'>
