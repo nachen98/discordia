@@ -4,7 +4,7 @@ from datetime import datetime
 def seed_channels():
     server_1_channel_1 = Channel(
         name='welcome',
-        topic='greetings',
+        topic='Greetings',
         is_voice=False,
         server_id=1,
         created_at=datetime.now(),
@@ -13,7 +13,7 @@ def seed_channels():
 
     server_1_channel_2 = Channel(
         name='music',
-        topic='classic, pop, r&b',
+        topic='Classic, pop, r&b',
         is_voice=False,
         server_id=1,
         created_at=datetime.now(),
@@ -31,7 +31,7 @@ def seed_channels():
 
     server_1_channel_4 = Channel(
         name='coding',
-        topic='python, C++, Javascript, Java',
+        topic='Python, C++, Javascript, Java',
         is_voice=False,
         server_id=1,
         created_at=datetime.now(),
@@ -39,8 +39,8 @@ def seed_channels():
     )
 
     server_1_channel_5 = Channel(
-        name='pets',
-        topic='cats, dogs, fish, bunnies',
+        name='general',
+        topic='Pets',
         is_voice=False,
         server_id=1,
         created_at=datetime.now(),
@@ -48,28 +48,28 @@ def seed_channels():
     )
 
     server_1_channel_6 = Channel(
-        name='sports',
-        topic='fencing, baseball, basketball, soccer',
+        name='general',
+        topic='Sports',
         is_voice=False,
-        server_id=1,
+        server_id=2,
         created_at=datetime.now(),
         updated_at=datetime.now()
     )
 
     server_1_channel_7 = Channel(
-        name='books',
-        topic='fables, classics, fiction, adventure stories',
+        name='general',
+        topic='Yoga',
         is_voice=False,
-        server_id=1,
+        server_id=3,
         created_at=datetime.now(),
         updated_at=datetime.now()
     )
 
     server_2_channel_1 = Channel(
-        name='welcome',
-        topic='greetings',
+        name='general',
+        topic='Greetings',
         is_voice=False,
-        server_id=2,
+        server_id=4,
         created_at=datetime.now(),
         updated_at=datetime.now()
     )
