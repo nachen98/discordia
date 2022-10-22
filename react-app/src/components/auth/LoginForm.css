@@ -57,7 +57,7 @@ label{
     color: rgb(186,186,190);
 }
 /* label:after { content: ": " } */
-input{
+.login-input{
     width: 100%;
     background-color: var(--server-sidebar-bg-color);
     height: 30px;
