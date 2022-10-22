@@ -17,11 +17,13 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-
+    console.log ('validation error messages ', data)
     if (data) {
       const formatedErrors=data.map(err=> {
-        const [_field, message]= err.split(":")
-        return message.slice(1)
+        // const [_field, message]= err.split(":")
+        // return message.slice(1)
+        const errMsgArr = err.split(":");
+        return  errMsgArr.length >1 ? errMsgArr.slice(1) : errMsgArr
       })
       setErrors(formatedErrors);
     }

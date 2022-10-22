@@ -40,7 +40,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {pathLocation.pathname === '/login' && <NavBar />}
+      {/* {pathLocation.pathname === '/login' && <NavBar />} */}
       <Switch>
 
         <Route path='/login' exact={true}>

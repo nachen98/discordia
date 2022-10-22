@@ -22,8 +22,10 @@ const ChatBox = () => {
     console.log('chatbox rendering....');
     const {channelId} = useParams();
     const {serverId} = useParams();
+    const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
     console.log('get  server ,channel---- ',serverId , channelId);
     const [isLoaded, setLoaded]= useState(false)
+
 
     let isDmServer;
 
@@ -146,26 +148,19 @@ const ChatBox = () => {
     }
 
     const handleMessageSubmit = async (e) => {
-       e.preventDefault();
-       console.log("status of socket", socket.connected)
-       console.log("before sending...", new Date())
-       socket.send('message',
-        {
+        e.preventDefault();
+        console.log("status of socket", socket.connected)
+        let time1 = new Date();
+        let data = {
             "sender_id": current_user.id,
             "is_channel_message": true,
             "channel_id": channelId,
             "body": messageInput
-        })
-        console.log("after sending...", new Date())
-        // socket.on('hello', (data)=>{
-        //     console.log("after receiving 1...", new Date())
-        //     console.log("received message from server", data)
-        //     console.log("received broadcast msg, socket id:", socket.id)
-        //     dispatch(createChannelMessage(data))
-        //     console.log("after receiving 2...", new Date())
-        //     setMessageInput("")
-        //     console.log("after receiving 3...", new Date())
-        // })
+             }
+        socket.send('message', data);
+        let time2= new Date();
+        console.log("sending data----", data)
+        console.log("sending data time", time2-time1 ,"ms")
         setMessageInput('');
     }
 
@@ -202,13 +197,15 @@ const ChatBox = () => {
             <div key = {index} className='all-messages-container'>
                     <div className='date-divider'> {getMonthYear(key)}</div>
                     {  dateObj[key].sort((a,b) =>a.id-b.id).map((item, idx) =>{
-                        console.log("item-------", item,index)
+                        const colorInd = item.user_id % COLORS.length;
                         return (
                             <div key = {idx} className="channel-message-container">
-                                <img className='channel-message-user-profile-image'src={profileimage} alt={"bb"}/>
+                                <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
+                                    <img className={`channel-message-user-profile-image`} src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
+                                </div>
                                 <div className="channel-message-detail">
                                     <div className='channel-message-info'>
-                                      <div className='channel-message-user-fullname'>  user : {users[item.user_id].username}  </div>
+                                      <div className='channel-message-user-fullname'>  {users[item.user_id].username}  </div>
                                       <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
                                     </div>
                                     <div className="channel-message-body" > {item.body}</div>
@@ -236,7 +233,7 @@ const ChatBox = () => {
                         <textarea
                         className='flx-col'
                         id='send-message-textarea'
-                        placeholder={`Message <channel or username(DM) name goes here>`}
+                        placeholder={`Message @${channel.name}`}
                         rows='1'
                         onChange={handleMessageInput}
                         value={messageInput}
@@ -244,7 +241,7 @@ const ChatBox = () => {
                         />
                     <button type='submit' id='send-message-btn' style={{display: 'none'}} />
                     </form>
-                    <span className='message-char-count'>{255 - messageInput.length}</span>
+                    <span className='message-char-count'>{255 - messageInput.length} </span>
                 </div>
             </div>
 

@@ -23,14 +23,18 @@ const SignUpForm = () => {
       return setErrors(["Password needs to be more than 6 characters."])
     }
     const data = await dispatch(signUp(username, email, password));
-  
+    console.log ('validation error messages ', data)
     if (data) {
       const formatedErrors = data.map(err => {
-        const [_field, message] = err.split(":")
-        return message.slice(1)
+        // const [_field, message] = err.split(":")
+        // return message.slice(1)
+        const errMsgArr = err.split(":");
+        return  errMsgArr.length >1 ? errMsgArr.slice(1) : errMsgArr
       })
       setErrors(formatedErrors)
+      return
     }
+    return <Redirect to='/channels/@me' />;
 
   };
 
@@ -51,7 +55,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/channels/@me' />;
   }
 
   return (

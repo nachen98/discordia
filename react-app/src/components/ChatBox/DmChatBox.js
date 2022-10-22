@@ -17,10 +17,10 @@ const DmChatBox = ({socket, dmMessages}) =>{
     const {serverId} = useParams();
     const dispatch = useDispatch();
     const users = useSelector(state => state.usersReducer)
+    const allDmServers = useSelector(state => state.dmServerReducer)
     const current_user = useSelector(state => state.session.user)
     const [messageInput, setMessageInput] = useState('')
     const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
-    //const colorInd = users[ind] % COLORS.length; 
     
     const handleMessageInput = (e) => {
         setMessageInput(e.target.value)
@@ -41,8 +41,8 @@ const DmChatBox = ({socket, dmMessages}) =>{
             "dm_server_id": serverId, 
             "body": messageInput 
         })
-        
         setMessageInput('');
+        return;
     }
 
     const dateObj = {}
@@ -59,7 +59,10 @@ const DmChatBox = ({socket, dmMessages}) =>{
     }
     console.log("dataObj: ", dateObj)
     console.log("dataObj--users1" ,users);
-
+    const dmServer = allDmServers[serverId];
+    const userIds = dmServer.name.split("-");
+    const otherUser = userIds.filter(id => parseInt(id) != current_user.id)
+    const otherUserName = users[otherUser[0]].username
 
     const messageContainer = Object.keys(dateObj).map((key, index) =>{
         return (
@@ -69,10 +72,12 @@ const DmChatBox = ({socket, dmMessages}) =>{
                         const colorInd = item.user_id % COLORS.length; 
                         return (
                             <div key = {idx} className="channel-message-container">
-                                <img className={`channel-message-user-profile-image ${COLORS[colorInd]}-bg` } src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
+                                <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
+                                    <img className={`channel-message-user-profile-image`} src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
+                                </div>
                                 <div className="channel-message-detail"> 
                                     <div className='channel-message-info'>
-                                      <div className='channel-message-user-fullname'>  user : {users[item.user_id].username}  </div>
+                                      <div className='channel-message-user-fullname'>  {users[item.user_id].username}  </div>
                                       <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
                                     </div>
                                     <div className="channel-message-body" > {item.body}</div>
@@ -88,7 +93,7 @@ const DmChatBox = ({socket, dmMessages}) =>{
 
     return (
         <div id='dm-main-chat' className='flx-row'>
-            <div id='chat-nav' className='flx-row-align-ctr'>Channel name and (optional) topic goes here</div>
+            <div id='chat-nav' className='flx-row-align-ctr'>This is the beginning of your direct message history with @{otherUserName}</div>
 
             <div id='dm-chat-window' className='flx-col'>
                 <div id='message-window'>
@@ -100,7 +105,7 @@ const DmChatBox = ({socket, dmMessages}) =>{
                         <textarea
                         className='flx-col'
                         id='send-message-textarea'
-                        placeholder={`Message <channel or username(DM) name goes here>`}
+                        placeholder={`Message @`}
                         rows='1'
                         onChange={handleMessageInput}
                         value={messageInput}

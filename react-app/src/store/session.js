@@ -1,3 +1,4 @@
+import {loadNewUser} from './users'
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -6,6 +7,7 @@ const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
+
 
 const removeUser = () => ({
   type: REMOVE_USER,
@@ -86,6 +88,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
+    dispatch(loadNewUser(data))
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
