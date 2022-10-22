@@ -14,7 +14,7 @@ server_routes = Blueprint('servers', __name__)
 @server_routes.route('/<int:server_id>/channels', methods=['POST'])
 @login_required
 def create_channel(server_id):
-
+    print(f"made it here to server route, serverId is {server_id}")
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -27,7 +27,7 @@ def create_channel(server_id):
         channel.updated_at=datetime.now()
         db.session.add(channel)
         db.session.commit()
-        return channel.to_dict(),201
+        return channel.to_dict_with_messages(),201
 
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400

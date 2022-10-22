@@ -75,6 +75,9 @@ function App() {
           <Main />
         </ProtectedRoute>
 
+        <ProtectedRoute path='/channels/:serverId' exact={true}>
+          <Main />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

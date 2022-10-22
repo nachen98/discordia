@@ -5,9 +5,9 @@ const GET_ALL_REGULAR_SERVERS = '/regularservers/getAllServers';
 const GET_ONE_REGULAR_SERVER_By_ID = 'regularservers/getOneServer';
 const CREATE_ONE_REGULAR_SERVER = 'regularservers/createOneServer';
 const UPDATE_ONE_REGULAR_SERVER = 'regularservers/updateOneServer';
-const DELETE_ONE_REGULAR_SERVER = 'regularservers/deleteOneServer'
-
-
+const DELETE_ONE_REGULAR_SERVER = 'regularservers/deleteOneServer';
+const UPDATE_SERVER_CHANNELS = 'regularservers/updateServerChannel';
+const DELETE_ONE_SERVER_CHANNEL = 'regularservers/deleteOneServerChannel'
 const loadRegularServers=(list)=> {
     return {
         type: GET_ALL_REGULAR_SERVERS,
@@ -43,6 +43,22 @@ const deleteOneRegularServer=(regularServerId)=> {
     }
 }
 
+export const addServerChannelUpdate = (serverId, channelId) =>{
+    return {
+        type: UPDATE_SERVER_CHANNELS,
+        serverId, 
+        channelId
+
+    }
+}
+
+export const deleteServerChannel = (serverId, channelId) => {
+    return {
+        type: DELETE_ONE_SERVER_CHANNEL,
+        serverId,
+        channelId
+    }
+}
 //thunk action creator
 export const getAllRegularServers =()=> async(dispatch)=>{
 
@@ -179,6 +195,22 @@ const regularServerReducer = (state=initialState, action)=>{
         case DELETE_ONE_REGULAR_SERVER:
             newState={...state}
             delete newState[action.regularServerId]
+            return newState
+        
+        case UPDATE_SERVER_CHANNELS:
+            newState={...state}
+            newState[action.serverId] = {...newState[action.serverId]}
+            newState[action.serverId].channels = [...newState[action.serverId].channels, action.channelId]
+            return newState
+        
+        case DELETE_ONE_SERVER_CHANNEL:
+            newState={...state}
+            console.log("newState before removing channel!!!!!!!!!", newState[action.serverId])
+            newState[action.serverId] = {...newState[action.serverId]}
+            const indexToRemove = newState[action.serverId].channels.indexOf(action.channelId)
+            newState[action.serverId].channels.splice(indexToRemove, 1)
+            newState[action.serverId].channels=[...newState[action.serverId].channels]
+            console.log("newState after removing channel!!!!!!!!!", newState[action.serverId])
             return newState
 
         default:
