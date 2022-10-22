@@ -20,7 +20,13 @@ const UserCard = ({ socket, userId }) => {
     useEffect(() => {
         if (!showDmPopUp) return;
 
-        const closeDmPopUp = () => setShowDmPopUp(false);
+        const closeDmPopUp = (e) => {
+            console.log('item being clicked on is :', e.target)
+            console.log('and its calsses are ', e.target.className)
+            console.log(typeof e.target.className)
+            if (e.target.className.includes('dm-pop-up-ele')) return;
+            setShowDmPopUp(false);
+        }
         document.addEventListener('click', closeDmPopUp);
 
         return () => document.removeEventListener('click', closeDmPopUp)
@@ -36,7 +42,7 @@ const UserCard = ({ socket, userId }) => {
 
             {allUsers[userId].username}
 
-            {showDmPopUp && <DmUserPopUp socket={socket} userId={userId} />}
+            {showDmPopUp && <DmUserPopUp setShowDmPopUp={setShowDmPopUp} socket={socket} userId={userId} />}
         </div>
     )
 }
