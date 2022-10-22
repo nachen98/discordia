@@ -52,3 +52,12 @@
     text-decoration: underline;
 } 
 
+.signup-input{
+    width: 100%;
+    background-color: var(--server-sidebar-bg-color);
+    height: 30px;
+    border-radius: 3px;
+    border-style: none;
+    margin-bottom: 10px;
+    color: rgb(186,186,190);
+}

@@ -66,6 +66,14 @@
 
 .send-dm-input {
     padding: 5px;
+    width: 100%;
+    background-color: var(--server-sidebar-bg-color);
+    height: 30px;
+    border-radius: 3px;
+    border-style: none;
+    margin-bottom: 10px;
+    color: rgb(186,186,190);
+    border: 1px solid #33353b
 }
 
 #send-user-a-msg {
