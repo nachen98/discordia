@@ -3,6 +3,7 @@ import { loadMessagesByChannel } from "./messages";
 const GET_ALL_DM_SERVERS = '/dmservers/getAllServers';
 const ADD_DM_SERVER_MESSAGE = '/dmservers/addMessage';
 // const GET_ONE_DM_SERVER_By_ID = 'dmservers/getOneServer';
+const LOAD_NEW_DM_SERVER = '/dmServers/loadNewDmServer'
 
 const loadDmServers=(list)=> {
     return {
@@ -26,6 +27,13 @@ export const addDmServerMessage = (messageId, serverId) =>{
 //     }
 // }
 
+const loadNewDmServer = (dmServer) => {
+    return {
+        type: LOAD_NEW_DM_SERVER,
+        dmServer
+    }
+}
+
 
 //thunk action creator
 export const getAllDmServers =()=> async(dispatch)=>{
@@ -44,6 +52,26 @@ export const getAllDmServers =()=> async(dispatch)=>{
             server.messages=messageIdArr
         })
         dispatch(loadDmServers(list))
+    }
+}
+
+export const createDmServer = (dmServerName) => async (dispatch) => {
+    const response = await fetch(`/api/servers/dm`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: dmServerName})
+    }).catch(res => res)
+
+    if (response.ok) {
+        const newDmServer = await response.json();
+        dispatch(loadNewDmServer(newDmServer));
+        return newDmServer
+    } else {
+        const result = await response.json();
+        console.log('the error message from creating dm server is ', result)
+        return result;
     }
 }
 
@@ -70,6 +98,12 @@ const dmServerReducer = (state=initialState, action)=>{
             newState[action.serverId] = {...newState[action.serverId]};
             newState[action.serverId].messages = [...newState[action.serverId].messages, action.messageId]
             return newState;
+
+        case LOAD_NEW_DM_SERVER:
+            newState = {...state};
+            newState[action.dmServer.id] = action.dmServer
+            return newState;
+
         default:
             return state
     }

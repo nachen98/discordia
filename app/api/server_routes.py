@@ -111,6 +111,54 @@ def create_server():
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@server_routes.route('/dm', methods=['POST'])
+@login_required
+def create_dm_server():
+    print('''
+
+    AT THE /API/SERVERS/DM route
+
+    ''')
+
+    form = ServerForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print('''
+
+
+    did i at least make it here?
+
+
+    ''')
+    if form.validate_on_submit:
+        print('well i made it in here!')
+        server=Server()
+        form.populate_obj(server)
+        server.is_dm = True
+        server.created_at = datetime.now()
+        server.updated_at = datetime.now()
+
+        [user_id1, user_id2] = server.name.split('-')
+        print(server.name.split('-'))
+        print('''
+
+
+
+
+        ''')
+
+        user1 = User.query.get(int(user_id1))
+        user2 = User.query.get(int(user_id2))
+
+        server.server_users.append(user1)
+        server.server_users.append(user2)
+        db.session.add(server)
+        db.session.commit()
+
+        return server.to_dict_dm_server(), 201
+
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 # edit a regular server
 @server_routes.route('/regular/<int:server_id>', methods=['POST'])
