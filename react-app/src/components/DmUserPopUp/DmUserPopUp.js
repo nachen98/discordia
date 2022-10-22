@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
+import { createDmServer } from '../../store/dmserver';
 import { create_dm } from '../../store/messages';
 
 import './DmUserPopUp.css'
@@ -14,6 +15,7 @@ const DmUserPopUp = ({ socket, userId }) => {
 
     const sessionUser = useSelector(state => state.session.user)
     const allUsers = useSelector(state => state.usersReducer)
+    const allDmServers = useSelector(state => state.dmServerReducer)
     const allDmServersArr = Object.values(useSelector(state => state.dmServerReducer))
 
     const [dmMessage, setDmMessage] = useState('');
@@ -21,7 +23,7 @@ const DmUserPopUp = ({ socket, userId }) => {
     const selectedUser = allUsers[+userId]
     const colorInd = COLORS[userId % COLORS.length];
 
-    const dmServer = allDmServersArr.find((server) => {
+    let dmServer = allDmServersArr.find((server) => {
         if(
             server.name === `${sessionUser.id}-${userId}`
             ||
@@ -40,8 +42,9 @@ const DmUserPopUp = ({ socket, userId }) => {
         return () => dmPopup.removeEventListener('click', stopClose)
     }, [])
 
-    const handleSendDm = e => {
-        e.preventDefault();
+    const handleSendDm = (e) => {
+        if (e) e.preventDefault();
+
         if (!dmMessage.length) return;
         if (dmMessage.length > 255) return alert(`255 characters max. Your message was ${dmMessage.length} characters long.`)
 
@@ -63,7 +66,25 @@ const DmUserPopUp = ({ socket, userId }) => {
         }
 
         if (!dmServer) {
-            alert('Wait up... Need to create a dm server between you two')
+            // alert('Wait up... Need to create a dm server between you two')
+
+            const dmServerName = `${sessionUser.id}-${userId}`;
+            console.log(dmServerName)
+            dispatch(createDmServer(dmServerName))
+                .then((newServer) => {
+                    socket.send('message',
+                    {
+                        "sender_id": sessionUser.id,
+                        "is_channel_message": false,
+                        "dm_server_id": newServer.id,
+                        "body": dmMessage
+                    })
+                    socket.on('hello', (data) => {
+                        dispatch(create_dm(data))
+                        history.push(`/channels/${newServer.id}`)
+                        return;
+                    })
+                })
         }
 
     }

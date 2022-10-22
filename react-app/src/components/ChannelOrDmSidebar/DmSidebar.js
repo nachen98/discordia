@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
 import { NavLink, useLocation, useParams } from "react-router-dom";
+import SessionUserBar from "../SessionUserBar";
 import ServerBanner from "./ServerBanner";
 
 const getOtherUserIdInDm = (sessionUserId, dmServer) => {
@@ -42,6 +43,8 @@ const DmSidebar = () => {
                     </NavLink>
                 )
             })}
+
+            <SessionUserBar />
         </div>
     )
 }

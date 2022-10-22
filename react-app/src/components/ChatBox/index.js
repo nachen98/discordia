@@ -13,6 +13,8 @@ import DmChatBox from './DmChatBox';
 import { addChannelMessage } from '../../store/channel'
 import { addDmServerMessage } from '../../store/dmserver'
 import { create_dm} from "../../store/messages"
+import NoChannels from '../NoChannels';
+import NoChatSelected from '../NoChatSelected';
 let socket
 
 const ChatBox = () => {
@@ -22,9 +24,9 @@ const ChatBox = () => {
     const {serverId} = useParams();
     console.log('get  server ,channel---- ',serverId , channelId);
     const [isLoaded, setLoaded]= useState(false)
-  
+
     let isDmServer;
-  
+
     const dispatch = useDispatch();
     const [currentServerId, setCurrentServerId] = useState(serverId)
 
@@ -55,7 +57,7 @@ const ChatBox = () => {
         socket.on('hello', (data)=>{
             console.log("after receiving 1...", new Date())
             console.log("received message from server in Chatbox", data)
-            console.log("received broadcast msg, socket id:", socket.id) 
+            console.log("received broadcast msg, socket id:", socket.id)
             console.log("c/////////// id ",data.channel_id )
             if (data.channel_id){
                 dispatch(createChannelMessage(data));
@@ -67,16 +69,16 @@ const ChatBox = () => {
                 dispatch(addDmServerMessage(data.id, data.server_id));
             }
         console.log("after receiving 2...", new Date())
-    })
+        })
 
-       
+
         return (() => {
             socket.disconnect()
         })
     }, [])
-    
 
-    
+
+
 
     useEffect(() => {
         if (!channelId) return;
@@ -98,14 +100,21 @@ const ChatBox = () => {
 
     useEffect(() => {
         const messageTextField = document.getElementById('send-message-textarea');
-        if (! messageTextField){
-            return
-        }
+        if (! messageTextField) return
+
         console.log(" add event listener....")
         messageTextField.addEventListener('keydown', listenForEnter);
         return () => messageTextField.removeEventListener('keydown', listenForEnter);
     }, [])
 
+    useEffect(() => {
+        const messages = document.querySelectorAll('.channel-message-container')
+
+        if (!messages.length) return;
+
+        messages[messages.length - 1].scrollIntoView()
+
+    })
 
 
     if (!serverId && !isLoaded) {
@@ -115,7 +124,7 @@ const ChatBox = () => {
 
     if (!channelId && !serverId){
         console.log("--------------");
-        return <div >Ready to send a message to friends? </div>
+        return <NoChatSelected />
     }
 
     const currentServer = allRegularServers[serverId] ? allRegularServers[serverId] : allDmServers[serverId]
@@ -124,7 +133,7 @@ const ChatBox = () => {
         console.log("current server is --", currentServer);
         isDmServer = currentServer.is_dm
     }
-    
+
 
     const listenForEnter = (e) => {
         if (e.key === "Enter") {
@@ -140,37 +149,37 @@ const ChatBox = () => {
        e.preventDefault();
        console.log("status of socket", socket.connected)
        console.log("before sending...", new Date())
-       socket.send('message', 
-        {   
-            "sender_id": current_user.id, 
-            "is_channel_message": true, 
-            "channel_id": channelId, 
-            "body": messageInput 
+       socket.send('message',
+        {
+            "sender_id": current_user.id,
+            "is_channel_message": true,
+            "channel_id": channelId,
+            "body": messageInput
         })
         console.log("after sending...", new Date())
         // socket.on('hello', (data)=>{
         //     console.log("after receiving 1...", new Date())
         //     console.log("received message from server", data)
-        //     console.log("received broadcast msg, socket id:", socket.id) 
+        //     console.log("received broadcast msg, socket id:", socket.id)
         //     dispatch(createChannelMessage(data))
         //     console.log("after receiving 2...", new Date())
         //     setMessageInput("")
         //     console.log("after receiving 3...", new Date())
-        // })     
+        // })
         setMessageInput('');
     }
 
     if (isDmServer && isLoaded){
         const dmMessages = msg.filter(message=> parseInt(message.server_id) === parseInt(serverId));
         return <DmChatBox  socket={socket} dmMessages={dmMessages}/>
-    } 
-   
-    const channel = channels[channelId]
-    if (!channel || !channel.messages){  
-        return <span>Loading................... </span>
     }
 
-   
+    const channel = channels[channelId]
+    if (!channel || !channel.messages){
+        return <NoChannels />
+    }
+
+
     let messageArr = msg
     const dateObj = {}
     for (let i=0; i< messageArr.length;i++){
@@ -197,21 +206,21 @@ const ChatBox = () => {
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <img className='channel-message-user-profile-image'src={profileimage} alt={"bb"}/>
-                                <div className="channel-message-detail"> 
+                                <div className="channel-message-detail">
                                     <div className='channel-message-info'>
                                       <div className='channel-message-user-fullname'>  user : {users[item.user_id].username}  </div>
                                       <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
                                     </div>
                                     <div className="channel-message-body" > {item.body}</div>
                                 </div>
-                            </div>  
+                            </div>
                             )
                         })
-                    }       
-            </div>   
+                    }
+            </div>
         )
     })
- 
+
 
     return (
         <div id='channel-main-chat' className='flx-row'>
@@ -238,6 +247,8 @@ const ChatBox = () => {
                     <span className='message-char-count'>{255 - messageInput.length}</span>
                 </div>
             </div>
+
+            <div id='five-px-divider'></div>
 
             <UsersListSidebar  socket={socket} />
         </div>
