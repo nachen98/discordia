@@ -1,12 +1,21 @@
 import { loadMessagesByChannel } from "./messages";
 
 const GET_ALL_DM_SERVERS = '/dmservers/getAllServers';
+const ADD_DM_SERVER_MESSAGE = '/dmservers/addMessage';
 // const GET_ONE_DM_SERVER_By_ID = 'dmservers/getOneServer';
 
 const loadDmServers=(list)=> {
     return {
         type: GET_ALL_DM_SERVERS,
         list
+    }
+}
+
+export const addDmServerMessage = (messageId, serverId) =>{
+    return {
+        type: ADD_DM_SERVER_MESSAGE,
+        messageId,
+        serverId
     }
 }
 
@@ -51,7 +60,16 @@ const dmServerReducer = (state=initialState, action)=>{
             action.list.result.forEach((server)=>{newAllDmServers[server.id]=server})
             newState=newAllDmServers
             return newState
-        
+
+        case ADD_DM_SERVER_MESSAGE:
+            console.log('adding a message to dm server....')
+            if (state[action.serverId].messages.includes(action.messageId)){
+                return state;
+            }
+            newState = {...state};
+            newState[action.serverId] = {...newState[action.serverId]};
+            newState[action.serverId].messages = [...newState[action.serverId].messages, action.messageId]
+            return newState;
         default:
             return state
     }

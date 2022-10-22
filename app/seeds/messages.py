@@ -105,7 +105,7 @@ def seed_messages():
     dm_msg_5 = Message(
         body='Did you join Demo\'s server?',
         server_id=7,
-        user_id=2,
+        user_id=1,
         created_at=datetime.now(),
         updated_at=datetime.now()
     )
@@ -113,7 +113,7 @@ def seed_messages():
     dm_msg_6 = Message(
         body='Yep!!',
         server_id=7,
-        user_id=3,
+        user_id=4,
         created_at=datetime.now(),
         updated_at=datetime.now()
     )

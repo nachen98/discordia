@@ -1,8 +1,9 @@
 const GET_ALL_CHANNELS = 'channels/getAllChannels'
 const GET_ONE_CHANNEL_By_ID = 'channels/getOneChannel';
 const CREATE_ONE_CHANNEL = 'channels/createOneChannel';
-const UPDATE_ONE_CHANNEL = 'channels/updateOneChannel'
-const DELETE_ONE_CHANNEL = 'channels/deleteOneChannel'
+const UPDATE_ONE_CHANNEL = 'channels/updateOneChannel';
+const DELETE_ONE_CHANNEL = 'channels/deleteOneChannel';
+const ADD_CHANNEL_MESSAGE = 'channels/addNewMessage';
 
 export const loadAllChannels = (channels) => {
     return {
@@ -14,6 +15,14 @@ export const loadOneChannel = (channel) => {
     return {
         type: GET_ONE_CHANNEL_By_ID,
         channel
+    }
+}
+
+export const addChannelMessage = (messageId, channelId) =>{
+    return {
+        type : ADD_CHANNEL_MESSAGE,
+        messageId,
+        channelId,
     }
 }
 
@@ -135,6 +144,12 @@ const channelReducer = (state=initialState, action)=>{
             newState={...state}
             delete newState[action.channelId]
             return newState
+        
+        case ADD_CHANNEL_MESSAGE:
+            newState={...state};
+            newState[action.channelId] = {...newState[action.channelId]};
+            newState[action.channelId].messages = [...newState[action.channelId].messages, action.messageId];
+            return newState;
         
         default:
             return state

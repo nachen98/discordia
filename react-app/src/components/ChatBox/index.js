@@ -107,15 +107,15 @@ const ChatBox = ({socket}) => {
             "body": messageInput 
         })
         console.log("after sending...", new Date())
-        socket.on('hello', (data)=>{
-            console.log("after receiving 1...", new Date())
-            console.log("received message from server", data)
-            console.log("received broadcast msg, socket id:", socket.id) 
-            dispatch(createChannelMessage(data))
-            console.log("after receiving 2...", new Date())
-            setMessageInput("")
-            console.log("after receiving 3...", new Date())
-        })     
+        // socket.on('hello', (data)=>{
+        //     console.log("after receiving 1...", new Date())
+        //     console.log("received message from server", data)
+        //     console.log("received broadcast msg, socket id:", socket.id) 
+        //     dispatch(createChannelMessage(data))
+        //     console.log("after receiving 2...", new Date())
+        //     setMessageInput("")
+        //     console.log("after receiving 3...", new Date())
+        // })     
     }
 
     if (isDmServer && isLoaded){
