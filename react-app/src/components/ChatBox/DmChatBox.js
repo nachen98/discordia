@@ -14,10 +14,10 @@ const DmChatBox = ({dmMessages, socket}) =>{
     const current_user = useSelector(state => state.session.user)
     const [messageInput, setMessageInput] = useState('')
     const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
-    //const colorInd = users[ind] % COLORS.length; 
+    //const colorInd = users[ind] % COLORS.length;
 
 
-    
+
     const handleMessageInput = (e) => {
         setMessageInput(e.target.value)
     }
@@ -28,26 +28,26 @@ const DmChatBox = ({dmMessages, socket}) =>{
     }
 
     const handleMessageSubmit = async (e) => {
-       e.preventDefault();
-       console.log("status of socket", socket.connected)
-       console.log("before sending...", new Date())
-       socket.send('message', 
-        {   
-            "sender_id": current_user.id, 
-            "is_channel_message": false, 
-            "dm_server_id": serverId, 
-            "body": messageInput 
+        e.preventDefault();
+        console.log("status of socket", socket.connected)
+        console.log("before sending...", new Date())
+        socket.send('message',
+        {
+            "sender_id": current_user.id,
+            "is_channel_message": false,
+            "dm_server_id": serverId,
+            "body": messageInput
         })
         console.log("after sending...", new Date())
-        socket.on('hello', (data)=>{
-            console.log("after receiving 1...", new Date())
-            console.log("received message from server", data)
-            console.log("received broadcast msg, socket id:", socket.id) 
-            dispatch(create_dm(data))
-            console.log("after receiving 2...", new Date())
-            setMessageInput("")
-            console.log("after receiving 3...", new Date())
-        })     
+        // socket.on('message', (data)=>{
+        //     console.log("after receiving 1...", new Date())
+        //     console.log("received message from server", data)
+        //     console.log("received broadcast msg, socket id:", socket.id)
+        //     dispatch(create_dm(data))
+        //     console.log("after receiving 2...", new Date())
+        //     setMessageInput("")
+        //     console.log("after receiving 3...", new Date())
+        // })
     }
 
     const dateObj = {}
@@ -70,22 +70,22 @@ const DmChatBox = ({dmMessages, socket}) =>{
             <div key = {index} className='all-messages-container'>
                     <div className='date-divider'> {getMonthYear(key)}</div>
                     {  dateObj[key].sort((a,b) =>a.id-b.id).map((item, idx) =>{
-                        const colorInd = item.user_id % COLORS.length; 
+                        const colorInd = item.user_id % COLORS.length;
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <img className={`channel-message-user-profile-image ${COLORS[colorInd]}-bg` } src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
-                                <div className="channel-message-detail"> 
+                                <div className="channel-message-detail">
                                     <div className='channel-message-info'>
                                       <div className='channel-message-user-fullname'>  user : {users[item.user_id].username}  </div>
                                       <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
                                     </div>
                                     <div className="channel-message-body" > {item.body}</div>
                                 </div>
-                            </div>  
+                            </div>
                             )
                         })
-                    }       
-            </div>   
+                    }
+            </div>
         )
     })
 

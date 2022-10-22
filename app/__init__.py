@@ -11,7 +11,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.channel_routes import channel_routes
-from flask_socketio import SocketIO, send, emit, send
+from flask_socketio import SocketIO, emit, send
 
 from .forms import ServerForm
 from datetime import datetime
@@ -98,7 +98,7 @@ def get_messages_by_dm_id(dm_server_id):
     if server :
         return {"result" : server.to_dict_dm_server()}, 200
     else:
-        return {'errors': "dm_server not found"}, 404 
+        return {'errors': "dm_server not found"}, 404
 
 
 
@@ -116,34 +116,35 @@ def handle_direct_chat(message, data):
     message = Message()
     if data["is_channel_message"]:
         message.channel_id =data['channel_id']
-    else:   
+    else:
         message.server_id = data['dm_server_id']
-        
+
     message.user_id =data['sender_id']
     message.body =data['body']
     message.created_at = datetime.now()
     message.updated_at = datetime.now()
-    
+
     # name_space = data['name-space']
 
     db.session.add(message)
     db.session.commit()
     # print ("receive data 1", direct_message.to_dict())
     print ("begin 2 ----", datetime.now())
-    socketio.emit("hello", message.to_dict(), broadCast=True)
+    socketio.emit("message", message.to_dict(), broadCast=True)
+    # socketio.emit("hello", message.to_dict(), broadCast=True)
     print ("begin 3 ----", datetime.now())
-    
+
 
 # @socketio.on('test')
 # def handle_test(data):
-    
+
 #     print ("receive data 2", data)
 #     socketio.emit("hello", data, namespace='/chat')
 
 
 # def ack():
 #     print('message was received!')
-    
+
 #     #emit('direct_message', data, broadcast=True)
 
 
