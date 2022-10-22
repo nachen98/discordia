@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { Link } from "react-router-dom"
 import './LoginForm.css'
+import { getAllDmServers } from '../../store/dmserver';
+import { getAllRegularServers } from '../../store/regularserver';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -38,6 +40,11 @@ const LoginForm = () => {
     dispatch(login('demo@aa.io', 'password'))
   }
   if (user) {
+    (async()=> {
+      await dispatch(getAllRegularServers());
+      await dispatch(getAllDmServers());
+    })();
+
     return <Redirect to='/channels/@me' />;
   }
 

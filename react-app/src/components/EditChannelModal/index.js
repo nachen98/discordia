@@ -9,7 +9,7 @@ const EditChannelModal = ({channelId}) => {
     return (
         <>
         <span tooltip="Edit Channel">
-        <i class="fa-solid fa-gear" onClick={() => setShowModal(true)}></i>
+        <i className="fa-solid fa-gear" onClick={() => setShowModal(true)}></i>
         </span>
         {showModal && (
             <Modal onClose={() => setShowModal(false)}>

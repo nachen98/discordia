@@ -6,6 +6,7 @@ import { Modal } from '../../context/Modal';
 import { CreateChannelForm } from '../CreateChannelModal/CreateChannelForm.js'
 import CreateChannelModal from "../CreateChannelModal";
 import EditChannelModal from "../EditChannelModal"
+import SessionUserBar from "../SessionUserBar";
 const ChannelSidebar = () => {
     let { serverId, channelId } = useParams();
     serverId = parseInt(serverId);
@@ -22,10 +23,10 @@ const ChannelSidebar = () => {
 
     if (!server && !hasLoaded) {
         setHasLoaded(true);
-        return (<span>Loading...</span>)
+        return (<span>Loading... from ChannelSideBar</span>)
     }
 
-    if (!server) return (<span>Loading...</span>)
+    if (!server) return (<span>Loading... also from ChannelSideBar</span>)
 
     console.log('server is :', server)
     const channels = server.channels.map(channelId => allChannels[channelId])
@@ -37,7 +38,7 @@ const ChannelSidebar = () => {
                 TEXT CHANNELS
                 <CreateChannelModal />
                 {/* <span tooltip="Create Channel">
-                        <i class="fa-solid fa-plus" onClick={() => setShowModal(true)}></i>
+                        <i className="fa-solid fa-plus" onClick={() => setShowModal(true)}></i>
                         </span>
                         {showModal && (
                         <Modal><CreateChannelForm setShowModal={setShowModal}/></Modal>)} */}
@@ -60,6 +61,8 @@ const ChannelSidebar = () => {
 
                 )
             })}
+
+            <SessionUserBar />
         </div>
     )
 }
