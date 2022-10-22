@@ -1,8 +1,14 @@
-#main-chat {
+#channel-main-chat {
     height: 100vh;
     width: calc(100vw - 75px - 250px);
     background-color: var(--dark-gray-bg-color);
+    flex-wrap: wrap;
+}
 
+#dm-main-chat {
+    height: 100vh;
+    width: calc(100vw - 75px - 250px);
+    background-color: var(--dark-gray-bg-color);
     flex-wrap: wrap;
 }
 
@@ -23,10 +29,18 @@
     box-sizing: border-box;
 }
 
+#dm-chat-window {
+    justify-content: flex-end;
+
+    width: calc(100vw - 75px - 250px - 250px);
+    box-sizing: border-box;
+}
+
+
 #message-window {
     width: calc(100vw - 75px - 250px - 250px);
 
-    padding-left: 75px;
+    padding-left: 20px;
     box-sizing: border-box;
 }
 
@@ -57,3 +71,71 @@
 #send-message-textarea:focus {
     outline: none;
 }
+
+.message-char-count {
+    color: var(--gray-text);
+    align-self: flex-end;
+}
+
+.channel-message-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+}
+
+.channel-message-user-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.channel-message-user-profile-image img{
+    height: 100%;
+    width: 100%;
+}
+
+
+.channel-message-user-fullname {
+    font-size: 18px;
+    color: orange;
+    margin-right: 10px;
+}
+.channel-message-created-date {
+    font-size: 12px;
+    color: var(--gray-text);
+    padding-top: 5px;
+    
+}
+.channel-message-body {
+    font-size: 14px;
+    color: orange;
+}
+.channel-message-info {
+    display: flex;
+    flex-direction: row;
+    vertical-align: baseline;
+}
+
+.date-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--gray-text);
+    font-size: 12px;
+    /* font-weight: 300; */
+  }
+  
+  .date-divider::after,
+  .date-divider::before {
+    content: "";
+    border: 0.5px solid gray;
+    flex: 1;
+  }
+  
+  .date-divider:not(:empty)::before {
+    margin-right: 0.25em;
+  }
+  
+  .date-divider:not(:empty)::after {
+    margin-left: 0.25em;
+  }

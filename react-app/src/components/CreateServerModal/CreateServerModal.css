@@ -1,0 +1,120 @@
+.material-symbols-sharp {
+    font-size: 35px;
+}
+
+#create-server-form-container {
+    border-radius: 5px;
+
+    box-sizing: border-box;
+    height: 400px;
+    width: 450px;
+
+    background-color: white;
+}
+
+#create-server-form {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: auto;
+}
+
+h1#create-server-header {
+    margin-top: 20px;
+}
+
+h3#create-server-desc {
+    padding: 0 25px;
+    margin: 0;
+    color: var(--gray-text);
+    font-weight: lighter;
+    font-size: medium;
+}
+
+.create-server-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+
+    border-radius: 5px;
+
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+
+    background-color: #e3e5e8;
+}
+.create-server-label {
+    margin-top: 5px;
+}
+
+.create-server-label-text {
+    font-size: small;
+}
+
+#create-server-req-star {
+    font-size: x-small;
+}
+
+.server-name-length {
+    margin-left: 390px;
+    font-size: small;
+}
+
+.server-name-length-color {
+    color: var(--gray-text);
+}
+
+.server-icon-err-msg {
+    display: block;
+    font-size: small;
+}
+
+#create-server-bottom {
+    justify-content: flex-end;
+    box-sizing: border-box;
+    width: 100%;
+
+    border-radius: 0 0 5px 5px;
+
+    padding: 20px;
+    margin-top: 20px;
+
+    background-color: #e3e5e8;
+}
+
+#create-server-btn:hover {
+    cursor: pointer;
+    background-color: #4752c4;
+}
+
+#create-server-btn {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100px;
+    height: 40px;
+
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+
+    color: white;
+    background-color: #5865f2;
+}
+
+#close-create-server-btn {
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+#close-create-server-btn:hover {
+    cursor: pointer;
+}
+
+#close-modal-x {
+    height: 15px;
+    width: 15px;
+}

@@ -9,6 +9,18 @@
     width: 200px;
     height: 40px;
     padding: 0 10px;
+    margin-top: 5px;
 
     color: var(--gray-text)
+}
+
+.user-card:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--gray-hover);
+}
+
+.popup-active {
+    border-radius: 10px;
+    background-color: var(--gray-hover);
 }

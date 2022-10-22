@@ -12,8 +12,8 @@ export const loadUsers = (userList) =>{
 
 const initialState = {};
 const usersReducer = (state = initialState, action) =>{
-    console.log("********** Action in usersReducer ************", action)
-    newState = { ...state }
+    // console.log("********** Action in usersReducer ************", action)
+    let newState = { ...state }
     switch (action.type){
         case LOAD_USERS :
             action.userList.forEach(user => {

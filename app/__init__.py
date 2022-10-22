@@ -1,4 +1,5 @@
-import os
+from gc import callbacks
+import os,json
 from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -63,6 +64,7 @@ CORS(app)
 def get_dm_server_message(to_user_id):
 
     cur_user_id = current_user.id
+    print("------------------ id", cur_user_id, to_user_id)
 
     server_name = str(cur_user_id)+'-'+str(to_user_id) if cur_user_id<to_user_id else str(to_user_id)+'-'+str(cur_user_id)
     server = Server.query.filter(Server.name == server_name).first()
@@ -76,9 +78,11 @@ def get_dm_server_message(to_user_id):
         new_dm_server.updated_at = datetime.now()
         db.session.add(new_dm_server)
         db.session.commit()
-        cur_user = User.query.filter(User.id == cur_user_id)
-        to_user = User.query.filter(User.id == to_user_id)
+        cur_user = User.query.filter(User.id == cur_user_id).first()
+        to_user = User.query.filter(User.id == to_user_id).first()
 
+        print ("-----------backend current user ", to_user)
+        print ("--------------backend to user ", cur_user)
         new_dm_server.server_users.append(cur_user)
         new_dm_server.server_users.append(to_user)
         db.session.commit()
@@ -87,23 +91,60 @@ def get_dm_server_message(to_user_id):
 
 
 
+
+@app.route('/api/messages/<int:dm_server_id>')
+def get_messages_by_dm_id(dm_server_id):
+    server = Server.query.filter(Server.id == dm_server_id).first()
+    if server :
+        return {"result" : server.to_dict_dm_server()}, 200
+    else:
+        return {'errors': "dm_server not found"}, 404 
+
+
+
+
+@socketio.on('connect')
+def handle_connect(data):
+    print("~~~~~~!!!!!!")
+
+
+
 @socketio.on('message')
 def handle_direct_chat(message, data):
-    if message != "User connected!":
-        direct_message = Message()
-        direct_message.user_id =data['sender_id']
-        direct_message.server_id = data['dm_server_id']
-        direct_message.body =data['body']
-        direct_message.created_at = datetime.now()
-        direct_message.updated_at = datetime.now()
+    print ("data----", data)
+    print ("begin 1 ----", datetime.now())
+    message = Message()
+    if data["is_channel_message"]:
+        message.channel_id =data['channel_id']
+    else:   
+        message.server_id = data['dm_server_id']
         
-
-        db.session.add(direct_message)
-        db.session.commit()
-        print ("receive data ", data)
-        send(message, broadcast=True)
+    message.user_id =data['sender_id']
+    message.body =data['body']
+    message.created_at = datetime.now()
+    message.updated_at = datetime.now()
     
-    #emit('direct_message', data, broadcast=True)
+    # name_space = data['name-space']
+
+    db.session.add(message)
+    db.session.commit()
+    # print ("receive data 1", direct_message.to_dict())
+    print ("begin 2 ----", datetime.now())
+    socketio.emit("hello", message.to_dict(), broadCast=True)
+    print ("begin 3 ----", datetime.now())
+    
+
+# @socketio.on('test')
+# def handle_test(data):
+    
+#     print ("receive data 2", data)
+#     socketio.emit("hello", data, namespace='/chat')
+
+
+# def ack():
+#     print('message was received!')
+    
+#     #emit('direct_message', data, broadcast=True)
 
 
 

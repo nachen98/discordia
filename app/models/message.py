@@ -1,5 +1,6 @@
 from http import server
 from .db import db
+import json
 
 class Message(db.Model):
     __tablename__ = 'messages'
@@ -27,7 +28,7 @@ class Message(db.Model):
             'user_id': self.user_id,
             'server_id': self.server_id,
             'channel_id': self.channel_id,
-            'created_at': self.created_at
+            'created_at': str(self.created_at)
         }
 
     def __repr__(self):

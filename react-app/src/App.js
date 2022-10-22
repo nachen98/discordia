@@ -11,11 +11,13 @@ import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
 import Main from './components/Main';
 import { getAllRegularServers } from './store/regularserver';
+import { getAllDmServers } from './store/dmserver';
+import { loadMessgesByChannelThunk} from'./store/messages';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const pathLocation = useLocation()
+  const pathLocation = useLocation();
 
 
   useEffect(() => {
@@ -28,6 +30,7 @@ function App() {
   useEffect(()=> {
     (async()=> {
       await dispatch(getAllRegularServers());
+      await dispatch(getAllDmServers());
     })();
   }, [dispatch])
 
@@ -39,27 +42,42 @@ function App() {
     <BrowserRouter>
       {pathLocation.pathname === '/login' && <NavBar />}
       <Switch>
+
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
+
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+
+        <Route path='/' exact={true} >
+          <SplashPage />
+        </Route>
+
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
+
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-        <Route path='/splash' exact={true} >
-          <SplashPage />
-        </Route>
-        <Route path='/channels/@me'>
+
+        <ProtectedRoute path='/channels/@me' exact={true}>
           <Main />
-        </Route>
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/channels/@me/:serverId' exact={true}>
+          <Main />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/channels/:serverId/:channelId' exact={true}>
+          <Main />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/channels/:serverId' exact={true}>
+          <Main />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

@@ -8,19 +8,52 @@
     color: var(--gray-text);
 }
 
+#settings-dropdown-logo {
+    height: 15px;
+    width: 15px;
+    filter: brightness(0)
+}
+
+#server-name {
+    display: block;
+    width: 200px;
+    height: 22px;
+    box-sizing: border-box;
+
+    overflow: clip;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-weight: 500;
+}
+
+.channelname-and-setting{
+  margin: 0 10px;
+  border-radius: 5px;
+  align-items: center;
+
+}
+
+.channelname-and-setting:hover{
+  background-color: var(--gray-hover);
+}
 #server-banner-img {
     width: 250px;
     height: 135px;
 }
 
-#server-title {
+#server-text-only-title {
     box-sizing: border-box;
     height: 50px;
     border-bottom:0.5px solid rgb(35, 37, 39);
 }
 
+.server-title {
+    padding: 15px;
+}
+
 .server-channel-card {
-    width: 230px;
+
     height: 35px;
 
     padding: 0 5px;
@@ -29,9 +62,224 @@
     box-sizing: border-box;
 
     color: var(--gray-text);
+    
 }
 
 .server-channel-card:hover {
     border-radius: 5px;
     background-color: var(--gray-hover);
 }
+
+.dm-logo-container {
+    height: 30px;
+    width: 30px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.dm-logos {
+    height: 15px;
+    width: 18px;
+}
+
+.active-view {
+    background-color: var(--gray-hover);
+    border-radius: 5px;
+}
+
+.server-name-offset {
+    top: 0;
+    left: 0;
+    padding: 15px;
+}
+
+.server-title-container {
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 250px;
+}
+
+.server-title:hover {
+    background-color: var(--server-name-hover);
+}
+
+#server-text-only-title.dm-server-banner {
+    cursor: default;
+}
+
+#server-text-only-title.dm-server-banner:hover {
+    background-color: var(--chat-sides-sidebar-bg-color);
+}
+
+#text-channels{
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 13px;
+    font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600
+}
+.fa-solid.fa-plus{
+    cursor: pointer;
+    padding-right: 14.5px
+}
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+    position: relative; /* opinion 1 */
+  }
+  
+  /* Applies to all tooltips */
+  [tooltip]::before,
+  [tooltip]::after {
+    text-transform: none; /* opinion 2 */
+    font-size: .9em; /* opinion 3 */
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+  }
+  [tooltip]::before {
+    content: '';
+    border: 5px solid transparent; /* opinion 4 */
+    z-index: 1001; /* absurdity 1 */
+  }
+  [tooltip]::after {
+    content: attr(tooltip); /* magic! */
+    
+    /* most of the rest of this is opinion */
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    
+    /* 
+      Let the content set the size of the tooltips 
+      but this will also keep them from being obnoxious
+      */
+    min-width: 3em;
+    max-width: 21em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1.5ch 2ch;
+    border-radius: .9ch;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+    background: black;
+    color: #fff;
+    z-index: 1000; /* absurdity 2 */
+  }
+  
+  /* Make the tooltips respond to hover */
+  [tooltip]:hover::before,
+  [tooltip]:hover::after {
+    display: block;
+  }
+  
+  /* don't show empty tooltips */
+  [tooltip='']::before,
+  [tooltip='']::after {
+    display: none !important;
+  }
+  
+  /* FLOW: UP */
+  [tooltip]:not([flow])::before,
+  [tooltip][flow^="up"]::before {
+    bottom: 100%;
+    border-bottom-width: 0;
+    border-top-color: #000;
+  }
+  [tooltip]:not([flow])::after,
+  [tooltip][flow^="up"]::after {
+    bottom: calc(100% + 5px);
+  }
+  [tooltip]:not([flow])::before,
+  [tooltip]:not([flow])::after,
+  [tooltip][flow^="up"]::before,
+  [tooltip][flow^="up"]::after {
+    left: 50%;
+    transform: translate(-50%, -.5em);
+  }
+  
+  /* FLOW: DOWN */
+  [tooltip][flow^="down"]::before {
+    top: 100%;
+    border-top-width: 0;
+    border-bottom-color: #000;
+  }
+  [tooltip][flow^="down"]::after {
+    top: calc(100% + 5px);
+  }
+  [tooltip][flow^="down"]::before,
+  [tooltip][flow^="down"]::after {
+    left: 50%;
+    transform: translate(-50%, .5em);
+  }
+  
+  /* FLOW: LEFT */
+  [tooltip][flow^="left"]::before {
+    top: 50%;
+    border-right-width: 0;
+    border-left-color: #000;
+    left: calc(0em - 5px);
+    transform: translate(-.5em, -50%);
+  }
+  [tooltip][flow^="left"]::after {
+    top: 50%;
+    right: calc(100% + 5px);
+    transform: translate(-.5em, -50%);
+  }
+  
+  /* FLOW: RIGHT */
+  [tooltip][flow^="right"]::before {
+    top: 50%;
+    border-left-width: 0;
+    border-right-color: #000;
+    right: calc(0em - 5px);
+    transform: translate(.5em, -50%);
+  }
+  [tooltip][flow^="right"]::after {
+    top: 50%;
+    left: calc(100% + 5px);
+    transform: translate(.5em, -50%);
+  }
+  
+  /* KEYFRAMES */
+  @keyframes tooltips-vert {
+    to {
+      opacity: .9;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+  @keyframes tooltips-horz {
+    to {
+      opacity: .9;
+      transform: translate(0, -50%);
+    }
+  }
+  
+  /* FX All The Things */ 
+  [tooltip]:not([flow]):hover::before,
+  [tooltip]:not([flow]):hover::after,
+  [tooltip][flow^="up"]:hover::before,
+  [tooltip][flow^="up"]:hover::after,
+  [tooltip][flow^="down"]:hover::before,
+  [tooltip][flow^="down"]:hover::after {
+    animation: tooltips-vert 300ms ease-out forwards;
+  }
+  
+  [tooltip][flow^="left"]:hover::before,
+  [tooltip][flow^="left"]:hover::after,
+  [tooltip][flow^="right"]:hover::before,
+  [tooltip][flow^="right"]:hover::after {
+    animation: tooltips-horz 300ms ease-out forwards;
+  }
+  
+  
+  
+  
+  
+  
+  
