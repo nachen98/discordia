@@ -66,6 +66,7 @@ const LoginForm = () => {
                 name='email'
                 type='text'
                 //placeholder='Email'
+                className='login-input'
                 value={email}
                 onChange={updateEmail}
                 required
@@ -78,6 +79,7 @@ const LoginForm = () => {
               <input
                 name='password'
                 type='password'
+                className='login-input'
                 //placeholder='Password'
                 value={password}
                 onChange={updatePassword}

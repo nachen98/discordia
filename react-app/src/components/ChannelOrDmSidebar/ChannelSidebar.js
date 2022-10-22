@@ -46,9 +46,9 @@ const ChannelSidebar = () => {
                 const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
                 return (
                     <>
-                        <div id="channelname-and-setting">
+                        <div className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
                             <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id}>
-                                <div className={`server-channel-card flx-row-align-ctr ${activeView}`}>
+                                <div className={`server-channel-card flx-row-align-ctr `}>
                                     # {channel.name}
                                 </div>
                             </NavLink>

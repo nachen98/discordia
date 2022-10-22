@@ -38,8 +38,13 @@
 #create-channel-name-input{
     padding-left: 20px;
     background-color: black;
+    color: var(--off-white-text);
+    border:none;
+    
 }
 #channel-name-input{
+    display:flex;
+    align-items: center;
     position:relative;
     box-sizing: border-box;
     width: 100%;

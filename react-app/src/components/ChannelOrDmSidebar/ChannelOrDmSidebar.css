@@ -27,6 +27,16 @@
     font-weight: 500;
 }
 
+.channelname-and-setting{
+  margin: 0 10px;
+  border-radius: 5px;
+  align-items: center;
+
+}
+
+.channelname-and-setting:hover{
+  background-color: var(--gray-hover);
+}
 #server-banner-img {
     width: 250px;
     height: 135px;
@@ -43,7 +53,7 @@
 }
 
 .server-channel-card {
-    width: 230px;
+
     height: 35px;
 
     padding: 0 5px;
@@ -52,6 +62,7 @@
     box-sizing: border-box;
 
     color: var(--gray-text);
+    
 }
 
 .server-channel-card:hover {
@@ -111,7 +122,7 @@
 }
 .fa-solid.fa-plus{
     cursor: pointer;
-    padding-right: 10px
+    padding-right: 14.5px
 }
 
 /* START TOOLTIP STYLES */

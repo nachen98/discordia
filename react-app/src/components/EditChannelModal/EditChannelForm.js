@@ -40,7 +40,8 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                 <label id="update-chanel-label">
                     <div id='update-channel-label-text'>CHANNEL NAME</div>
                     <input
-                        id='update-channel-name-input'
+                        // id='update-channel-name-input'
+                        className="edit-channel-input"
                         type='text'
                         value={newName}
                         onChange={e => setNewName(e.target.value)}
@@ -50,7 +51,8 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                 <label>
                     <div id='update-channel-label-text'>CHANNEL TOPIC</div>
                     <input
-                        id='update-channel-topic-input'
+                        // id='update-channel-topic-input'
+                        className="edit-channel-input"
                         type='text'
                         value={newTopic}
                         onChange={e => setNewTopic(e.target.value)}
@@ -58,14 +60,14 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                 </label>
 
             </form>
-            <div className="flx-row-space-btw">
+            <div id='button-containers' className="flx-row-space-btw">
                 <div id='delete-channel-button'>
-                    <button id='delete-channel-btn' onClick={handleDeleteChannel}>
+                    <button id='delete-channel-btn' className="edit-delete-buttons" onClick={handleDeleteChannel}>
                         Delete Channel
                     </button>
                 </div>
                 <div id='update-channel-button' className='flx-row'>
-                    <button id='update-channel-btn' onClick={handleEditChannel}>
+                    <button id='update-channel-btn' className="edit-delete-buttons" onClick={handleEditChannel}>
                         Save Changes
                     </button>
                 </div>
