@@ -3,7 +3,7 @@ from datetime import datetime
 
 def seed_channels():
     server_1_channel_1 = Channel(
-        name='welcome',
+        name='Grand Line',
         topic='Greetings',
         is_voice=False,
         server_id=1,
@@ -82,7 +82,7 @@ def seed_channels():
     db.session.add(server_1_channel_5)
     db.session.add(server_1_channel_6)
     db.session.add(server_1_channel_7)
-    
+
     db.session.commit()
 
 def undo_channels():

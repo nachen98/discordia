@@ -28,21 +28,23 @@ const DmSidebar = () => {
 
             <ServerBanner isDm={true} serverName='Direct Messages' />
 
-            {allDmServers.map((dmServer, ind) =>{
-                const activeView = parseInt(activeDmServerId) === dmServer.id ? 'active-view' : ''
-                const colorInd = dmRecipientsUserIds[ind] % COLORS.length;
-                return (
-                    <NavLink to={`/channels/@me/${dmServer.id}`} key={dmServer.id}>
-                        <div className={`server-channel-card flx-row-align-ctr ${activeView}`}>
+            <div id='channel-or-dm-card-container' className='flx-col'>
+                {allDmServers.map((dmServer, ind) =>{
+                    const activeView = parseInt(activeDmServerId) === dmServer.id ? 'active-view' : ''
+                    const colorInd = dmRecipientsUserIds[ind] % COLORS.length;
+                    return (
+                        <NavLink to={`/channels/@me/${dmServer.id}`} key={dmServer.id}>
+                            <div className={`server-channel-card flx-row-align-ctr ${activeView}`}>
 
-                            <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}>
-                                <img className='dm-logos' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png' />
+                                <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}>
+                                    <img className='dm-logos' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png' />
+                                </div>
+                                {users[dmRecipientsUserIds[ind]].username}
                             </div>
-                            {users[dmRecipientsUserIds[ind]].username}
-                        </div>
-                    </NavLink>
-                )
-            })}
+                        </NavLink>
+                    )
+                })}
+            </div>
 
             <SessionUserBar />
         </div>

@@ -144,3 +144,8 @@ body {
 .left-algn-text {
     text-align: left;
 }
+
+.flx-grow-one {
+    display: flex;
+    flex-grow: 1;;
+}
