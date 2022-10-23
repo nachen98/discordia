@@ -4,18 +4,28 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updateChannel, deleteChannel } from "../../store/channel";
+import {channelReducer} from "../../store/channel";
 
 const EditChannelForm = ({ setShowModal, channelId }) => {
+    const allChannels=useSelector(state => state.channelReducer)
+    const channel=allChannels[channelId]
     const {serverId} = useParams()
     const dispatch = useDispatch()
     const history = useHistory();
-    const [newName, setNewName] = useState("")
+    const [newName, setNewName] = useState(channel.name)
     const [newTopic, setNewTopic] = useState("")
-
-    
+    const [newNameErrMsg, setNewNameErrMsg] = useState('')
 
     const handleEditChannel = async e => {
         e.preventDefault()
+
+        let errors = false;
+        if (newName.length === 0){
+            setNewNameErrMsg('This field is required.')
+            errors = true;
+        }
+
+        if(errors) return;
 
         const newChannel = {
             name: newName,
@@ -44,8 +54,10 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                         className="edit-channel-input"
                         type='text'
                         value={newName}
+                        placeholder={channel.name}
                         onChange={e => setNewName(e.target.value)}
                     />
+                     <span className='edit-server-err'>{newNameErrMsg}</span>
                 </label>
 
                 <label>
@@ -55,6 +67,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                         className="edit-channel-input"
                         type='text'
                         value={newTopic}
+                        placeholder="Let everyone know how to use this channel!"
                         onChange={e => setNewTopic(e.target.value)}
                     />
                 </label>

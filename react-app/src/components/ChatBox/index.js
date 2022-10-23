@@ -221,8 +221,16 @@ const ChatBox = () => {
 
     return (
         <div id='channel-main-chat' className='flx-row'>
-            <div id='chat-nav' className='flx-row-align-ctr'> {`# ${channel.name}`} </div>
-
+            <div id='chat-nav' className='flx-row-align-ctr'>
+                <i class="fa-solid fa-hashtag"></i>
+                <div id='channel-name'>{channel.name}</div> 
+                <div id='divider'>|</div>    
+                <div id='channel-topic'>
+                    {!!channel.topic && channel.topic}
+                </div>
+                 
+            </div>
+           
             <div id='chat-window' className='flx-col'>
                 <div id='message-window'>
                     {messageContainer}
