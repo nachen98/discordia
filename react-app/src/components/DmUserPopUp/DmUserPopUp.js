@@ -53,7 +53,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
     const handleSendDm = (e) => {
         if (e) e.preventDefault();
 
-        if (!dmMessage.length) return;
+        if (!dmMessage.trim().length) return;
         if (dmMessage.length > 255) return alert(`255 characters max. Your message was ${dmMessage.length} characters long.`)
 
         if (dmServer) {

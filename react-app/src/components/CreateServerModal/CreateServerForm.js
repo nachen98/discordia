@@ -25,13 +25,17 @@ const CreateServerForm = ({ setShowModal }) => {
 
     const handleCreateServer = async e => {
         e.preventDefault();
+        let alertMsg = ''
+        let iconLinkErrMsg = ''
 
         let errors = false;
-        if (!newServerName.length) {
+        if (!newServerName.trim().length) {
+            alertMsg = alertMsg + 'Please enter a server name.'
             errors = true;
         }
 
         if (newServerName.length > 50) {
+            alertMsg = alertMsg + `50 characters max. Your topic was ${newServerName.length} characters long.`
             errors = true;
         }
 
@@ -40,12 +44,21 @@ const CreateServerForm = ({ setShowModal }) => {
             const newServerImgExt = imgUrlParts[imgUrlParts.length - 1];
 
             if (!imageExtensions.includes(newServerImgExt.toLowerCase())) {
-                setServerIconErrMsg('Invalid image URL. (jpeg, jpg, png supported)')
+                iconLinkErrMsg = iconLinkErrMsg + 'Invalid image URL. (jpeg, jpg, png supported). '
+                errors = true;
+            }
+
+            if (newServerIcon.length > 255) {
+                iconLinkErrMsg = iconLinkErrMsg + 'Please enter an image URL shorter than 255 characters'
                 errors = true;
             }
         }
 
-        if (errors) return;
+        if (errors) {
+            setServerIconErrMsg(iconLinkErrMsg);
+            if (alertMsg) alert(alertMsg)
+            return;
+        }
 
         const newServer = {
             name: newServerName,

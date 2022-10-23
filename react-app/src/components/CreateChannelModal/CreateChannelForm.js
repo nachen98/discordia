@@ -19,12 +19,14 @@ export const CreateChannelForm=({ setShowModal })=>{
         e.preventDefault()
 
         let errors = false;
-        if(!newChannelName.length){
+        if(!newChannelName.trim().length){
             errors = true
+            alert(`Please enter a name for your new channel.`)
         }
 
         if(newChannelName.length > 50){
             errors = true;
+            alert(`50 characters max. Your message was ${newChannelName.length} characters long.`)
         }
 
         if(errors) return;

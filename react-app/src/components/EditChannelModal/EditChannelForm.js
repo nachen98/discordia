@@ -16,11 +16,13 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
     const [newName, setNewName] = useState(channel.name)
     const [newTopic, setNewTopic] = useState("")
     const [newNameErrMsg, setNewNameErrMsg] = useState('')
+    const [newTopicErrMsg, setNewTopicErrMsg] = useState('')
 
     const currentServer = allServers[serverId]
 
     const handleEditChannel = async e => {
         e.preventDefault()
+        // let alertMsg = '';
 
         let errors = false;
         if (newName.length === 0 || newName.trim().length === 0){
@@ -28,7 +30,24 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
             errors = true;
         }
 
-        if(errors) return;
+        if (newName.length > 50) {
+            setNewNameErrMsg(`50 characters max. Your channel name was ${newName.length} characters long.`)
+            // alert(`50 characters max. Your channel name was ${newName.length} characters long.`)
+            // alertMsg = alertMsg + `50 characters max. Your channel name was ${newName.length} characters long. \n`
+            errors = true;
+        }
+
+        if (newTopic.length > 50) {
+            setNewTopicErrMsg(`50 characters max. Your channel name was ${newTopic.length} characters long.`)
+            // alert(`50 characters max. Your topic was ${newTopic.length} characters long.`)
+            // alertMsg = alertMsg + `50 characters max. Your topic was ${newTopic.length} characters long.`
+            errors = true;
+        }
+
+        if(errors) {
+            // alert(alertMsg);
+            return;
+        }
 
         const newChannel = {
             name: newName,
@@ -77,6 +96,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                         placeholder="Let everyone know how to use this channel!"
                         onChange={e => setNewTopic(e.target.value)}
                     />
+                    <span className='edit-server-err'>{newTopicErrMsg}</span>
                 </label>
 
             </form>
