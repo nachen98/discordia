@@ -10,8 +10,11 @@ const ServerLogo = ({ server }) => {
     if (server.channels?.length > 0)  navlinkPath = navlinkPath + `/${server.channels[0]}`
 
     if (!server.image_url) {
-        const serverNamePartition = server.name.split('-')
-        const serverInitials = serverNamePartition.map(word => word[0]).join('-')
+        let serverInitials;
+        const serverNamePartition = server.name.split('-').filter(part => part !== '')
+
+        if (serverNamePartition.length === 1) serverInitials = server.name.slice(0, 3)
+        else serverInitials = serverNamePartition.map(word => word[0]).join('-')
 
         return (
             <NavLink
@@ -20,7 +23,7 @@ const ServerLogo = ({ server }) => {
             to={`${navlinkPath}`}>
                 <div className={`${serverLogoBG} default-server-text-logo flx-row-justify-align-ctr`}>
                     <div className={`text-logo flx-row-justify-align-ctr`}>
-                        {serverInitials.slice(0,3)}
+                        {serverInitials.slice(0,3).trimRight()}
                     </div>
                 </div>
             </NavLink>

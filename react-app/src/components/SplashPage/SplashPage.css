@@ -1,11 +1,14 @@
 #splashpage-container,
 .splash-nav {
-    min-width: 1024px
+    min-width: 1024px;
+    width: 100%;
+    flex-grow: 1;
 }
 
 #splash-sect-1 {
     background-color: #5865f2;
     height: 626px;
+    width: 100%;
 }
 h1{
     font-family: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -71,7 +74,7 @@ h1{
     padding-left: 500px;
     padding-right: 500px;
     background-color: rgb(246, 246,246);
-    
+
 }
 
 #splash-sect-6-inner-container{
