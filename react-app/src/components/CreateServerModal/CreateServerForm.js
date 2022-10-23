@@ -39,8 +39,8 @@ const CreateServerForm = ({ setShowModal }) => {
             errors = true;
         }
 
-        if (newServerIcon) {
-            const imgUrlParts = newServerIcon.split('.')
+        if (newServerIcon.trim()) {
+            const imgUrlParts = newServerIcon.trimEnd().split('.')
             const newServerImgExt = imgUrlParts[imgUrlParts.length - 1];
 
             if (!imageExtensions.includes(newServerImgExt.toLowerCase())) {
@@ -65,7 +65,7 @@ const CreateServerForm = ({ setShowModal }) => {
         }
 
         // Will need to put some validations for this image url
-        if (newServerIcon.length > 0) {
+        if (newServerIcon.trim().length > 0) {
             newServer['image_url'] = newServerIcon
         }
 

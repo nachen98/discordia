@@ -8,15 +8,18 @@ const SplashPage = () => {
             <div id='splash-sect-1' className={`flx-col-justify-align-ctr pos-rel`}>
                 <div className='section-contents'>
                     <nav className='splash-nav flx-row-space-btw pos-abs'>
-                        <NavLink className='white-text' to='/'>Discordia Logo</NavLink>
+                        <NavLink className='white-text flx-row-justify-align-ctr' to='/'>
+                            <img src="https://i.imgur.com/shYMrjL.png" alt='home-logo' id="home-logo"/> 
+                            Discordia
+                        </NavLink>
 
-                        <div className='splash-nav-inner-links flx-row-space-evenly'>
-                            <a className='white-text' href='https://github.com/nachen98'>Chen, Na</a>
-                            <a className='white-text' href='https://github.com/GUOYIBO'>Guo, Yibo</a>
-                            <a className='white-text' href='https://github.com/juanpunchman'>Hang, Justin</a>
+                        <div className='splash-nav-inner-links flx-row-justify-align-ctr flx-row-space-evenly'>
+                            <a className='white-text ctr-algn-text' href='https://github.com/nachen98'>Chen, Na</a>
+                            <a className='white-text ctr-algn-text' href='https://github.com/GUOYIBO'>Guo, Yibo</a>
+                            <a className='white-text ctr-algn-text' href='https://github.com/juanpunchman'>Hang, Justin</a>
                         </div>
 
-                        <NavLink to={"/login"}>
+                        <NavLink className="flx-row-justify-align-ctr" to={"/login"}>
                         <button id="splash-login-button" >Login</button>
                         </NavLink>
                     </nav>
@@ -71,9 +74,12 @@ const SplashPage = () => {
             </div>
 
             <div id='splash-sect-6'>
-                <div id='splash-sect-6-inner-container' className="flx-row-space-btw">
-                    <div>discordia logo</div>
-                    <NavLink to={"/sign-up"}>
+                <div id='splash-sect-6-inner-container' className="flx-row-space-btw flx-row-justify-align-ctr">
+                        <NavLink className='white-text flx-row-justify-align-ctr' to='/'>
+                            <img src="https://i.imgur.com/shYMrjL.png" alt='home-logo' id="home-logo"/> 
+                            Discordia
+                        </NavLink>
+                        <NavLink to={"/sign-up"}>
                         <button id="splash-signup-button" >Sign up</button>
                     </NavLink>
                 </div>
