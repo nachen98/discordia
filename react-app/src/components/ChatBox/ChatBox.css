@@ -107,7 +107,6 @@
 }
 
 .message-char-count {
-    color: var(--gray-text);
     align-self: flex-end;
 }
 
@@ -179,7 +178,7 @@
   }
 
   #channel-topic{
-    margin: 0 
+    margin: 0
   }
 
   #channel-name{
