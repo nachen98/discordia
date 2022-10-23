@@ -84,7 +84,7 @@ def seed_users():
         password='password',
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
@@ -101,32 +101,32 @@ def seed_users():
     # Add in servers here so that the server objects
     # will have access to user objects
     reg_server_1 = Server(
-        name='Straw Hats',
-        image_url='https://i.imgur.com/4YsCCXc.png',
+        name='test-server-1',
+        image_url='https://logos-world.net/wp-content/uploads/2020/12/Discord-Logo.png',
         is_dm=False,
         owner_id=1,
         created_at=datetime.now(),
         updated_at=datetime.now())
 
     reg_server_2 = Server(
-        name='House-Targaryen',
-        image_url='https://i.imgur.com/hRNuKfd.png',
+        name='test-server-2',
+        image_url='https://sm.mashable.com/mashable_sea/photo/default/alexander-shatov-sifcjhruwpm-unsplash_vvnu.jpg',
         is_dm=False,
         owner_id=2,
         created_at=datetime.now(),
         updated_at=datetime.now())
 
     reg_server_3 = Server(
-        name='Kurzgesagt',
-        image_url='https://i.imgur.com/7b306JP.jpg',
+        name='test-server-3',
+        image_url='https://m.media-amazon.com/images/I/51lpm9SpsJL.png',
         is_dm=False,
         owner_id=3,
         created_at=datetime.now(),
         updated_at=datetime.now())
 
     reg_server_4 = Server(
-        name='AOL-Instant-Messenger',
-        image_url='https://i.imgur.com/b12S9th.png',
+        name='test-server-4',
+        # image_url='',
         is_dm=False,
         owner_id=1,
         created_at=datetime.now(),
@@ -152,13 +152,13 @@ def seed_users():
         is_dm=True,
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    
     dm_server_4 = Server(
         name='1-5',
         is_dm=True,
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    
     dm_server_5 = Server(
         name='1-6',
         is_dm=True,
