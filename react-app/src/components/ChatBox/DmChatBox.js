@@ -94,7 +94,7 @@ const DmChatBox = ({socket, dmMessages}) =>{
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
-                                    <img className={`channel-message-user-profile-image`} src={"/assets/discordia-mascot.png"} alt={"bb"}/>
+                                    <img className={`channel-message-user-profile-image`} src={"https://i.imgur.com/xjNdd63.png"} alt={"bb"}/>
                                 </div>
                                 <div className="channel-message-detail">
                                     <div className='channel-message-info'>

@@ -104,7 +104,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
 
             <div className='profile-pic-bg pos-abs flx-row-justify-align-ctr dm-pop-up-ele'>
                 <div className={`${colorInd}-bg pop-up-profile-img-container flx-row-justify-align-ctr dm-pop-up-ele`}>
-                    <img className='pop-up-profile-img dm-pop-up-ele' src='/assets/discordia-mascot.png'/>
+                    <img className='pop-up-profile-img dm-pop-up-ele' src='https://i.imgur.com/xjNdd63.png'/>
                 </div>
             </div>
 
