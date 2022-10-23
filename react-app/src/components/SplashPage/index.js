@@ -11,9 +11,9 @@ const SplashPage = () => {
                         <NavLink className='white-text' to='/'>Discordia Logo</NavLink>
 
                         <div className='splash-nav-inner-links flx-row-space-evenly'>
-                            <NavLink className='white-text' to='https://github.com/nachen98'>Chen, Na</NavLink>
-                            <NavLink className='white-text' to='/'>Guo, Yibo</NavLink>
-                            <NavLink className='white-text' to='/'>Hang, Justin</NavLink>
+                            <a className='white-text' href='https://github.com/nachen98'>Chen, Na</a>
+                            <a className='white-text' href='https://github.com/GUOYIBO'>Guo, Yibo</a>
+                            <a className='white-text' href='https://github.com/juanpunchman'>Hang, Justin</a>
                         </div>
 
                         <NavLink to={"/login"}>

@@ -39,7 +39,7 @@ const ChannelSidebar = () => {
             <ServerBanner isDm={false} serverName={server.name} serverImg={server.image_url} />
             <div id='text-channels' className="flx-row-space-btw">
                 TEXT CHANNELS
-                <CreateChannelModal />
+                {sessionUserOwnsServer &&<CreateChannelModal />}
                 {/* <span tooltip="Create Channel">
                         <i className="fa-solid fa-plus" onClick={() => setShowModal(true)}></i>
                         </span>

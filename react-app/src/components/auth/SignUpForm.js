@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -16,12 +16,25 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    let validationErrors=[]
     if (password !== repeatPassword) {
-      return setErrors(["Password does not match."])
+      validationErrors.push("Password does not match.")
     }
     if(password.length < 6){
-      return setErrors(["Password needs to be more than 6 characters."])
+      validationErrors.push("Password needs to be more than 6 characters.")
     }
+
+    if(!email.includes('@')){
+      validationErrors.push("Please fill email in the correct format with @ sign.")
+    }
+
+    if (validationErrors.length > 0) return setErrors(validationErrors)
+
+    // useEffect(()=> {
+    //   setEmail()
+    //   setPassword()
+    // })
+
     const data = await dispatch(signUp(username, email, password));
     console.log ('validation error messages ', data)
     if (data) {
