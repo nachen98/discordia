@@ -8,6 +8,7 @@ const EditChannelModal = ({channelId}) => {
 
     return (
         <>
+        {/* <div className='channel-setting-container'> */}
         <span tooltip="Edit Channel">
         <i className="fa-solid fa-gear" onClick={() => setShowModal(true)}></i>
         </span>
@@ -16,6 +17,7 @@ const EditChannelModal = ({channelId}) => {
                 <EditChannelForm channelId={channelId} setShowModal={setShowModal}/>
             </Modal>
         )}
+        {/* </div> */}
     </>
     )
 }

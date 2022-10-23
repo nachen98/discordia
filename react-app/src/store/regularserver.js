@@ -7,7 +7,15 @@ const CREATE_ONE_REGULAR_SERVER = 'regularservers/createOneServer';
 const UPDATE_ONE_REGULAR_SERVER = 'regularservers/updateOneServer';
 const DELETE_ONE_REGULAR_SERVER = 'regularservers/deleteOneServer';
 const UPDATE_SERVER_CHANNELS = 'regularservers/updateServerChannel';
-const DELETE_ONE_SERVER_CHANNEL = 'regularservers/deleteOneServerChannel'
+const DELETE_ONE_SERVER_CHANNEL = 'regularservers/deleteOneServerChannel';
+const CLEAR_REGULAR_SERVERS = 'regularServers/clearRegularServers'
+
+export const clearRegularServers = () => {
+    return {
+        type: CLEAR_REGULAR_SERVERS
+    }
+}
+
 const loadRegularServers=(list)=> {
     return {
         type: GET_ALL_REGULAR_SERVERS,
@@ -46,7 +54,7 @@ const deleteOneRegularServer=(regularServerId)=> {
 export const addServerChannelUpdate = (serverId, channelId) =>{
     return {
         type: UPDATE_SERVER_CHANNELS,
-        serverId, 
+        serverId,
         channelId
 
     }
@@ -196,13 +204,13 @@ const regularServerReducer = (state=initialState, action)=>{
             newState={...state}
             delete newState[action.regularServerId]
             return newState
-        
+
         case UPDATE_SERVER_CHANNELS:
             newState={...state}
             newState[action.serverId] = {...newState[action.serverId]}
             newState[action.serverId].channels = [...newState[action.serverId].channels, action.channelId]
             return newState
-        
+
         case DELETE_ONE_SERVER_CHANNEL:
             newState={...state}
             console.log("newState before removing channel!!!!!!!!!", newState[action.serverId])
@@ -212,6 +220,9 @@ const regularServerReducer = (state=initialState, action)=>{
             newState[action.serverId].channels=[...newState[action.serverId].channels]
             console.log("newState after removing channel!!!!!!!!!", newState[action.serverId])
             return newState
+
+        case CLEAR_REGULAR_SERVERS:
+            return {};
 
         default:
             return state

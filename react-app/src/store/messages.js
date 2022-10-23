@@ -7,6 +7,14 @@ const LOAD_MESSAGE_BY_CHANNEL = 'message/load_channel_message'
 const LOAD_DM_SERVER_MESSAGE_BY_USER = 'message/load_dm_server_message'
 const LOAD_MESSAGES_BY_DM_ID = 'message/load_messsage_by_dm_id'
 
+const CLEAR_MESSAGES = 'messages/clear_messages';
+
+export const clearMessages = () => {
+    return {
+        type: CLEAR_MESSAGES
+    }
+}
+
 export const create_dm = (payload) => {
     return {
         type : CREATE_DIRECT_MESSAGE,
@@ -146,11 +154,15 @@ const messagesReducer = (state = initialState, action) =>{
             console.log('???????? state111 ', newState)
             action.payload.messages.forEach(message => {
                 console.log('???????? message ', message.id)
-                
+
                 newState[message.id] = message
             });
             console.log('???????? state   222', newState)
             return newState
+
+        case CLEAR_MESSAGES:
+            return {};
+            
         default :
             return state
     }

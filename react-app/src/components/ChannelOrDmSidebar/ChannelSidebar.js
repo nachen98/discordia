@@ -43,24 +43,26 @@ const ChannelSidebar = () => {
                         {showModal && (
                         <Modal><CreateChannelForm setShowModal={setShowModal}/></Modal>)} */}
             </div>
-            {!!channels.length && channels.map((channel) => {
-                const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
-                return (
-                    <>
-                        <div className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
-                            <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id}>
-                                <div className={`server-channel-card flx-row-align-ctr `}>
-                                    # {channel.name}
-                                </div>
-                            </NavLink>
-                            <EditChannelModal channelId={channel.id}/>
-                        </div>
 
+            <div id='channel-or-dm-card-container' className='flx-col'>
+                {!!channels.length && channels.map((channel) => {
+                    const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
+                    return (
+                        <>
+                            <div className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
+                                <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id} className='flx-grow-one'>
+                                    <div className={`server-channel-card flx-row-align-ctr `}>
+                                        # {channel.name}
+                                    </div>
+                                </NavLink>
+                                <EditChannelModal channelId={channel.id}/>
+                            </div>
 
-                    </>
+                        </>
 
-                )
-            })}
+                    )
+                })}
+        </div>
 
             <SessionUserBar />
         </div>

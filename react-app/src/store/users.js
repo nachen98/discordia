@@ -1,6 +1,12 @@
 const LOAD_USERS = 'users/loadUsers'
 const LOAD_NEW_USER = 'users/loadNewUser'
+const CLEAR_USERS = 'users/clearUsers';
 
+export const clearUsers = () => {
+    return {
+        type: CLEAR_USERS
+    }
+}
 
 export const loadUsers = (userList) =>{
     return {
@@ -27,10 +33,13 @@ const usersReducer = (state = initialState, action) =>{
                 newState[user.id] = user
             });
             return newState;
-            
+
         case LOAD_NEW_USER:
             newState[action.user.id] = action.user;
-            return newState
+            return newState;
+
+        case CLEAR_USERS:
+            return {};
 
         default :
             return state

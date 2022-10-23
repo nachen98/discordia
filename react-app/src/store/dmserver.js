@@ -4,6 +4,13 @@ const GET_ALL_DM_SERVERS = '/dmservers/getAllServers';
 const ADD_DM_SERVER_MESSAGE = '/dmservers/addMessage';
 // const GET_ONE_DM_SERVER_By_ID = 'dmservers/getOneServer';
 const LOAD_NEW_DM_SERVER = '/dmServers/loadNewDmServer'
+const CLEAR_DM_SERVERS = '/dmServers/clearDmServers'
+
+export const clearDmServers = () => {
+    return  {
+        type: CLEAR_DM_SERVERS
+    }
+}
 
 const loadDmServers=(list)=> {
     return {
@@ -103,6 +110,9 @@ const dmServerReducer = (state=initialState, action)=>{
             newState = {...state};
             newState[action.dmServer.id] = action.dmServer
             return newState;
+
+        case CLEAR_DM_SERVERS:
+            return {};
 
         default:
             return state

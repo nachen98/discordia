@@ -35,7 +35,7 @@ const ServerBanner = ({ isDm, serverImg, serverName }) => {
             onClick={openSettings}
             >
                 <span id='server-name'>{serverName}</span>
-                <img id='settings-dropdown-logo' src='https://i.imgur.com/FD5ylDu.png' alt='settings-dropdown' />
+                {!isDm && <img id='settings-dropdown-logo' src='https://i.imgur.com/FD5ylDu.png' alt='settings-dropdown' />}
 
                 {showServerSettings && !isDm && <ServerSettings setShowServerSettingsModal={setShowServerSettingsModal} />}
 
