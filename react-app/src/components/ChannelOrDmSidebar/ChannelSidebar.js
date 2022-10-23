@@ -52,10 +52,11 @@ const ChannelSidebar = () => {
                     const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
                     return (
                         <>
-                            <div className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
+                            <div key={channel.id} className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
                                 <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id} className='flx-grow-one'>
                                     <div className={`server-channel-card flx-row-align-ctr `}>
-                                        <i className="fa-solid fa-hashtag channel-hash"></i> {channel.name}
+                                        <i className="fa-solid fa-hashtag channel-hash"></i>
+                                        <span className='channel-sidebar-text'>{channel.name}</span>
                                     </div>
                                 </NavLink>
                                 {sessionUserOwnsServer && <EditChannelModal channelId={channel.id}/>}

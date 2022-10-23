@@ -14,6 +14,14 @@
   /* overflow-y: scroll; */
 }
 
+.channel-sidebar-text {
+  max-width: 150px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 #dm-card-container {
   margin: 0 15px;
   box-sizing: border-box;
