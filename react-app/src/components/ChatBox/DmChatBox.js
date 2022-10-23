@@ -33,6 +33,9 @@ const DmChatBox = ({socket, dmMessages}) =>{
 
     const handleMessageSubmit = async (e) => {
        e.preventDefault();
+       if (messageInput.length > 255) {
+            return alert('Your message was too long.');
+       }
        console.log("status of socket", socket)
        socket.send('message', 
         {   

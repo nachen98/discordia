@@ -153,7 +153,10 @@ const ChatBox = () => {
 
     const handleMessageSubmit = async (e) => {
         e.preventDefault();
-        console.log("status of socket", socket.connected)
+        if (messageInput.length > 255) {
+            return alert('Your message was too long.');
+        }
+        console.log("channel, status of socket ", socket);
         let time1 = new Date();
         let data = {
             "sender_id": current_user.id,
