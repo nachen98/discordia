@@ -80,6 +80,10 @@ const ChatBox = () => {
     }, [])
 
 
+    useEffect(() => {
+        setLoaded(true);
+
+    },[])
 
 
     useEffect(() => {
@@ -120,7 +124,7 @@ const ChatBox = () => {
 
 
     if (!serverId && !isLoaded) {
-        setLoaded(true);
+        
         return (<span>Loading...</span>)
     }
 
@@ -168,6 +172,10 @@ const ChatBox = () => {
         const dmMessages = msg.filter(message=> parseInt(message.server_id) === parseInt(serverId));
         return <DmChatBox  socket={socket} dmMessages={dmMessages}/>
     }
+
+    // if (!isLoaded ){
+    //     return (<span>Loading...</span>)
+    // }
 
     const channel = channels[channelId]
     if (!channel || !channel.messages){

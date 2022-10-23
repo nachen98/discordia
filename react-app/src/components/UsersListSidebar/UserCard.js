@@ -32,6 +32,8 @@ const UserCard = ({ socket, userId }) => {
         return () => document.removeEventListener('click', closeDmPopUp)
     }, [showDmPopUp])
 
+
+    console.log("all users reducer :", allUsers);
     return (
         <div onClick={openPopUp} className={`user-card flx-row-align-ctr pos-rel ${showDmPopUp ? 'popup-active' : ''}`}>
 
@@ -40,7 +42,7 @@ const UserCard = ({ socket, userId }) => {
                 <img className='dm-logos' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png' />
             </div>
 
-            {allUsers[userId].username}
+            {!!allUsers[userId] && allUsers[userId].username}
 
             {showDmPopUp && <DmUserPopUp setShowDmPopUp={setShowDmPopUp} socket={socket} userId={userId} />}
         </div>
