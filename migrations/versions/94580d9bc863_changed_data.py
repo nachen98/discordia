@@ -1,8 +1,8 @@
-"""changed seeding data
+"""changed data
 
-Revision ID: 3f28e8a9ef38
+Revision ID: 94580d9bc863
 Revises: 
-Create Date: 2022-10-22 23:23:46.669572
+Create Date: 2022-10-22 23:36:29.555240
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3f28e8a9ef38'
+revision = '94580d9bc863'
 down_revision = None
 branch_labels = None
 depends_on = None
