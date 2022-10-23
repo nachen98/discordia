@@ -1,8 +1,8 @@
-"""restore tables
+"""restoring-data
 
-Revision ID: 46cbdd764469
+Revision ID: 6f7bf3baf26b
 Revises: 
-Create Date: 2022-10-22 22:46:53.815427
+Create Date: 2022-10-22 23:07:54.087494
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '46cbdd764469'
+revision = '6f7bf3baf26b'
 down_revision = None
 branch_labels = None
 depends_on = None
