@@ -39,7 +39,7 @@ const UserCard = ({ socket, userId }) => {
 
             <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}
             >
-                <img className='dm-logos' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png' />
+                <img className='dm-logos' src='/assets/discordia-mascot.png' alt='dm-logo'/>
             </div>
 
             {!!allUsers[userId] && allUsers[userId].username}

@@ -221,7 +221,7 @@ const ChatBox = () => {
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
-                                    <img className={`channel-message-user-profile-image`} src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
+                                    <img className={`channel-message-user-profile-image`} src={"/assets/discordia-mascot.png"} alt={"bb"}/>
                                 </div>
                                 <div className="channel-message-detail">
                                     <div className='channel-message-info'>

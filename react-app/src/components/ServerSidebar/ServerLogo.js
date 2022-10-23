@@ -36,7 +36,7 @@ const ServerLogo = ({ server }) => {
         className={`server-navlink`}
         to={`${navlinkPath}`}>
             <div className={`${serverLogoBG} server-sidebar-logo-container flx-row-justify-align-ctr`}>
-                <img className={`server-sidebar-logo`} src={server.image_url} />
+                <img className={`server-sidebar-logo`} src={server.image_url} alt='server-logo'/>
             </div>
         </NavLink>
     )

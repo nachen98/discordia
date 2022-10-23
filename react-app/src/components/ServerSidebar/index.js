@@ -36,7 +36,8 @@ const ServerSidebar = () => {
                     id='dm-server-nav-logo'
                     className={`s${dmLogoBackground}`}
                     // src='https://i.imgur.com/Pj1HWah.png'
-                    src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png'
+                    // src='/assets/discordia-mascot.png'
+                    src='/assets/discordia-mascot.png'
                 />
             </NavLink>
 

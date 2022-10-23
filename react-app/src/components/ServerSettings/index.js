@@ -28,7 +28,7 @@ const ServerSettings =  ({ setShowServerSettingsModal }) => {
                 onClick={() => setShowServerSettingsModal(true)}>
                     <span>Server Settings</span>
 
-                    <img className='server-settings-dropdown-icons' src='https://i.imgur.com/uGvARJz.png' />
+                    <img className='server-settings-dropdown-icons' alt='settings-gear' src='https://i.imgur.com/uGvARJz.png' />
                 </div>
             </ul>
         </>

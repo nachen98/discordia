@@ -30,7 +30,7 @@ const SplashPage = () => {
 
             <div id='splash-sect-2' className='flx-row-justify-align-ctr'>
                 <div className='section-contents flx-row-justify-align-ctr'>
-                    <img className='splash-sect-imgs' src='https://i.imgur.com/6IcFryk.png'/>
+                    <img className='splash-sect-imgs' src='https://i.imgur.com/6IcFryk.png' alt='splash-section'/>
                     <div className='flx-col section-side-desc'>
                         {/* <h1>Create an invite-only place where you belong</h1>
                         <h3>Discord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.</h3> */}
@@ -46,13 +46,13 @@ const SplashPage = () => {
                     <h1>Lorem ipsum dolor sit amet</h1>
                         <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
                     </div>
-                    <img className='splash-sect-imgs' src='https://i.imgur.com/P17KqTB.png'/>
+                    <img className='splash-sect-imgs' src='https://i.imgur.com/P17KqTB.png' alt='splash-section'/>
                 </div>
             </div>
 
             <div id='splash-sect-4' className='flx-row-justify-align-ctr'>
                 <div className='section-contents flx-row-justify-align-ctr'>
-                    <img className='splash-sect-imgs' src='https://i.imgur.com/3ktkCJh.png'/>
+                    <img className='splash-sect-imgs' src='https://i.imgur.com/3ktkCJh.png' alt='splash-section'/>
                     <div className='flx-col section-side-desc'>
                     <h1>Lorem ipsum dolor sit amet</h1>
                     <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
@@ -66,7 +66,7 @@ const SplashPage = () => {
                     <h1>Lorem ipsum dolor sit amet</h1>
                         <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
                     </div>
-                    <img className='splash-sect-imgs' src='https://i.imgur.com/c80M4cI.png'/>
+                    <img className='splash-sect-imgs' src='https://i.imgur.com/c80M4cI.png' alt='splash-section'/>
                 </div>
             </div>
 

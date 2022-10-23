@@ -55,7 +55,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
 
         if (!dmMessage.length) return;
         if (dmMessage.length > 255) return alert(`255 characters max. Your message was ${dmMessage.length} characters long.`)
-        
+
         if (dmServer) {
             socket.send('message', {
                 "sender_id": sessionUser.id,
@@ -104,7 +104,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
 
             <div className='profile-pic-bg pos-abs flx-row-justify-align-ctr dm-pop-up-ele'>
                 <div className={`${colorInd}-bg pop-up-profile-img-container flx-row-justify-align-ctr dm-pop-up-ele`}>
-                    <img className='pop-up-profile-img dm-pop-up-ele' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png'/>
+                    <img className='pop-up-profile-img dm-pop-up-ele' src='/assets/discordia-mascot.png'/>
                 </div>
             </div>
 
