@@ -15,11 +15,14 @@ const ChannelSidebar = () => {
     const [showModal, setShowModal] = useState(false)
     const allRegularServers = useSelector(state => state.regularServerReducer);
     const allChannels = useSelector(state => state.channelReducer);
+    const sessionUser = useSelector(state => state.session.user)
 
     // Will we have to take into account of when the server isn't initally loaded?
     // Thinking no since we should be retrieving ALL servers that sessionUser is in
 
     const server = allRegularServers[serverId];
+
+    const sessionUserOwnsServer = server.owner_id === sessionUser.id;
 
     if (!server && !hasLoaded) {
         setHasLoaded(true);
@@ -55,7 +58,7 @@ const ChannelSidebar = () => {
                                         # {channel.name}
                                     </div>
                                 </NavLink>
-                                <EditChannelModal channelId={channel.id}/>
+                                {sessionUserOwnsServer && <EditChannelModal channelId={channel.id}/>}
                             </div>
 
                         </>
