@@ -33,6 +33,7 @@ def create_channel(server_id):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+
 # get all regular server associated with current user
 @server_routes.route('/regular/current')
 @login_required
