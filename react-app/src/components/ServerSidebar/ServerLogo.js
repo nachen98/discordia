@@ -3,7 +3,7 @@ import { NavLink, useParams } from "react-router-dom"
 const ServerLogo = ({ server }) => {
     const { serverId } = useParams();
     const onServer = parseInt(serverId) === server.id
-    const serverLogoBG = onServer ? 'active-server-sidebar-img' : 'server-sidebar-img'
+    const serverLogoBG = onServer ? 'active-server-sidebar-img' : ''
 
     // NOTE: EDGECASE WHERE THERE IS A SERVER WITH NO CHANNELS!
     let navlinkPath = `/channels/${server.id}`
@@ -19,7 +19,9 @@ const ServerLogo = ({ server }) => {
             className={`server-navlink`}
             to={`${navlinkPath}`}>
                 <div className={`${serverLogoBG} default-server-text-logo flx-row-justify-align-ctr`}>
-                    {serverInitials}
+                    <div className={`text-logo flx-row-justify-align-ctr`}>
+                        {serverInitials.slice(0,3)}
+                    </div>
                 </div>
             </NavLink>
         )
@@ -30,7 +32,9 @@ const ServerLogo = ({ server }) => {
         activeClassName='active-server'
         className={`server-navlink`}
         to={`${navlinkPath}`}>
-            <img className={`${serverLogoBG}`} src={server.image_url} />
+            <div className={`${serverLogoBG} server-sidebar-logo-container flx-row-justify-align-ctr`}>
+                <img className={`server-sidebar-logo`} src={server.image_url} />
+            </div>
         </NavLink>
     )
 }

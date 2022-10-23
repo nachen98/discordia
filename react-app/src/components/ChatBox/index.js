@@ -242,9 +242,9 @@ const ChatBox = () => {
     return (
         <div id='channel-main-chat' className='flx-row'>
             <div id='chat-nav' className='flx-row-align-ctr'>
-                <i class="fa-solid fa-hashtag"></i>
+                <i className="fa-solid fa-hashtag"></i>
                 <div id='channel-name'>{channel.name}</div>
-                <div id='divider'>|</div>
+                <div id='divider'>{!!channel.topic && '|' }</div>
                 <div id='channel-topic'>
                     {!!channel.topic && channel.topic}
                 </div>

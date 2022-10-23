@@ -22,17 +22,19 @@ function App() {
 
   useEffect(() => {
     (async() => {
-      await dispatch(authenticate());
+      await dispatch(authenticate())
+      await dispatch(getAllRegularServers())
+      await dispatch(getAllDmServers())
       setLoaded(true);
     })();
   }, [dispatch]);
 
-  useEffect(()=> {
-    (async()=> {
-      await dispatch(getAllRegularServers());
-      await dispatch(getAllDmServers());
-    })();
-  }, [dispatch])
+  // useEffect(()=> {
+  //   (async()=> {
+  //     await dispatch(getAllRegularServers());
+  //     await dispatch(getAllDmServers());
+  //   })();
+  // }, [dispatch])
 
   if (!loaded) {
     return null;

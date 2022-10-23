@@ -23,6 +23,10 @@
   width: 0px;
 }
 
+i.channel-hash.fa-solid.fa-hashtag {
+  margin-left: 0;
+}
+
 #settings-dropdown-logo {
     height: 15px;
     width: 15px;
@@ -72,12 +76,10 @@
     height: 35px;
 
     padding: 0 5px;
-    margin: 0 10px;
 
     box-sizing: border-box;
 
     color: var(--gray-text);
-
 }
 
 .server-channel-card:hover {

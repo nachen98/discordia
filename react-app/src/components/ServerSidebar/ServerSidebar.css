@@ -26,6 +26,11 @@
     background-color: var(--chat-sides-sidebar-bg-color);
 }
 
+.dm-server-nav:hover {
+    background-color: #5865f2;
+}
+
+
 #dm-server-nav:hover {
     background-color: #5865f2;
 }
@@ -40,36 +45,71 @@
 
     margin-top: 10px;
     border-radius: 50%;
+
+    transition: border-radius 0.5s;
 }
 
 .server-navlink:hover {
     border-radius: 30%;
 }
 
-.server-sidebar-img {
+.server-sidebar-logo-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: border-radius 0.5s;
+}
+
+.default-server-text-logo:hover,
+.server-sidebar-logo-container:hover {
+    border-radius: 30%;
+    background-color:#5865f2;
+}
+
+.server-sidebar-logo {
+    height: 100%;
+}
+
+/* .server-sidebar-img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 
     transition: border-radius 0.5s;
-}
+} */
 
-div.active-server-sidebar-img,
+/* div.active-server-sidebar-img, */
 .active-server-sidebar-img {
     width: 50px;
     height: 50px;
     border-radius: 30%;
     background-color: #5865f2;
+    --chat-sides-sidebar-bg-color: #5865f2;
 }
 
-.server-sidebar-img:hover {
+/* .server-sidebar-img:hover {
     border-radius: 30%;
     background-color:#5865f2;
-}
+} */
 
 .default-server-text-logo {
     background-color: var(--chat-sides-sidebar-bg-color);
     color: var(--off-white-text);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    transition: border-radius 0.5s;
+}
+
+.text-logo {
+    max-width: 100%;
+    max-height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-word;
+    text-overflow: ellipsis;
 }
 
 .active-server {

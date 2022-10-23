@@ -120,7 +120,7 @@ const DmChatBox = ({socket, dmMessages}) =>{
                         <textarea
                         className='flx-col'
                         id='send-message-textarea'
-                        placeholder={`Message @${!!users[otherUser[0]] && users[otherUser[0]].usernameotherUserName}`}
+                        placeholder={`Message @${!!users[otherUser[0]] && users[otherUser[0]].username}`}
                         rows='1'
                         onChange={handleMessageInput}
                         value={messageInput}

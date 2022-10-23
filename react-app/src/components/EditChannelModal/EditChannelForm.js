@@ -8,6 +8,7 @@ import {channelReducer} from "../../store/channel";
 
 const EditChannelForm = ({ setShowModal, channelId }) => {
     const allChannels=useSelector(state => state.channelReducer)
+    const allServers = useSelector(state => state.regularServerReducer)
     const channel=allChannels[channelId]
     const {serverId} = useParams()
     const dispatch = useDispatch()
@@ -16,11 +17,13 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
     const [newTopic, setNewTopic] = useState("")
     const [newNameErrMsg, setNewNameErrMsg] = useState('')
 
+    const currentServer = allServers[serverId]
+
     const handleEditChannel = async e => {
         e.preventDefault()
 
         let errors = false;
-        if (newName.length === 0){
+        if (newName.length === 0 || newName.trim().length === 0){
             setNewNameErrMsg('This field is required.')
             errors = true;
         }
@@ -34,14 +37,18 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
 
         dispatch(updateChannel(newChannel, channelId))
             .then(updatedChannel => history.push(`/channels/${updatedChannel.result.server_id}/${updatedChannel.result.id}`))
-                
+
             .then(() => setShowModal(false))
     }
 
     const handleDeleteChannel = () => {
 
         dispatch(deleteChannel(serverId, channelId))
-            .then(() => history.push(`/channels/${serverId}`))
+            .then(() => console.log('current server after channel deletion', currentServer))
+            .then(() => {
+                if (currentServer.channels.length) history.push(`/channels/${serverId}/${currentServer.channels[0]}`)
+                else history.push(`/channels/${serverId}`)
+            })
     }
     return (
         <div id='update-channel-form-container' className='flx-col-align-ctr pos-rel'>
@@ -57,7 +64,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                         placeholder={channel.name}
                         onChange={e => setNewName(e.target.value)}
                     />
-                     <span className='edit-server-err'>{newNameErrMsg}</span>
+                    <span className='edit-server-err'>{newNameErrMsg}</span>
                 </label>
 
                 <label>

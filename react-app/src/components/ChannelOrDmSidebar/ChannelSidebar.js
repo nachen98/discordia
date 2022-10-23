@@ -55,7 +55,7 @@ const ChannelSidebar = () => {
                             <div className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
                                 <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id} className='flx-grow-one'>
                                     <div className={`server-channel-card flx-row-align-ctr `}>
-                                        # {channel.name}
+                                        <i className="fa-solid fa-hashtag channel-hash"></i> {channel.name}
                                     </div>
                                 </NavLink>
                                 {sessionUserOwnsServer && <EditChannelModal channelId={channel.id}/>}
