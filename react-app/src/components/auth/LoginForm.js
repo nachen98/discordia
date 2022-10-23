@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { Link } from "react-router-dom"
 import './LoginForm.css'
+import { getAllDmServers } from '../../store/dmserver';
+import { getAllRegularServers } from '../../store/regularserver';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -15,11 +17,13 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-
+    console.log ('validation error messages ', data)
     if (data) {
       const formatedErrors=data.map(err=> {
-        const [_field, message]= err.split(":")
-        return message.slice(1)
+        // const [_field, message]= err.split(":")
+        // return message.slice(1)
+        const errMsgArr = err.split(":");
+        return  errMsgArr.length >1 ? errMsgArr.slice(1) : errMsgArr
       })
       setErrors(formatedErrors);
     }
@@ -38,6 +42,11 @@ const LoginForm = () => {
     dispatch(login('demo@aa.io', 'password'))
   }
   if (user) {
+    (async()=> {
+      await dispatch(getAllRegularServers());
+      await dispatch(getAllDmServers());
+    })();
+
     return <Redirect to='/channels/@me' />;
   }
 

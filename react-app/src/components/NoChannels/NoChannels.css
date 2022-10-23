@@ -1,0 +1,14 @@
+#no-channel-server {
+    background-color: #202225;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+}
+
+#no-channel-server > * {
+    color: #9a9da1;
+}
+
+.no-ch-content-text {
+    width: 450px;
+    text-align: center;
+}

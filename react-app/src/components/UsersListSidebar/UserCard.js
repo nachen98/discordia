@@ -20,12 +20,20 @@ const UserCard = ({ socket, userId }) => {
     useEffect(() => {
         if (!showDmPopUp) return;
 
-        const closeDmPopUp = () => setShowDmPopUp(false);
+        const closeDmPopUp = (e) => {
+            console.log('item being clicked on is :', e.target)
+            console.log('and its calsses are ', e.target.className)
+            console.log(typeof e.target.className)
+            if (e.target.className.includes('dm-pop-up-ele')) return;
+            setShowDmPopUp(false);
+        }
         document.addEventListener('click', closeDmPopUp);
 
         return () => document.removeEventListener('click', closeDmPopUp)
     }, [showDmPopUp])
 
+
+    console.log("all users reducer :", allUsers);
     return (
         <div onClick={openPopUp} className={`user-card flx-row-align-ctr pos-rel ${showDmPopUp ? 'popup-active' : ''}`}>
 
@@ -34,9 +42,9 @@ const UserCard = ({ socket, userId }) => {
                 <img className='dm-logos' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png' />
             </div>
 
-            {allUsers[userId].username}
+            {!!allUsers[userId] && allUsers[userId].username}
 
-            {showDmPopUp && <DmUserPopUp socket={socket} userId={userId} />}
+            {showDmPopUp && <DmUserPopUp setShowDmPopUp={setShowDmPopUp} socket={socket} userId={userId} />}
         </div>
     )
 }

@@ -26,17 +26,21 @@ const ChannelOrDmSidebar = () => {
     const pathLocation = useLocation();
     const serverIdInt = parseInt(serverId)
 
+    let server = allRegularServers[serverIdInt] ? allRegularServers[serverIdInt] : allDmServers[serverIdInt]
 
     useEffect(() => {
         if (Object.values(allRegularServers).length === 0) return;
         if (pathLocation.pathname === '/channels/@me') return;
 
-        const server = allRegularServers[serverIdInt] ?
+        server = allRegularServers[serverIdInt] ?
         allRegularServers[serverIdInt] : allDmServers[serverIdInt];
         setServername(server.name)
     }, [serverIdInt])
 
-    if (!parseInt(serverId)) return <DmSidebar />
+    // if (!server) return <ChannelSidebar />
+    // else return <DmSidebar />
+
+    if (!server || server.is_dm) return <DmSidebar />
     else return <ChannelSidebar />
 
     //
@@ -55,51 +59,51 @@ const ChannelOrDmSidebar = () => {
     // Will have to pass in dmServers rather than channels
 
 
-    if (Object.values(allRegularServers).length === 0) return <span>Loading...</span>
+    // if (Object.values(allRegularServers).length === 0) return <span>Loading...</span>
 
-    const server = allRegularServers[serverIdInt] ?
-                    allRegularServers[serverIdInt] : allDmServers[serverIdInt] ?
-                    allDmServers[serverIdInt] : false
+    // const server = allRegularServers[serverIdInt] ?
+    //                 allRegularServers[serverIdInt] : allDmServers[serverIdInt] ?
+    //                 allDmServers[serverIdInt] : false
 
-    // server === false indicates that it is likely at /channels/@me
-    //      ... or it's an edge case.
-    let channels;
-    server ?
-        channels = server.channels.map(channelId => allChannels[channelId]) :
-        channels = Object.values(allDmServers).map((server) => users[getOtherUserIdInDm(sessionUser.id, server)])
-    console.log('channels are ', channels)
+    // // server === false indicates that it is likely at /channels/@me
+    // //      ... or it's an edge case.
+    // let channels;
+    // server ?
+    //     channels = server.channels.map(channelId => allChannels[channelId]) :
+    //     channels = Object.values(allDmServers).map((server) => users[getOtherUserIdInDm(sessionUser.id, server)])
+    // console.log('channels are ', channels)
 
 
-    const serverImg = 'https://staticc.sportskeeda.com/editor/2022/03/199c9-16468646951546-1920.jpg';
-    const is_dm = false;
+    // const serverImg = 'https://staticc.sportskeeda.com/editor/2022/03/199c9-16468646951546-1920.jpg';
+    // const is_dm = false;
 
-    // TEMPORARY - TO BE ABLE TO LOAD '/channels/@me'
+    // // TEMPORARY - TO BE ABLE TO LOAD '/channels/@me'
 
-    if (!serverName) {
-        if (pathLocation.pathname === '/channels/@me') {
-            setServername('dm-server')
-            return (<span>Loading...</span>)
-        }
+    // if (!serverName) {
+    //     if (pathLocation.pathname === '/channels/@me') {
+    //         setServername('dm-server')
+    //         return (<span>Loading...</span>)
+    //     }
 
-        setServername(server.name)
-        return (<span>Loading...</span>)
-    }
+    //     setServername(server.name)
+    //     return (<span>Loading...</span>)
+    // }
 
-    return (
-        <div id='channel-or-dm-sidebar' className='flx-col'>
-            {!is_dm && <ServerBanner serverName={serverName} serverImg={serverImg}/>}
+    // return (
+    //     <div id='channel-or-dm-sidebar' className='flx-col'>
+    //         {!is_dm && <ServerBanner serverName={serverName} serverImg={serverImg}/>}
 
-            {channels.map((channel) =>{
-                return (
-                    <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id}>
-                        <div className='server-channel-card flx-row-align-ctr'>
-                            # {channel.name || channel.username}
-                        </div>
-                    </NavLink>
-                )
-            })}
-        </div>
-    )
+    //         {channels.map((channel) =>{
+    //             return (
+    //                 <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id}>
+    //                     <div className='server-channel-card flx-row-align-ctr'>
+    //                         # {channel.name || channel.username}
+    //                     </div>
+    //                 </NavLink>
+    //             )
+    //         })}
+    //     </div>
+    // )
 }
 
 export default ChannelOrDmSidebar

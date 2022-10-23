@@ -6,6 +6,13 @@ const CREATE_ONE_CHANNEL = 'channels/createOneChannel';
 const UPDATE_ONE_CHANNEL = 'channels/updateOneChannel';
 const DELETE_ONE_CHANNEL = 'channels/deleteOneChannel';
 const ADD_CHANNEL_MESSAGE = 'channels/addNewMessage';
+const CLEAR_CHANNELS = 'channels/clearChannels';
+
+export const clearChannels = () => {
+    return {
+        type: CLEAR_CHANNELS
+    }
+}
 
 export const loadAllChannels = (channels) => {
     return {
@@ -51,13 +58,13 @@ const deleteOneChannel=(channelId)=> {
 
 //thunk action creator
 export const getOneChannel= (channelId) => async(dispatch) => {
-    
+
     const response = await fetch(`/api/channels/${channelId}`)
-    
+
     if(response.ok){
         const oneChannel = await response.json()
         console.log("get one channel data ", oneChannel.result)
-       
+
         dispatch(loadOneChannel(oneChannel.result))
     }
 }
@@ -111,7 +118,7 @@ export const deleteChannel=(serverId, channelId)=> async(dispatch)=> {
     if(response.ok){
         dispatch(deleteServerChannel(serverId,channelId))
         dispatch(deleteOneChannel(channelId))
-        
+
     }
 }
 
@@ -130,7 +137,7 @@ const channelReducer = (state=initialState, action)=>{
                 newState[channel.id]=channel
             })
             return newState
-            
+
         case GET_ONE_CHANNEL_By_ID:
             newState={...state}
             console.log("new state chanel!!!!!!!---1" ,newState)
@@ -144,22 +151,25 @@ const channelReducer = (state=initialState, action)=>{
             newState={...state}
             newState[action.channel.id]=action.channel
             return newState
-        
+
         case UPDATE_ONE_CHANNEL:
             newState={...state, [action.channel.result.id]: action.channel.result}
             return newState
-        
+
         case DELETE_ONE_CHANNEL:
             newState={...state}
             delete newState[action.channelId]
             return newState
-        
+
         case ADD_CHANNEL_MESSAGE:
             newState={...state};
             newState[action.channelId] = {...newState[action.channelId]};
             newState[action.channelId].messages = [...newState[action.channelId].messages, action.messageId];
             return newState;
-        
+
+        case CLEAR_CHANNELS:
+            return {};
+
         default:
             return state
     }

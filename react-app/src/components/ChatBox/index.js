@@ -13,6 +13,8 @@ import DmChatBox from './DmChatBox';
 import { addChannelMessage } from '../../store/channel'
 import { addDmServerMessage } from '../../store/dmserver'
 import { create_dm} from "../../store/messages"
+import NoChannels from '../NoChannels';
+import NoChatSelected from '../NoChatSelected';
 let socket
 
 const ChatBox = () => {
@@ -20,11 +22,13 @@ const ChatBox = () => {
     console.log('chatbox rendering....');
     const {channelId} = useParams();
     const {serverId} = useParams();
+    const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
     console.log('get  server ,channel---- ',serverId , channelId);
     const [isLoaded, setLoaded]= useState(false)
-  
+
+
     let isDmServer;
-  
+
     const dispatch = useDispatch();
     const [currentServerId, setCurrentServerId] = useState(serverId)
 
@@ -55,7 +59,7 @@ const ChatBox = () => {
         socket.on('hello', (data)=>{
             console.log("after receiving 1...", new Date())
             console.log("received message from server in Chatbox", data)
-            console.log("received broadcast msg, socket id:", socket.id) 
+            console.log("received broadcast msg, socket id:", socket.id)
             console.log("c/////////// id ",data.channel_id )
             if (data.channel_id){
                 dispatch(createChannelMessage(data));
@@ -67,16 +71,20 @@ const ChatBox = () => {
                 dispatch(addDmServerMessage(data.id, data.server_id));
             }
         console.log("after receiving 2...", new Date())
-    })
+        })
 
-       
+
         return (() => {
             socket.disconnect()
         })
     }, [])
-    
 
-    
+
+    useEffect(() => {
+        setLoaded(true);
+
+    },[])
+
 
     useEffect(() => {
         if (!channelId) return;
@@ -98,24 +106,31 @@ const ChatBox = () => {
 
     useEffect(() => {
         const messageTextField = document.getElementById('send-message-textarea');
-        if (! messageTextField){
-            return
-        }
+        if (! messageTextField) return
+
         console.log(" add event listener....")
         messageTextField.addEventListener('keydown', listenForEnter);
         return () => messageTextField.removeEventListener('keydown', listenForEnter);
     }, [])
 
+    useEffect(() => {
+        const messages = document.querySelectorAll('.channel-message-container')
+
+        if (!messages.length) return;
+
+        messages[messages.length - 1].scrollIntoView()
+
+    })
 
 
     if (!serverId && !isLoaded) {
-        setLoaded(true);
+        
         return (<span>Loading...</span>)
     }
 
     if (!channelId && !serverId){
         console.log("--------------");
-        return <div >Ready to send a message to friends? </div>
+        return <NoChatSelected />
     }
 
     const currentServer = allRegularServers[serverId] ? allRegularServers[serverId] : allDmServers[serverId]
@@ -124,7 +139,7 @@ const ChatBox = () => {
         console.log("current server is --", currentServer);
         isDmServer = currentServer.is_dm
     }
-    
+
 
     const listenForEnter = (e) => {
         if (e.key === "Enter") {
@@ -137,40 +152,37 @@ const ChatBox = () => {
     }
 
     const handleMessageSubmit = async (e) => {
-       e.preventDefault();
-       console.log("status of socket", socket.connected)
-       console.log("before sending...", new Date())
-       socket.send('message', 
-        {   
-            "sender_id": current_user.id, 
-            "is_channel_message": true, 
-            "channel_id": channelId, 
-            "body": messageInput 
-        })
-        console.log("after sending...", new Date())
-        // socket.on('hello', (data)=>{
-        //     console.log("after receiving 1...", new Date())
-        //     console.log("received message from server", data)
-        //     console.log("received broadcast msg, socket id:", socket.id) 
-        //     dispatch(createChannelMessage(data))
-        //     console.log("after receiving 2...", new Date())
-        //     setMessageInput("")
-        //     console.log("after receiving 3...", new Date())
-        // })     
+        e.preventDefault();
+        console.log("status of socket", socket.connected)
+        let time1 = new Date();
+        let data = {
+            "sender_id": current_user.id,
+            "is_channel_message": true,
+            "channel_id": channelId,
+            "body": messageInput
+             }
+        socket.send('message', data);
+        let time2= new Date();
+        console.log("sending data----", data)
+        console.log("sending data time", time2-time1 ,"ms")
         setMessageInput('');
     }
 
     if (isDmServer && isLoaded){
         const dmMessages = msg.filter(message=> parseInt(message.server_id) === parseInt(serverId));
         return <DmChatBox  socket={socket} dmMessages={dmMessages}/>
-    } 
-   
-    const channel = channels[channelId]
-    if (!channel || !channel.messages){  
-        return <span>Loading................... </span>
     }
 
-   
+    // if (!isLoaded ){
+    //     return (<span>Loading...</span>)
+    // }
+
+    const channel = channels[channelId]
+    if (!channel || !channel.messages){
+        return <NoChannels />
+    }
+
+
     let messageArr = msg
     const dateObj = {}
     for (let i=0; i< messageArr.length;i++){
@@ -193,30 +205,40 @@ const ChatBox = () => {
             <div key = {index} className='all-messages-container'>
                     <div className='date-divider'> {getMonthYear(key)}</div>
                     {  dateObj[key].sort((a,b) =>a.id-b.id).map((item, idx) =>{
-                        console.log("item-------", item,index)
+                        const colorInd = item.user_id % COLORS.length;
                         return (
                             <div key = {idx} className="channel-message-container">
-                                <img className='channel-message-user-profile-image'src={profileimage} alt={"bb"}/>
-                                <div className="channel-message-detail"> 
+                                <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
+                                    <img className={`channel-message-user-profile-image`} src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
+                                </div>
+                                <div className="channel-message-detail">
                                     <div className='channel-message-info'>
-                                      <div className='channel-message-user-fullname'>  user : {users[item.user_id].username}  </div>
+                                      <div className='channel-message-user-fullname'>  {users[item.user_id].username}  </div>
                                       <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
                                     </div>
                                     <div className="channel-message-body" > {item.body}</div>
                                 </div>
-                            </div>  
+                            </div>
                             )
                         })
-                    }       
-            </div>   
+                    }
+            </div>
         )
     })
- 
+
 
     return (
         <div id='channel-main-chat' className='flx-row'>
-            <div id='chat-nav' className='flx-row-align-ctr'> {`# ${channel.name}`} </div>
-
+            <div id='chat-nav' className='flx-row-align-ctr'>
+                <i class="fa-solid fa-hashtag"></i>
+                <div id='channel-name'>{channel.name}</div> 
+                <div id='divider'>|</div>    
+                <div id='channel-topic'>
+                    {!!channel.topic && channel.topic}
+                </div>
+                 
+            </div>
+           
             <div id='chat-window' className='flx-col'>
                 <div id='message-window'>
                     {messageContainer}
@@ -227,7 +249,7 @@ const ChatBox = () => {
                         <textarea
                         className='flx-col'
                         id='send-message-textarea'
-                        placeholder={`Message <channel or username(DM) name goes here>`}
+                        placeholder={`Message @${channel.name}`}
                         rows='1'
                         onChange={handleMessageInput}
                         value={messageInput}
@@ -235,9 +257,11 @@ const ChatBox = () => {
                         />
                     <button type='submit' id='send-message-btn' style={{display: 'none'}} />
                     </form>
-                    <span className='message-char-count'>{255 - messageInput.length}</span>
+                    <span className='message-char-count'>{255 - messageInput.length} </span>
                 </div>
             </div>
+
+            <div id='five-px-divider'></div>
 
             <UsersListSidebar  socket={socket} />
         </div>
