@@ -22,7 +22,7 @@ body{
     margin: 0;
     top: 50%;
     transform: translate(0, -50%)
-    
+
 }
 #inner-container{
     margin: 30px 80px
@@ -43,7 +43,6 @@ body{
     color: var(--gray-text);
     margin-bottom: 10px
 }
-
 
 label{
     color: var(--gray-text);
@@ -106,7 +105,7 @@ input:focus{
     font-family: "ABC Ginto Normal","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: rgb(243, 134, 136);
     font-size: 12px;
-    
+
 }
 
 #signup-meessage{
@@ -123,4 +122,4 @@ input:focus{
 }
 #linktosignup:hover{
     text-decoration: underline;
-} 
+}

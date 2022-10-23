@@ -15,11 +15,14 @@ const ChannelSidebar = () => {
     const [showModal, setShowModal] = useState(false)
     const allRegularServers = useSelector(state => state.regularServerReducer);
     const allChannels = useSelector(state => state.channelReducer);
+    const sessionUser = useSelector(state => state.session.user)
 
     // Will we have to take into account of when the server isn't initally loaded?
     // Thinking no since we should be retrieving ALL servers that sessionUser is in
 
     const server = allRegularServers[serverId];
+
+    const sessionUserOwnsServer = server.owner_id === sessionUser.id;
 
     if (!server && !hasLoaded) {
         setHasLoaded(true);
@@ -36,7 +39,7 @@ const ChannelSidebar = () => {
             <ServerBanner isDm={false} serverName={server.name} serverImg={server.image_url} />
             <div id='text-channels' className="flx-row-space-btw">
                 TEXT CHANNELS
-                <CreateChannelModal />
+                {sessionUserOwnsServer &&<CreateChannelModal />}
                 {/* <span tooltip="Create Channel">
                         <i className="fa-solid fa-plus" onClick={() => setShowModal(true)}></i>
                         </span>
@@ -44,18 +47,19 @@ const ChannelSidebar = () => {
                         <Modal><CreateChannelForm setShowModal={setShowModal}/></Modal>)} */}
             </div>
 
-            <div id='channel-or-dm-card-container' className='flx-col'>
+            <div id='channel-card-container' className='flx-col'>
                 {!!channels.length && channels.map((channel) => {
                     const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
                     return (
                         <>
-                            <div className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
+                            <div key={channel.id} className={`channelname-and-setting flx-row-space-btw ${activeView}`}>
                                 <NavLink to={`/channels/${serverId}/${channel.id}`} key={channel.id} className='flx-grow-one'>
                                     <div className={`server-channel-card flx-row-align-ctr `}>
-                                        # {channel.name}
+                                        <i className="fa-solid fa-hashtag channel-hash"></i>
+                                        <span className='channel-sidebar-text'>{channel.name}</span>
                                     </div>
                                 </NavLink>
-                                <EditChannelModal channelId={channel.id}/>
+                                {sessionUserOwnsServer && <EditChannelModal channelId={channel.id}/>}
                             </div>
 
                         </>

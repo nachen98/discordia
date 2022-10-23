@@ -53,7 +53,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
     const handleSendDm = (e) => {
         if (e) e.preventDefault();
 
-        if (!dmMessage.length) return;
+        if (!dmMessage.trim().length) return;
         if (dmMessage.length > 255) return alert(`255 characters max. Your message was ${dmMessage.length} characters long.`)
 
         if (dmServer) {
@@ -63,7 +63,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
                 "dm_server_id": dmServer.id,
                 "body": dmMessage
             })
-                .then(()=> history.push(`/channels/${dmServer.id}`))
+            history.push(`/channels/${dmServer.id}`)
             // console.log('made it here?')
             // socket.on('hello', (data) => {
             //     console.log('data received back from socket is ', data)
@@ -104,7 +104,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
 
             <div className='profile-pic-bg pos-abs flx-row-justify-align-ctr dm-pop-up-ele'>
                 <div className={`${colorInd}-bg pop-up-profile-img-container flx-row-justify-align-ctr dm-pop-up-ele`}>
-                    <img className='pop-up-profile-img dm-pop-up-ele' src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png'/>
+                    <img className='pop-up-profile-img dm-pop-up-ele' src='/assets/discordia-mascot.png'/>
                 </div>
             </div>
 

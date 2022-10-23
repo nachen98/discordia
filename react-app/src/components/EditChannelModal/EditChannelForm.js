@@ -8,6 +8,7 @@ import {channelReducer} from "../../store/channel";
 
 const EditChannelForm = ({ setShowModal, channelId }) => {
     const allChannels=useSelector(state => state.channelReducer)
+    const allServers = useSelector(state => state.regularServerReducer)
     const channel=allChannels[channelId]
     const {serverId} = useParams()
     const dispatch = useDispatch()
@@ -15,17 +16,38 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
     const [newName, setNewName] = useState(channel.name)
     const [newTopic, setNewTopic] = useState("")
     const [newNameErrMsg, setNewNameErrMsg] = useState('')
+    const [newTopicErrMsg, setNewTopicErrMsg] = useState('')
+
+    const currentServer = allServers[serverId]
 
     const handleEditChannel = async e => {
         e.preventDefault()
+        // let alertMsg = '';
 
         let errors = false;
-        if (newName.length === 0){
+        if (newName.length === 0 || newName.trim().length === 0){
             setNewNameErrMsg('This field is required.')
             errors = true;
         }
 
-        if(errors) return;
+        if (newName.length > 50) {
+            setNewNameErrMsg(`50 characters max. Your channel name was ${newName.length} characters long.`)
+            // alert(`50 characters max. Your channel name was ${newName.length} characters long.`)
+            // alertMsg = alertMsg + `50 characters max. Your channel name was ${newName.length} characters long. \n`
+            errors = true;
+        }
+
+        if (newTopic.length > 50) {
+            setNewTopicErrMsg(`50 characters max. Your channel name was ${newTopic.length} characters long.`)
+            // alert(`50 characters max. Your topic was ${newTopic.length} characters long.`)
+            // alertMsg = alertMsg + `50 characters max. Your topic was ${newTopic.length} characters long.`
+            errors = true;
+        }
+
+        if(errors) {
+            // alert(alertMsg);
+            return;
+        }
 
         const newChannel = {
             name: newName,
@@ -34,14 +56,18 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
 
         dispatch(updateChannel(newChannel, channelId))
             .then(updatedChannel => history.push(`/channels/${updatedChannel.result.server_id}/${updatedChannel.result.id}`))
-                
+
             .then(() => setShowModal(false))
     }
 
     const handleDeleteChannel = () => {
 
         dispatch(deleteChannel(serverId, channelId))
-            .then(() => history.push(`/channels/${serverId}`))
+            .then(() => console.log('current server after channel deletion', currentServer))
+            .then(() => {
+                if (currentServer.channels.length) history.push(`/channels/${serverId}/${currentServer.channels[0]}`)
+                else history.push(`/channels/${serverId}`)
+            })
     }
     return (
         <div id='update-channel-form-container' className='flx-col-align-ctr pos-rel'>
@@ -57,7 +83,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                         placeholder={channel.name}
                         onChange={e => setNewName(e.target.value)}
                     />
-                     <span className='edit-server-err'>{newNameErrMsg}</span>
+                    <span className='edit-server-err'>{newNameErrMsg}</span>
                 </label>
 
                 <label>
@@ -70,6 +96,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                         placeholder="Let everyone know how to use this channel!"
                         onChange={e => setNewTopic(e.target.value)}
                     />
+                    <span className='edit-server-err'>{newTopicErrMsg}</span>
                 </label>
 
             </form>

@@ -26,7 +26,7 @@ const SessionUserBar = () => {
                 <div id='session-user-bar-profile-img-container' className={`${bgColor}-bg flx-row-justify-align-ctr`}>
                     <img
                     id='session-user-bar-profile-img'
-                    src='https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png'
+                    src='/assets/discordia-mascot.png'
                     alt='profile-img' />
 
                 </div>

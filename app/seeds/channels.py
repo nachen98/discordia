@@ -47,7 +47,7 @@ def seed_channels():
         updated_at=datetime.now()
     )
 
-    server_1_channel_6 = Channel(
+    server_2_channel_6 = Channel(
         name='general',
         topic='Sports',
         is_voice=False,
@@ -56,7 +56,7 @@ def seed_channels():
         updated_at=datetime.now()
     )
 
-    server_1_channel_7 = Channel(
+    server_3_channel_7 = Channel(
         name='general',
         topic='Yoga',
         is_voice=False,
@@ -65,9 +65,18 @@ def seed_channels():
         updated_at=datetime.now()
     )
 
-    server_2_channel_1 = Channel(
-        name='general',
-        topic='Greetings',
+    server_4_channel_8 = Channel(
+        name='One Piece',
+        topic='is it real?',
+        is_voice=False,
+        server_id=4,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
+    )
+
+    server_4_channel_9 = Channel(
+        name='Laugh Tale',
+        topic='',
         is_voice=False,
         server_id=4,
         created_at=datetime.now(),
@@ -77,12 +86,17 @@ def seed_channels():
     db.session.add(server_1_channel_1)
     db.session.add(server_1_channel_2)
     db.session.add(server_1_channel_3)
-    db.session.add(server_2_channel_1)
     db.session.add(server_1_channel_4)
     db.session.add(server_1_channel_5)
-    db.session.add(server_1_channel_6)
-    db.session.add(server_1_channel_7)
-    
+
+    db.session.add(server_2_channel_6)
+
+    db.session.add(server_3_channel_7)
+
+    db.session.add(server_4_channel_8)
+    db.session.add(server_4_channel_9)
+
+
     db.session.commit()
 
 def undo_channels():

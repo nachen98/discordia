@@ -39,6 +39,17 @@ const ChatBox = () => {
     const allRegularServers = useSelector(state => state.regularServerReducer)
     const allDmServers = useSelector(state => state.dmServerReducer)
     const [messageInput, setMessageInput] = useState('')
+    const [messageInputLengthErr, setMessageInputLengthErr] = useState('gray-text')
+
+    useEffect(() => {
+        if (messageInput.length <= 255 && messageInputLengthErr=== 'gray-text') return;
+        if (messageInput.length > 255 && messageInputLengthErr === 'red-text') return;
+
+        if (messageInput.length > 255 && messageInputLengthErr === 'gray-text') setMessageInputLengthErr('red-text')
+        if (messageInput.length <= 255 && messageInputLengthErr ==='red-text') setMessageInputLengthErr('gray-text');
+
+    }, [messageInput])
+
     useEffect(() => {
         // create websocket/connect
         socket = io();
@@ -124,7 +135,7 @@ const ChatBox = () => {
 
 
     if (!serverId && !isLoaded) {
-        
+
         return (<span>Loading...</span>)
     }
 
@@ -153,6 +164,13 @@ const ChatBox = () => {
 
     const handleMessageSubmit = async (e) => {
         e.preventDefault();
+        if (messageInput.trim().length === 0) return;
+
+        if (messageInput.length > 255) {
+            alert(`255 characters max. Your message was ${messageInput.length} characters long.`);
+            return;
+        }
+
         console.log("status of socket", socket.connected)
         let time1 = new Date();
         let data = {
@@ -160,7 +178,7 @@ const ChatBox = () => {
             "is_channel_message": true,
             "channel_id": channelId,
             "body": messageInput
-             }
+            }
         socket.send('message', data);
         let time2= new Date();
         console.log("sending data----", data)
@@ -209,12 +227,12 @@ const ChatBox = () => {
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
-                                    <img className={`channel-message-user-profile-image`} src={"https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png"} alt={"bb"}/>
+                                    <img className={`channel-message-user-profile-image`} src={"/assets/discordia-mascot.png"} alt={"bb"}/>
                                 </div>
                                 <div className="channel-message-detail">
                                     <div className='channel-message-info'>
-                                      <div className='channel-message-user-fullname'>  {users[item.user_id].username}  </div>
-                                      <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
+                                        <div className='channel-message-user-fullname'>  {users[item.user_id].username}  </div>
+                                        <div className="channel-message-created-date"> {new Date(item.created_at).toLocaleDateString()} </div>
                                     </div>
                                     <div className="channel-message-body" > {item.body}</div>
                                 </div>
@@ -230,15 +248,15 @@ const ChatBox = () => {
     return (
         <div id='channel-main-chat' className='flx-row'>
             <div id='chat-nav' className='flx-row-align-ctr'>
-                <i class="fa-solid fa-hashtag"></i>
-                <div id='channel-name'>{channel.name}</div> 
-                <div id='divider'>|</div>    
+                <i className="fa-solid fa-hashtag"></i>
+                <div id='channel-name'>{channel.name}</div>
+                <div id='divider'>{!!channel.topic && '|' }</div>
                 <div id='channel-topic'>
                     {!!channel.topic && channel.topic}
                 </div>
-                 
+
             </div>
-           
+
             <div id='chat-window' className='flx-col'>
                 <div id='message-window'>
                     {messageContainer}
@@ -257,7 +275,7 @@ const ChatBox = () => {
                         />
                     <button type='submit' id='send-message-btn' style={{display: 'none'}} />
                     </form>
-                    <span className='message-char-count'>{255 - messageInput.length} </span>
+                    <span className={`${messageInputLengthErr} message-char-count`}>{255 - messageInput.length} </span>
                 </div>
             </div>
 
@@ -266,6 +284,6 @@ const ChatBox = () => {
             <UsersListSidebar  socket={socket} />
         </div>
     )
- }
+}
 
 export default ChatBox

@@ -63,6 +63,11 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
             errors = true;
         }
 
+        if (serverName.trim().length === 0){
+            setServerNameErrMsg(`This field can not be empty.`)
+            errors = true;
+        }
+
         if (serverLogo.length) {
             const serverLogoUrlParts = serverLogo.split('.');
             const logoExtension = serverLogoUrlParts[serverLogoUrlParts.length - 1]
@@ -77,7 +82,7 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
 
         // validation stuff here
         const updatedServer = {};
-        updatedServer['name'] = serverName;
+        updatedServer['name'] = serverName.trim();
         updatedServer['image_url'] = serverLogo;
 
         dispatch(updateRegularServer(updatedServer, +serverId))

@@ -21,9 +21,14 @@
 #message-window {
     display: flex;
     flex-direction: column;
+
+    box-sizing: border-box;
     height: 100%;
+    width: 100%;
     overflow-y: scroll;
-    padding-right: 2.5px;
+
+    padding-left: 20px;
+    padding-right: 15px;
 }
 
 #message-window::-webkit-scrollbar {
@@ -70,13 +75,6 @@
     box-sizing: border-box;
 }
 
-#message-window {
-    /* width: calc(100vw - 75px - 250px - 250px - 10px); */
-    width: 100%;
-    padding-left: 20px;
-    box-sizing: border-box;
-}
-
 #message-input-container {
     box-sizing: border-box;
 
@@ -107,7 +105,6 @@
 }
 
 .message-char-count {
-    color: var(--gray-text);
     align-self: flex-end;
 }
 
@@ -118,6 +115,8 @@
 }
 
 .channel-message-user-profile-image-container {
+    display: flex;
+    flex-shrink: 0;;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -142,6 +141,7 @@
 .channel-message-body {
     font-size: 14px;
     color: var(--off-white-text);
+    word-break: break-word;
 }
 .channel-message-info {
     display: flex;
@@ -179,7 +179,7 @@
   }
 
   #channel-topic{
-    margin: 0 
+    margin: 0
   }
 
   #channel-name{
