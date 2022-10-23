@@ -55,7 +55,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
 
         if (!dmMessage.length) return;
         if (dmMessage.length > 255) return alert(`255 characters max. Your message was ${dmMessage.length} characters long.`)
-
+        
         if (dmServer) {
             socket.send('message', {
                 "sender_id": sessionUser.id,
@@ -63,7 +63,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
                 "dm_server_id": dmServer.id,
                 "body": dmMessage
             })
-                .then(()=> history.push(`/channels/${dmServer.id}`))
+            history.push(`/channels/${dmServer.id}`)
             // console.log('made it here?')
             // socket.on('hello', (data) => {
             //     console.log('data received back from socket is ', data)
