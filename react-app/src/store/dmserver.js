@@ -91,6 +91,10 @@ const dmServerReducer = (state=initialState, action)=>{
 
         case ADD_DM_SERVER_MESSAGE:
             console.log('adding a message to dm server....')
+            if (!state[serverId]){
+                console.log("current state...", state);
+                return state;
+            }
             if (state[action.serverId].messages.includes(action.messageId)){
                 return state;
             }

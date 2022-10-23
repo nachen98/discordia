@@ -61,10 +61,14 @@ const DmChatBox = ({socket, dmMessages}) =>{
     console.log("dataObj--users1" ,users);
     const dmServer = allDmServers[serverId];
     const userIds = dmServer.name.split("-");
+    
     const otherUser = userIds.filter(id => parseInt(id) != current_user.id)
-    const otherUserName = users[otherUser[0]].username
+    
+    const otherUserName = users[parseInt(otherUser[0])].username
+    console.log("other user name ---", otherUserName)
 
     const messageContainer = Object.keys(dateObj).map((key, index) =>{
+        console.log("key is ", key)
         return (
             <div key = {index} className='all-messages-container'>
                     <div className='date-divider'> {getMonthYear(key)}</div>
@@ -105,7 +109,7 @@ const DmChatBox = ({socket, dmMessages}) =>{
                         <textarea
                         className='flx-col'
                         id='send-message-textarea'
-                        placeholder={`Message @`}
+                        placeholder={`Message @${!!users[otherUser[0]] && users[otherUser[0]].usernameotherUserName}`}
                         rows='1'
                         onChange={handleMessageInput}
                         value={messageInput}
