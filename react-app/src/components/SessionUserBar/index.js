@@ -26,7 +26,7 @@ const SessionUserBar = () => {
                 <div id='session-user-bar-profile-img-container' className={`${bgColor}-bg flx-row-justify-align-ctr`}>
                     <img
                     id='session-user-bar-profile-img'
-                    src='/assets/discordia-mascot.png'
+                    src='https://i.imgur.com/xjNdd63.png'
                     alt='profile-img' />
 
                 </div>

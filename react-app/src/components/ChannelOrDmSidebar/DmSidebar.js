@@ -37,7 +37,7 @@ const DmSidebar = () => {
                             <div className={`dm-channel-card flx-row-align-ctr ${activeView}`}>
 
                                 <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}>
-                                    <img className='dm-logos' src='/assets/discordia-mascot.png' alt='logo' />
+                                    <img className='dm-logos' src='https://i.imgur.com/xjNdd63.png' alt='logo' />
                                 </div>
                                 {users[dmRecipientsUserIds[ind]].username}
                             </div>
