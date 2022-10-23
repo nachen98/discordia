@@ -47,7 +47,7 @@ const ChannelSidebar = () => {
                         <Modal><CreateChannelForm setShowModal={setShowModal}/></Modal>)} */}
             </div>
 
-            <div id='channel-or-dm-card-container' className='flx-col'>
+            <div id='channel-card-container' className='flx-col'>
                 {!!channels.length && channels.map((channel) => {
                     const activeView = parseInt(channelId) === channel.id ? 'active-view' : ''
                     return (

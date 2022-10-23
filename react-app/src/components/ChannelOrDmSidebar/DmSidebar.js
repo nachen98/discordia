@@ -28,13 +28,13 @@ const DmSidebar = () => {
 
             <ServerBanner isDm={true} serverName='Direct Messages' />
 
-            <div id='channel-or-dm-card-container' className='flx-col'>
+            <div id='dm-card-container' className='flx-col'>
                 {allDmServers.map((dmServer, ind) =>{
                     const activeView = parseInt(activeDmServerId) === dmServer.id ? 'active-view' : ''
                     const colorInd = dmRecipientsUserIds[ind] % COLORS.length;
                     return (
                         <NavLink to={`/channels/@me/${dmServer.id}`} key={dmServer.id}>
-                            <div className={`server-channel-card flx-row-align-ctr ${activeView}`}>
+                            <div className={`dm-channel-card flx-row-align-ctr ${activeView}`}>
 
                                 <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}>
                                     <img className='dm-logos' src='/assets/discordia-mascot.png' alt='logo' />
