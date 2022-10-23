@@ -84,7 +84,7 @@ def seed_users():
         password='password',
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
@@ -152,13 +152,13 @@ def seed_users():
         is_dm=True,
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    
     dm_server_4 = Server(
         name='1-5',
         is_dm=True,
         created_at=datetime.now(),
         updated_at=datetime.now())
-
+    
     dm_server_5 = Server(
         name='1-6',
         is_dm=True,
@@ -168,6 +168,11 @@ def seed_users():
     reg_server_1.server_users.append(demo)
     reg_server_1.server_users.append(marnie)
     reg_server_1.server_users.append(bobbie)
+    reg_server_2.server_users.append(demo)
+    reg_server_2.server_users.append(marnie)
+    reg_server_3.server_users.append(demo)
+    reg_server_3.server_users.append(bobbie)
+    reg_server_4.server_users.append(demo)
     reg_server_1.server_users.append(mary)
     reg_server_1.server_users.append(james)
     reg_server_1.server_users.append(john)
@@ -175,55 +180,32 @@ def seed_users():
     reg_server_1.server_users.append(steven)
     reg_server_1.server_users.append(nancy)
     reg_server_1.server_users.append(betty)
-    db.session.add(reg_server_1)
-    db.session.commit()
-
-    reg_server_2.server_users.append(demo)
-    reg_server_2.server_users.append(marnie)
-    reg_server_2.server_users.append(betty)
-    reg_server_2.server_users.append(mary)
-    reg_server_2.server_users.append(linda)
-    reg_server_2.server_users.append(steven)
-    db.session.add(reg_server_2)
-    db.session.commit()
-
-    reg_server_3.server_users.append(demo)
-    reg_server_3.server_users.append(bobbie)
-    reg_server_3.server_users.append(marnie)
-    reg_server_3.server_users.append(john)
-    reg_server_3.server_users.append(linda)
-    db.session.add(reg_server_3)
-    db.session.commit()
-
-    reg_server_4.server_users.append(demo)
-    reg_server_4.server_users.append(nancy)
-    reg_server_4.server_users.append(betty)
-    db.session.add(reg_server_4)
-    db.session.commit()
 
     dm_server_1.server_users.append(demo)
     dm_server_1.server_users.append(marnie)
-    db.session.add(dm_server_1)
-    db.session.commit()
 
     dm_server_2.server_users.append(demo)
     dm_server_2.server_users.append(bobbie)
-    db.session.add(dm_server_2)
-    db.session.commit()
 
     dm_server_3.server_users.append(demo)
     dm_server_3.server_users.append(mary)
-    db.session.add(dm_server_3)
-    db.session.commit()
 
     dm_server_4.server_users.append(demo)
     dm_server_4.server_users.append(james)
-    db.session.add(dm_server_4)
-    db.session.commit()
 
     dm_server_5.server_users.append(demo)
     dm_server_5.server_users.append(john)
+
+    db.session.add(reg_server_1)
+    db.session.add(reg_server_2)
+    db.session.add(reg_server_3)
+    db.session.add(reg_server_4)
+    db.session.add(dm_server_1)
+    db.session.add(dm_server_2)
+    db.session.add(dm_server_3)
+    db.session.add(dm_server_4)
     db.session.add(dm_server_5)
+
     db.session.commit()
 
 # seed_users()
