@@ -8,6 +8,9 @@
 
     --gray-text: rgb(118, 121, 127);
     --off-white-text: rgb(254, 254, 242);
+
+    --delete-red-color: #d73c3e;
+    --delete-red-color-hover: #a02d2f;
 }
 
 * {
@@ -152,4 +155,20 @@ body {
 
 .gray-text{
     color: var(--gray-text);
+}
+
+.bold-900 {
+    font-weight: 900;
+}
+
+.bold-575 {
+    font-weight: 575;
+}
+
+.small-text {
+    font-size: small;;
+}
+
+.pink-error-text {
+    color: #c27375
 }

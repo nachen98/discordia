@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { Modal } from "../../context/Modal"
 import { deleteRegularServer, updateRegularServer } from "../../store/regularserver";
+import ConfirmDeleteModalForm from "../ConfirmDeleteModalForm";
 
 import './ServerSettingsModal.css'
 
@@ -26,6 +27,9 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
     const [serverNameErrMsg, setServerNameErrMsg] = useState('');
     const [serverLogoErrMsg, setServerLogErrMsg] = useState('');
     const [showSaveChangesBtn, setShowSaveChangesBtn] = useState(hidden)
+    const [showConfirmDeleteForm, setShowConfirmDeleteForm] = useState(false);
+
+    const sessionUserOwnsServer = sessionUser.id === server.owner_id
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -48,6 +52,20 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
 
         return () => document.removeEventListener('keydown', listenForEsc)
     }, [])
+
+    useEffect(() => {
+        if(sessionUserOwnsServer) return;
+
+        const alertNonOwner = e => {
+            if (!e.target.className.includes('edit-server-input-field')) return;
+
+            alert('You do not have permission to edit this server.')
+        }
+
+        document.addEventListener('click', alertNonOwner);
+
+        return () => document.removeEventListener('click', alertNonOwner)
+    })
 
     const handleServerUpdate = e => {
         e.preventDefault();
@@ -90,12 +108,9 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
             // .then(() => history.push(`/channels/@me/${serverId}/${channelId}`))
     }
 
-    const handleDeleteServer = () => {
-        dispatch(deleteRegularServer(+serverId))
-            .then(() => history.push(`/channels/@me`))
+    const confirmDelete = () => {
+        setShowConfirmDeleteForm(true)
     }
-
-    const sessionUserOwnsServer = sessionUser.id === server.owner_id
 
     return (
         <div id='server-settings-modal' className='flx-row'>
@@ -106,7 +121,8 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
                 {sessionUserOwnsServer &&
                 <div id='delete-server-div'
                 className='flx-row-space-btw'
-                onClick={handleDeleteServer}
+                // onClick={handleDeleteServer}
+                onClick={confirmDelete}
                 >
                     <span>Delete Server</span>
                     <img id='delete-server-logo' src='https://i.imgur.com/fyemDb2.png' alt='delete' />
@@ -124,7 +140,7 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
                             </span>
 
                             <input
-                                className='edit-server-input'
+                                className='edit-server-input edit-server-input-field'
                                 placeholder="required field"
                                 value={serverName}
                                 onChange={(e) => setServerName(e.target.value)}
@@ -135,7 +151,7 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
 
                             <span className='edit-server-input-header'>Server Logo</span>
                             <input
-                                className='edit-server-input'
+                                className='edit-server-input edit-server-input-field'
                                 value={serverLogo}
                                 onChange={(e) => setServerLogo(e.target.value)}
                                 disabled={!sessionUserOwnsServer}
@@ -167,6 +183,12 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
                     ESC
                 </button>
             </div>
+
+            {showConfirmDeleteForm && (
+                <Modal onClose={() => setShowConfirmDeleteForm(false)}>
+                    <ConfirmDeleteModalForm setShowConfirmDeleteForm={setShowConfirmDeleteForm} server={server} />
+                </Modal>
+            )}
         </div>
     )
 }

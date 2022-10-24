@@ -1,0 +1,80 @@
+#delete-server-form-container {
+    justify-content: flex-start;
+    width: 450px;
+    height: 300px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--gray-hover);
+    color: var(--off-white-text);
+}
+
+#delete-server-form {
+    height: 100px;
+    width: 100%;
+}
+
+#delete-server-header {
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+#confirmation-text {
+    height: 75px;
+
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    background-color: #f9a71a;
+}
+
+#confirm-server-name-to-delete {
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 0;
+    background-color: #202225;
+    color: var(--off-white-text)
+}
+
+#delete-server-buttons-container {
+    box-sizing: border-box;
+    height: 70px;
+    padding: 16px;
+    width: 450px;
+    bottom: 0;
+    border-radius: 0 0 10px 10px;
+
+    background-color: #2f3136;
+}
+
+#cancel-delete-server-btn,
+#delete-server-btn {
+    cursor: pointer;
+    border: none;
+    height: 100%;
+    padding: 0 15px;
+    color: var(--off-white-text)
+}
+
+#cancel-delete-server-btn {
+    margin-left: auto;
+    background-color: transparent;
+}
+
+#cancel-delete-server-btn:hover {
+    text-decoration: underline;
+}
+
+#delete-server-btn {
+    border-radius: 5px;
+    background-color: var(--delete-red-color);
+}
+
+#delete-server-btn:hover {
+    background-color: var(--delete-red-color-hover);
+}
