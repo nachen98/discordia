@@ -22,19 +22,21 @@ const ChannelOrDmSidebar = () => {
     const allDmServers = useSelector(state => state.dmServerReducer)
     const allChannels = useSelector(state => state.channelReducer)
     const users = useSelector(state => state.usersReducer);
-    const [serverName, setServername] = useState('');
+    // const [serverName, setServername] = useState('');
     const pathLocation = useLocation();
     const serverIdInt = parseInt(serverId)
 
     let server = allRegularServers[serverIdInt] ? allRegularServers[serverIdInt] : allDmServers[serverIdInt]
-
+    console.log('server ID :', serverId)
+    console.log('pathlocation.pathname is :', pathLocation.pathname)
     useEffect(() => {
         if (Object.values(allRegularServers).length === 0) return;
         if (pathLocation.pathname === '/channels/@me') return;
+        if(!serverId) return;
 
         server = allRegularServers[serverIdInt] ?
         allRegularServers[serverIdInt] : allDmServers[serverIdInt];
-        setServername(server.name)
+        // setServername(server.name)
     }, [serverIdInt])
 
     // if (!server) return <ChannelSidebar />

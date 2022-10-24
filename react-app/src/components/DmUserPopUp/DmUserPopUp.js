@@ -6,6 +6,8 @@ import { createDmServer } from '../../store/dmserver';
 import { create_dm } from '../../store/messages';
 
 import './DmUserPopUp.css'
+import userDiscImg from '../../img/discordia-mascot.png'
+import { onErrorLoadDiscLogoHandler } from '../../utils/helper';
 
 const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
 
@@ -104,7 +106,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
 
             <div className='profile-pic-bg pos-abs flx-row-justify-align-ctr dm-pop-up-ele'>
                 <div className={`${colorInd}-bg pop-up-profile-img-container flx-row-justify-align-ctr dm-pop-up-ele`}>
-                    <img className='pop-up-profile-img dm-pop-up-ele' src='https://i.imgur.com/xjNdd63.png'/>
+                    <img onError={onErrorLoadDiscLogoHandler} className='pop-up-profile-img dm-pop-up-ele' src={userDiscImg}/>
                 </div>
             </div>
 
@@ -114,7 +116,7 @@ const DmUserPopUp = ({ setShowDmPopUp, socket, userId }) => {
                 </div>
 
                 {selectedUser.id === sessionUser.id &&
-                    <img id='spiderman' className='dm-pop-up-ele' alt='talking-to-yourself' src='https://i.imgur.com/X1JLM7l.jpg' />
+                    <img onError={onErrorLoadDiscLogoHandler} id='spiderman' className='dm-pop-up-ele' alt='talking-to-yourself' src='https://i.imgur.com/X1JLM7l.jpg' />
                 }
 
                 {selectedUser.id !== sessionUser.id && (

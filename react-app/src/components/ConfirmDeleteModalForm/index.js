@@ -13,7 +13,8 @@ const ConfirmDeleteModalForm = ({ server, setShowConfirmDeleteForm }) => {
     const [showErrorText, setShowErrorText] = useState('dis-none')
     const [serverNameInput, setServerNameInput] = useState('');
 
-    const handleDeleteServer = () => {
+    const handleDeleteServer = (e) => {
+        e.preventDefault();
 
         if (server.name !== serverNameInput) {
             setShowErrorText('')

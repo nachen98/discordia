@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { Modal } from "../../context/Modal"
 import { deleteRegularServer, updateRegularServer } from "../../store/regularserver";
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 import ConfirmDeleteModalForm from "../ConfirmDeleteModalForm";
 
 import './ServerSettingsModal.css'
@@ -125,7 +126,7 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
                 onClick={confirmDelete}
                 >
                     <span>Delete Server</span>
-                    <img id='delete-server-logo' src='https://i.imgur.com/fyemDb2.png' alt='delete' />
+                    <img onError={onErrorLoadDiscLogoHandler} id='delete-server-logo' src='https://i.imgur.com/fyemDb2.png' alt='delete' />
                 </div>}
             </div>
 
@@ -176,7 +177,7 @@ const ServerSettingsModal = ({ setShowServerSettingsModal }) => {
                 className='flx-col'
                 onClick={() => setShowServerSettingsModal(false)}
                 >
-                    <img
+                    <img onError={onErrorLoadDiscLogoHandler}
                     id='close-server-modal-logo'
                     src='https://i.imgur.com/lziPn1x.png'
                     alt='close' />

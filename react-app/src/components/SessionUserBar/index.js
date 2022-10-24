@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 import './SessionUserBar.css'
+import userDiscImg from '../../img/discordia-mascot.png'
+import { onErrorLoadDiscLogoHandler } from '../../utils/helper';
 
 const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
 
@@ -24,9 +26,9 @@ const SessionUserBar = () => {
 
             <div className='flx-row-justify-align-ctr'>
                 <div id='session-user-bar-profile-img-container' className={`${bgColor}-bg flx-row-justify-align-ctr`}>
-                    <img
+                    <img onError={onErrorLoadDiscLogoHandler}
                     id='session-user-bar-profile-img'
-                    src='https://i.imgur.com/xjNdd63.png'
+                    src={userDiscImg}
                     alt='profile-img' />
 
                 </div>

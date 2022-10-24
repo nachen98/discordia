@@ -71,15 +71,15 @@ h1{
 }
 
 #splash-sect-6{
-    padding-left: 500px;
-    padding-right: 500px;
+    display: flex;
+    justify-content: center;
     background-color: rgb(246, 246,246);
 
 }
 
 #splash-sect-6-inner-container{
     border-top: 2px solid blue;
-    width: 100%;
+    width: 50%;
     padding-top: 20px;
     margin-bottom: 30px
 }
@@ -121,5 +121,5 @@ h1{
 
 #splash-sect-6-inner-container > a{
     color:  rgb(77, 86,192)
-    
+
 }

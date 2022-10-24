@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updateChannel, deleteChannel } from "../../store/channel";
 import {channelReducer} from "../../store/channel";
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const EditChannelForm = ({ setShowModal, channelId }) => {
     const allChannels=useSelector(state => state.channelReducer)
@@ -118,7 +119,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                 id='close-update-channel-btn'
                 className='pos-abs'
                 onClick={() => setShowModal(false)}>
-                <img id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
+                <img onError={onErrorLoadDiscLogoHandler} id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
             </button>
         </div>
 

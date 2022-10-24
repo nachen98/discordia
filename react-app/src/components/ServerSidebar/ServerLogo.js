@@ -1,4 +1,5 @@
 import { NavLink, useParams } from "react-router-dom"
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const ServerLogo = ({ server }) => {
     const { serverId } = useParams();
@@ -36,7 +37,7 @@ const ServerLogo = ({ server }) => {
         className={`server-navlink`}
         to={`${navlinkPath}`}>
             <div className={`${serverLogoBG} server-sidebar-logo-container flx-row-justify-align-ctr`}>
-                <img className={`server-sidebar-logo`} src={server.image_url} alt='server-logo'/>
+                <img onError={onErrorLoadDiscLogoHandler} className={`server-sidebar-logo`} src={server.image_url} alt='server-logo'/>
             </div>
         </NavLink>
     )

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addOneRegularServer } from "../../store/regularserver";
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const imageExtensions = [
     'jpeg',
@@ -116,7 +117,7 @@ const CreateServerForm = ({ setShowModal }) => {
             id='close-create-server-btn'
             className='pos-abs'
             onClick={() => setShowModal(false)}>
-                <img id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
+                <img onError={onErrorLoadDiscLogoHandler} id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
             </button>
         </div>
     )

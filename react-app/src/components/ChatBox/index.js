@@ -8,13 +8,16 @@ import { io } from "socket.io-client";
 import * as messageActions  from "../../store/messages"
 import {createChannelMessage } from "../../store/messages"
 import profileimage from './profileimage.png'
-import { getMonthYear } from '../../utils/helper';
+import { getMonthYear, onErrorLoadDiscLogoHandler } from '../../utils/helper';
 import DmChatBox from './DmChatBox';
 import { addChannelMessage } from '../../store/channel'
 import { addDmServerMessage } from '../../store/dmserver'
 import { create_dm} from "../../store/messages"
 import NoChannels from '../NoChannels';
 import NoChatSelected from '../NoChatSelected';
+
+import userDiscImg from '../../img/discordia-mascot.png'
+
 let socket
 
 const ChatBox = () => {
@@ -227,7 +230,7 @@ const ChatBox = () => {
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
-                                    <img className={`channel-message-user-profile-image`} src={"https://i.imgur.com/xjNdd63.png"} alt={"bb"}/>
+                                    <img onError={onErrorLoadDiscLogoHandler} className={`channel-message-user-profile-image`} src={userDiscImg} alt={"user-img"}/>
                                 </div>
                                 <div className="channel-message-detail">
                                     <div className='channel-message-info'>

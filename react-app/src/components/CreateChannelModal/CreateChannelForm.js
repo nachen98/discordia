@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { addOneChannel } from "../../store/channel";
 import "./CreateChannelForm.css"
 import "../../index.css"
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 export const CreateChannelForm=({ setShowModal })=>{
     const {serverId} = useParams()
     const dispatch = useDispatch();
@@ -72,7 +73,7 @@ export const CreateChannelForm=({ setShowModal })=>{
             id='close-create-channel-btn'
             className='pos-abs'
             onClick={() => setShowModal(false)}>
-                <img id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
+                <img onError={onErrorLoadDiscLogoHandler} id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
             </button>
         </div>
     )
