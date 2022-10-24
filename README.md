@@ -41,7 +41,7 @@ Login by clicking on the 'Login' button located on the top right. You can also s
 
 ### As a server owner, you can any of the following:
 
-#### Edit a server by clicking on your server's name to the very top of the channel and then clicking the server settings button
+#### Edit a server by clicking on your server's name above the channels list and then clicking the server settings button
 ![image](https://user-images.githubusercontent.com/60123981/197450898-1d6135f1-1a57-4bd3-8041-35270bcec854.png)
 
 ![image](https://user-images.githubusercontent.com/60123981/197450918-ca1314bb-6005-4d28-b8ff-94c93277b985.png)
