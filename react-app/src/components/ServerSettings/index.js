@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal"
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 import './ServerSettings.css'
 
@@ -28,7 +29,7 @@ const ServerSettings =  ({ setShowServerSettingsModal }) => {
                 onClick={() => setShowServerSettingsModal(true)}>
                     <span>Server Settings</span>
 
-                    <img className='server-settings-dropdown-icons' alt='settings-gear' src='https://i.imgur.com/uGvARJz.png' />
+                    <img onError={onErrorLoadDiscLogoHandler} className='server-settings-dropdown-icons' alt='settings-gear' src='https://i.imgur.com/uGvARJz.png' />
                 </div>
             </ul>
         </>

@@ -20,7 +20,7 @@
 #logout {
     cursor: pointer;
     padding: 8px 10px;
-    background-color: red;
+    background-color: var(--delete-red-color);
 
     border-radius: 5px;
     border: none;
@@ -30,5 +30,5 @@
 }
 
 #logout:hover {
-    background-color: hsla(0, 100%, 50%, 0.582);
+    background-color: var(--delete-red-color-hover);
 }

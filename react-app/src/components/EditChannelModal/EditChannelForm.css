@@ -227,11 +227,15 @@ span[tooltip]::after {
 }
 
 #delete-channel-button{
-  background-color: red;
+  background-color: var(--delete-red-color);
   border-radius: 5px;
   display: flex;
   align-items: center;
   padding: 5px
+}
+
+#delete-channel-button:hover {
+  background-color: var(--delete-red-color-hover);
 }
 
 #update-channel-button{
@@ -243,11 +247,13 @@ span[tooltip]::after {
 }
 
 .edit-channel-input{
+  box-sizing: border-box;
+  padding: 2px 8px;
   width: 100%;
-background-color: var(--server-sidebar-bg-color);
-height: 30px;
-border-radius: 3px;
-border-style: none;
-margin-bottom: 10px;
-color: rgb(186,186,190);
+  background-color: var(--server-sidebar-bg-color);
+  height: 30px;
+  border-radius: 3px;
+  border-style: none;
+  margin-bottom: 10px;
+  color: rgb(186,186,190);
 }

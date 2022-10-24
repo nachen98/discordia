@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import DmUserPopUp from "../DmUserPopUp/DmUserPopUp";
 
 import './UsersListSidebar.css'
+import userDiscImg from '../../img/discordia-mascot.png'
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const COLORS = ['gray', 'purple', 'red', 'yellow', 'green'];
 
@@ -39,7 +41,7 @@ const UserCard = ({ socket, userId }) => {
 
             <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}
             >
-                <img className='dm-logos' src='https://i.imgur.com/xjNdd63.png' alt='dm-logo'/>
+                <img onError={onErrorLoadDiscLogoHandler} className='dm-logos' src={userDiscImg} alt='dm-logo'/>
             </div>
 
             {!!allUsers[userId] && allUsers[userId].username}

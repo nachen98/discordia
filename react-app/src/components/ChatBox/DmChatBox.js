@@ -2,7 +2,7 @@
 import { useSelector ,useDispatch} from "react-redux";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMonthYear } from "../../utils/helper";
+import { getMonthYear, onErrorLoadDiscLogoHandler } from "../../utils/helper";
 import { create_dm} from "../../store/messages"
 import { useEffect } from 'react'
 import {io} from 'socket.io-client'
@@ -10,6 +10,8 @@ import { addChannelMessage } from '../../store/channel'
 import { addDmServerMessage } from '../../store/dmserver'
 import { createChannelMessage } from '../../store/messages'
 // let socket
+
+import userDiscImg from '../../img/discordia-mascot.png'
 
 const DmChatBox = ({socket, dmMessages}) =>{
 
@@ -94,7 +96,7 @@ const DmChatBox = ({socket, dmMessages}) =>{
                         return (
                             <div key = {idx} className="channel-message-container">
                                 <div className={`channel-message-user-profile-image-container ${COLORS[colorInd]}-bg flx-row-justify-align-ctr`}>
-                                    <img className={`channel-message-user-profile-image`} src={"https://i.imgur.com/xjNdd63.png"} alt={"bb"}/>
+                                    <img onError={onErrorLoadDiscLogoHandler} className={`channel-message-user-profile-image`} src={userDiscImg} alt={"user-img"}/>
                                 </div>
                                 <div className="channel-message-detail">
                                     <div className='channel-message-info'>
