@@ -75,7 +75,7 @@ Login by clicking on the 'Login' button located on the top right. You can also s
 
 ## Tech used
 
-!Flask
+!Flask(https://camo.githubusercontent.com/ea92b069447aaf7b6ed27965700bc66cd0f7a450d0af50e0253e51a[%E2%80%A6]5266c6f676f3d466c61736b266c6f676f436f6c6f723d626c61636b)
 !Python
 !React
 !Redux
