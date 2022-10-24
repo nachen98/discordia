@@ -1,15 +1,15 @@
 # WELCOME TO DISCORDIA
-![image](https://user-images.githubusercontent.com/60123981/197452705-8f8b366c-595b-45bb-aeb4-aa433e33f11b.png)
-
 Discordia is a Discord clone built using Postgres, Flask-SQLAlchemy, React, Redux.
 
 The backend utilizes Flask-SocketIO while the frontend utilizes socket.io-client to set up its websocket connection.
 
 Discordia (discord) is an instant messaging social platform. Users can chat live in servers or private messages.
 
+![image](https://user-images.githubusercontent.com/60123981/197452743-b8948698-c7e6-4a39-abfe-5a43d3508e25.png)
+
+
 Follow the link below to check it out!
 https://discordia-cgh.herokuapp.com/
-![image](https://user-images.githubusercontent.com/60123981/197452697-df09c998-22f9-4a45-9b61-a27f89c80dba.png)
 
 
 # NAVIGATING DISCORDIA
@@ -75,11 +75,17 @@ Login by clicking on the 'Login' button located on the top right. You can also s
 
 ## Tech used
 
-### Frontend
-React Redux NodeJs HTML5 CSS socket.io-client
-
-### Backend
-Postgres Flask SQLAlchemy Flask-Python Flask-SocketIO
+!Flask
+!Python
+!React
+!Redux
+!Ubuntu
+!JavaScript
+!NodeJS
+!HTML
+!CSS3
+!Heroku
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ## To dos
 
