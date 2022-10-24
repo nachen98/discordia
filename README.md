@@ -1,4 +1,5 @@
 # WELCOME TO DISCORDIA
+![image](https://user-images.githubusercontent.com/60123981/197452705-8f8b366c-595b-45bb-aeb4-aa433e33f11b.png)
 
 Discordia is a Discord clone built using Postgres, Flask-SQLAlchemy, React, Redux.
 
@@ -8,6 +9,8 @@ Discordia (discord) is an instant messaging social platform. Users can chat live
 
 Follow the link below to check it out!
 https://discordia-cgh.herokuapp.com/
+![image](https://user-images.githubusercontent.com/60123981/197452697-df09c998-22f9-4a45-9b61-a27f89c80dba.png)
+
 
 # NAVIGATING DISCORDIA
 HOW TO LOGIN
