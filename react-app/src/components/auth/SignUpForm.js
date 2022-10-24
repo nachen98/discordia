@@ -14,26 +14,64 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const onSignUp = async (e) => {
-    e.preventDefault();
-    let validationErrors=[]
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    if(!hasSubmitted) return;
+
+    let validationErrors = [];
+
+    if (email.trim().length === 0) {
+      validationErrors.push('Please enter an email.')
+    }
+
+    if(!email.includes('@')) {
+      validationErrors.push("Please fill email in the correct format with @ sign.")
+    }
+
+    if (username.trim().length === 0) {
+      validationErrors.push('Please enter a username.')
+    }
+
+    if(password.length < 6){
+      validationErrors.push("Password needs to be more than 6 characters.")
+    }
+
     if (password !== repeatPassword) {
       validationErrors.push("Password does not match.")
     }
-    if(password.length < 6){
-      validationErrors.push("Password needs to be more than 6 characters.")
+
+    setErrors(validationErrors)
+
+  }, [email, username, password, repeatPassword])
+
+  const onSignUp = async (e) => {
+    if (!hasSubmitted) setHasSubmitted(true);
+
+    e.preventDefault();
+    let validationErrors=[]
+
+    if (email.trim().length === 0) {
+      validationErrors.push('Please enter an email')
     }
 
     if(!email.includes('@')){
       validationErrors.push("Please fill email in the correct format with @ sign.")
     }
 
-    if (validationErrors.length > 0) return setErrors(validationErrors)
+    if (username.trim().length === 0) {
+      validationErrors.push('Please enter a username.')
+    }
 
-    // useEffect(()=> {
-    //   setEmail()
-    //   setPassword()
-    // })
+    if(password.length < 6){
+      validationErrors.push("Password needs to be more than 6 characters.")
+    }
+
+    if (password !== repeatPassword) {
+      validationErrors.push("Password does not match.")
+    }
+
+    if (validationErrors.length > 0) return setErrors(validationErrors)
 
     const data = await dispatch(signUp(username, email, password));
     console.log ('validation error messages ', data)
@@ -87,7 +125,7 @@ const SignUpForm = () => {
               <label>EMAIL</label>
               <input
                 className='signup-input'
-                type='text'
+                type='email'
                 name='email'
                 onChange={updateEmail}
                 value={email}
@@ -121,7 +159,7 @@ const SignUpForm = () => {
                 name='repeat_password'
                 onChange={updateRepeatPassword}
                 value={repeatPassword}
-                required={true}
+                // required={true}
               ></input>
             </div>
             <button type='submit' id="signup-button">Sign Up</button>

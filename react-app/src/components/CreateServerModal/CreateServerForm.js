@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addOneRegularServer } from "../../store/regularserver";
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const imageExtensions = [
     'jpeg',
@@ -39,8 +40,8 @@ const CreateServerForm = ({ setShowModal }) => {
             errors = true;
         }
 
-        if (newServerIcon) {
-            const imgUrlParts = newServerIcon.split('.')
+        if (newServerIcon.trim()) {
+            const imgUrlParts = newServerIcon.trimEnd().split('.')
             const newServerImgExt = imgUrlParts[imgUrlParts.length - 1];
 
             if (!imageExtensions.includes(newServerImgExt.toLowerCase())) {
@@ -65,7 +66,7 @@ const CreateServerForm = ({ setShowModal }) => {
         }
 
         // Will need to put some validations for this image url
-        if (newServerIcon.length > 0) {
+        if (newServerIcon.trim().length > 0) {
             newServer['image_url'] = newServerIcon
         }
 
@@ -116,7 +117,7 @@ const CreateServerForm = ({ setShowModal }) => {
             id='close-create-server-btn'
             className='pos-abs'
             onClick={() => setShowModal(false)}>
-                <img id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
+                <img onError={onErrorLoadDiscLogoHandler} id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
             </button>
         </div>
     )

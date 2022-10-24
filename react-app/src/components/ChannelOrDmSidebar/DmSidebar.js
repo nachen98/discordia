@@ -2,6 +2,8 @@ import { useSelector } from "react-redux"
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import SessionUserBar from "../SessionUserBar";
 import ServerBanner from "./ServerBanner";
+import userDiscImg from '../../img/discordia-mascot.png'
+import { onErrorLoadDiscLogo, onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const getOtherUserIdInDm = (sessionUserId, dmServer) => {
     const userIds = dmServer.name.split('-');
@@ -37,7 +39,7 @@ const DmSidebar = () => {
                             <div className={`dm-channel-card flx-row-align-ctr ${activeView}`}>
 
                                 <div className={`dm-logo-container flx-row-justify-align-ctr ${COLORS[colorInd]}-bg`}>
-                                    <img className='dm-logos' src='https://i.imgur.com/xjNdd63.png' alt='logo' />
+                                        <img onError={onErrorLoadDiscLogoHandler} className='dm-logos' src={userDiscImg} alt='logo' />
                                 </div>
                                 {users[dmRecipientsUserIds[ind]].username}
                             </div>

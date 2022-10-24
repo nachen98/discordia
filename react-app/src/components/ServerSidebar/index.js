@@ -4,6 +4,8 @@ import CreateServerModal from '../CreateServerModal'
 import ServerLogo from './ServerLogo'
 
 import './ServerSidebar.css'
+import userDiscImg from '../../img/discordia-mascot.png'
+import { onErrorLoadDiscLogoHandler } from '../../utils/helper'
 
 const ServerSidebar = () => {
     const servers = useSelector(state => state.regularServerReducer)
@@ -15,16 +17,6 @@ const ServerSidebar = () => {
     const dmLogoBackground = onDmHomepageBool ? 'on-dm-homepage-bg' : ''
     console.log(dmLogoBackground)
 
-    const serverImgs = [
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-        'https://m.media-amazon.com/images/I/41kvTKoc38L._AC_SX425_.jpg',
-    ]
-
     return (
         <div id='server-sidebar' className='flx-col-align-ctr'>
 
@@ -32,12 +24,10 @@ const ServerSidebar = () => {
             activeClassName='active-server'
             className={`server-navlink server-sidebar-img dm-server-nav flx-row-justify-align-ctr flx-shrink-null`}
             to='/channels/@me'>
-                <img
+                <img onError={onErrorLoadDiscLogoHandler}
                     id='dm-server-nav-logo'
                     className={`s${dmLogoBackground}`}
-                    // src='https://i.imgur.com/Pj1HWah.png'
-                    // src='https://i.imgur.com/xjNdd63.png'
-                    src='https://i.imgur.com/xjNdd63.png'
+                    src={userDiscImg}
                 />
             </NavLink>
 

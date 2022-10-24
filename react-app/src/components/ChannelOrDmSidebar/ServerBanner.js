@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ServerSettings from "../ServerSettings";
 import ServerSettingsModal from "../ServerSettingsModal";
 import { Modal } from "../../context/Modal";
+import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const ServerBanner = ({ isDm, serverImg, serverName }) => {
     const [showServerSettings, setShowServerSettings] = useState(false);
@@ -35,7 +36,7 @@ const ServerBanner = ({ isDm, serverImg, serverName }) => {
             onClick={openSettings}
             >
                 <span id='server-name'>{serverName}</span>
-                {!isDm && <img id='settings-dropdown-logo' src='https://i.imgur.com/FD5ylDu.png' alt='settings-dropdown' />}
+                {!isDm && <img onError={onErrorLoadDiscLogoHandler} id='settings-dropdown-logo' src='https://i.imgur.com/FD5ylDu.png' alt='settings-dropdown' />}
 
                 {showServerSettings && !isDm && <ServerSettings setShowServerSettingsModal={setShowServerSettingsModal} />}
 
@@ -55,11 +56,11 @@ const ServerBanner = ({ isDm, serverImg, serverName }) => {
             className='pos-rel'
             onClick={openSettings}
             >
-                <img id='server-banner-img' src={serverImg} />
+                <img onError={onErrorLoadDiscLogoHandler} id='server-banner-img' src={serverImg} />
 
                 <div className='pos-abs white-text server-name-offset flx-row-space-btw server-title-container'>
                     <span id='server-name'>{serverName}</span>
-                    <img id='settings-dropdown-logo' src='https://i.imgur.com/FD5ylDu.png' alt='settings-dropdown' />
+                    <img onError={onErrorLoadDiscLogoHandler} id='settings-dropdown-logo' src='https://i.imgur.com/FD5ylDu.png' alt='settings-dropdown' />
                 </div>
 
                 {showServerSettings && <ServerSettings setShowServerSettingsModal={setShowServerSettingsModal} />}

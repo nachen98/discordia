@@ -1,3 +1,5 @@
+import discordiaBruise from '../img/discordia-ow.jpg'
+import discordia from '../img/discordia.png'
 
 export function  getMonthYear (dateStr) {
 
@@ -43,9 +45,21 @@ export function  getMonthYear (dateStr) {
             break;
         default:
             mon = "October"
-            break; 
+            break;
     }
     let res = mon + " "+ dateValue +', ' + year
-    
+
     return mon + " "+ dateValue +', ' + year;
+}
+
+export const onLoadImg = (e) => {
+    e.target.className = e.target.className + ' loading-img';
+    e.target.src = discordia;
+    return;
+}
+
+export const onErrorLoadDiscLogoHandler = (e) => {
+    e.target.className = e.target.className + ' default-err-img'
+    e.target.src = discordiaBruise;
+    return;
 }

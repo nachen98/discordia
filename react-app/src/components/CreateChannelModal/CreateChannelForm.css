@@ -20,7 +20,7 @@
 #create-channel-header {
     margin-top: 15px;
     width: 95%;
-   
+
     color: var(--off-white-text);
     font-size: 20px;
     font-weight: 800;
@@ -28,11 +28,11 @@
 
 
 /* .create-channel-input {
-   
+
 } */
 .create-channel-label {
     margin-top: 25px;
-   
+
 }
 
 #create-channel-name-input{
@@ -40,14 +40,16 @@
     background-color: black;
     color: var(--off-white-text);
     border:none;
-    
 }
+
 #channel-name-input{
     display:flex;
+    flex-grow: 0;
+
     align-items: center;
     position:relative;
     box-sizing: border-box;
-    width: 100%;
+    width: 415px;
     height: 40px;
 
     border-radius: 5px;
@@ -55,9 +57,9 @@
     padding: 5px 10px;
     border: none;
     outline: none;
-    
+
     background-color: black;
-    
+
 }
 .inputPrefix-1HHwWv {
     position: absolute;
@@ -92,7 +94,7 @@
 #create-channel-bottom {
     justify-content: flex-end;
     box-sizing: border-box;
-   
+
 
     border-radius: 0 0 5px 5px;
 
