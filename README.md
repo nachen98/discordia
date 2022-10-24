@@ -32,7 +32,10 @@ Login by clicking on the 'Login' button located on the top right. You can also s
 
 
 #### You can also start DMs with other users in that same server! Just click on on a user on the right sidebar while you're viewing a server.
-![image](https://user-images.githubusercontent.com/60123981/197450536-608aa8fb-f0dc-445b-8711-ca12a1f81626.png)
+![image](https://user-images.githubusercontent.com/60123981/197452300-8e81a121-e93b-41ce-b025-3cc953e54210.png)
+
+![image](https://user-images.githubusercontent.com/60123981/197452216-75b339f2-fa13-4aaa-83b7-c94d9e62ef0b.png)
+
 
 
 #### You can also create your own server (and channels of course!) by clicking on the green + button below all the servers.
