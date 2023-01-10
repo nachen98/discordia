@@ -22,7 +22,7 @@ const SplashPage = () => {
                         <div className='splash-nav-inner-links flx-row-justify-align-ctr flx-row-space-evenly'>
                             <a className='white-text ctr-algn-text' href='https://linkedin.com/in/nachen-swe' target="_blank">Chen, Na</a>
                             <a className='white-text ctr-algn-text' href='https://www.linkedin.com/in/yibo-g-502684191/'  target="_blank">Guo, Yibo</a>
-                            <a className='white-text ctr-algn-text' href='https://github.com/hang-justin' target="_blank">Hang, Justin</a>
+                            <a className='white-text ctr-algn-text' href='https://www.linkedin.com/in/hang-justin/' target="_blank">Hang, Justin</a>
                         </div>
 
                         <NavLink className="flx-row-justify-align-ctr" to={"/login"}>
