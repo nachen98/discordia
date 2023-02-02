@@ -49,7 +49,7 @@ def seed_channels():
 
     server_2_channel_6 = Channel(
         name='general',
-        topic='Sports',
+        topic='Seven Kingdoms of Westeros',
         is_voice=False,
         server_id=2,
         created_at=datetime.now(),
@@ -58,7 +58,7 @@ def seed_channels():
 
     server_3_channel_7 = Channel(
         name='general',
-        topic='Yoga',
+        topic='AOL Instant Messenger',
         is_voice=False,
         server_id=3,
         created_at=datetime.now(),
@@ -67,7 +67,7 @@ def seed_channels():
 
     server_4_channel_8 = Channel(
         name='One Piece',
-        topic='is it real?',
+        topic='Straw Hats',
         is_voice=False,
         server_id=4,
         created_at=datetime.now(),
@@ -75,8 +75,8 @@ def seed_channels():
     )
 
     server_4_channel_9 = Channel(
-        name='Laugh Tale',
-        topic='',
+        name='Wano',
+        topic='Greatest arc ever',
         is_voice=False,
         server_id=4,
         created_at=datetime.now(),
