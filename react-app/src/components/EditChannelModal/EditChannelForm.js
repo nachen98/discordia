@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { updateChannel, deleteChannel } from "../../store/channel";
 import {channelReducer} from "../../store/channel";
+import { Modal } from "../../context/Modal"
+import ConfirmDeleteChannelForm from "./ConfirmDeleteChannelForm"
 import { onErrorLoadDiscLogoHandler } from "../../utils/helper";
 
 const EditChannelForm = ({ setShowModal, channelId }) => {
@@ -18,6 +20,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
     const [newTopic, setNewTopic] = useState("")
     const [newNameErrMsg, setNewNameErrMsg] = useState('')
     const [newTopicErrMsg, setNewTopicErrMsg] = useState('')
+    const [showConfirmDeleteForm, setShowConfirmDeleteForm] = useState(false);
 
     const currentServer = allServers[serverId]
 
@@ -59,6 +62,10 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
             .then(updatedChannel => history.push(`/channels/${updatedChannel.result.server_id}/${updatedChannel.result.id}`))
 
             .then(() => setShowModal(false))
+    }
+
+    const confirmDelete = () => {
+        setShowConfirmDeleteForm(true)
     }
 
     const handleDeleteChannel = () => {
@@ -103,7 +110,7 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
             </form>
             <div id='button-containers' className="flx-row-space-btw">
                 <div id='delete-channel-button'>
-                    <button id='delete-channel-btn' className="edit-delete-buttons" onClick={handleDeleteChannel}>
+                    <button id='delete-channel-btn' className="edit-delete-buttons" onClick={confirmDelete}>
                         Delete Channel
                     </button>
                 </div>
@@ -121,6 +128,12 @@ const EditChannelForm = ({ setShowModal, channelId }) => {
                 onClick={() => setShowModal(false)}>
                 <img onError={onErrorLoadDiscLogoHandler} id='close-modal-x' src='https://i.imgur.com/ai6mpis.png' alt='close' />
             </button>
+
+            {showConfirmDeleteForm && (
+                <Modal onClose={() => setShowConfirmDeleteForm(false)}>
+                    <ConfirmDeleteChannelForm currentServer={currentServer} setShowConfirmDeleteForm={setShowConfirmDeleteForm} channel={channel} />
+                </Modal>
+            )}
         </div>
 
 

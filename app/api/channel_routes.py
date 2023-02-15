@@ -41,6 +41,8 @@ def edit_channel(channel_id):
 @channel_routes.route('/<int:channel_id>', methods=['DELETE'])
 @login_required
 def delete_channel(channel_id):
+
+    
     channel = Channel.query.filter(Channel.id == channel_id).first()
 
     if channel is not None:
