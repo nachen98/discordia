@@ -28,24 +28,24 @@ function App() {
     //   setLoaded(true);
     // })();
 
-    console.log('running the useEffect in app')
+    //console.log('running the useEffect in app')
 
     dispatch(authenticate())
       .catch((e) => {
-        console.log('authenticate error ', e)
+        //console.log('authenticate error ', e)
         setLoaded(true)})
       .then(() => dispatch(getAllRegularServers()))
       .catch((e) => {
-        console.log('get all regular servers error ', e)
+        //console.log('get all regular servers error ', e)
         setLoaded(true)})
       .then(() => dispatch(getAllDmServers()))
       .catch((e) => {
-        console.log('get all dm servers error ', e)
+        //console.log('get all dm servers error ', e)
         setLoaded(true)})
       .then(() => setLoaded(true))
       .catch((e) => console.log('set loaded errror (catch all?) ', e))
 
-    console.log('finish running the useEffect in app')
+    //console.log('finish running the useEffect in app')
 
   }, [dispatch]);
 
