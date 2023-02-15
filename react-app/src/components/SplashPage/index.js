@@ -20,9 +20,9 @@ const SplashPage = () => {
                         </NavLink>
 
                         <div className='splash-nav-inner-links flx-row-justify-align-ctr flx-row-space-evenly'>
-                            <a className='white-text ctr-algn-text' href='https://github.com/nachen98'>Chen, Na</a>
-                            <a className='white-text ctr-algn-text' href='https://github.com/GUOYIBO'>Guo, Yibo</a>
-                            <a className='white-text ctr-algn-text' href='https://github.com/juanpunchman'>Hang, Justin</a>
+                            <a className='white-text ctr-algn-text' href='https://linkedin.com/in/nachen-swe' target="_blank">Chen, Na</a>
+                            <a className='white-text ctr-algn-text' href='https://www.linkedin.com/in/yibo-g-502684191/'  target="_blank">Guo, Yibo</a>
+                            <a className='white-text ctr-algn-text' href='https://www.linkedin.com/in/hang-justin/' target="_blank">Hang, Justin</a>
                         </div>
 
                         <NavLink className="flx-row-justify-align-ctr" to={"/login"}>
@@ -30,9 +30,9 @@ const SplashPage = () => {
                         </NavLink>
                     </nav>
                     <div className='splash-intro-text'>
-                        <h1 className={`white-text`}>IMAGINE A PLACE</h1>
-                        <h3 className={`h3-intro-text white-text`}>...consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </h3>
-                        <h3 className={`h3-intro-text white-text`}>Fermentum posuere urna nec tincidunt praesent. Ornare lectus sit amet est placerat in egestas.</h3>
+                        <h1 className={`white-text`}>IMAGINE A PLACE...</h1>
+                        <h3 className={`h3-intro-text white-text`}>...where you can belong to a school club, a gaming group, or a worldwide art </h3>
+                        <h3 className={`h3-intro-text white-text`}>community. Where just you and a handful of friends can spend time together.</h3>
                     </div>
                 </div>
             </div>
@@ -41,10 +41,9 @@ const SplashPage = () => {
                 <div className='section-contents flx-row-justify-align-ctr'>
                     <img onError={onErrorLoadDiscLogoHandler} className='splash-sect-imgs' src={splash2} alt='splash-section'/>
                     <div className='flx-col section-side-desc'>
-                        {/* <h1>Create an invite-only place where you belong</h1>
-                        <h3>Discord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.</h3> */}
-                        <h1>Lorem ipsum dolor sit amet</h1>
-                        <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
+                        <h1>Create an invite-only place where you belong</h1>
+                        <h3>Discordia servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.</h3>
+                        
                     </div>
                 </div>
             </div>
@@ -52,8 +51,8 @@ const SplashPage = () => {
             <div id='splash-sect-3' className='flx-row-justify-align-ctr'>
                 <div className='section-contents flx-row-justify-align-ctr'>
                     <div className='flx-col section-side-desc'>
-                    <h1>Lorem ipsum dolor sit amet</h1>
-                        <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
+                    <h1>Where hanging out is easy</h1>
+                        <h3>Grab a seat in a voice channel when you're free. Friends in your server can see you're around and instantly pop in to talk without having to call. </h3>
                     </div>
                     <img onError={onErrorLoadDiscLogoHandler} className='splash-sect-imgs' src={splash3} alt='splash-section'/>
                 </div>
@@ -63,8 +62,8 @@ const SplashPage = () => {
                 <div className='section-contents flx-row-justify-align-ctr'>
                     <img onError={onErrorLoadDiscLogoHandler} className='splash-sect-imgs' src={splash4} alt='splash-section'/>
                     <div className='flx-col section-side-desc'>
-                    <h1>Lorem ipsum dolor sit amet</h1>
-                    <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
+                    <h1>From few to a fandom</h1>
+                    <h3>Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more. </h3>
                     </div>
                 </div>
             </div>
@@ -72,8 +71,8 @@ const SplashPage = () => {
             <div id='splash-sect-5' className='flx-row-justify-align-ctr'>
                 <div className='section-contents flx-row-justify-align-ctr'>
                     <div className='flx-row-justify-algn-ctr ctr-align-text'>
-                    <h1>Lorem ipsum dolor sit amet</h1>
-                        <h3>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum posuere urna nec tincidunt praesent. </h3>
+                    <h1>Reliable tech to get closer</h1>
+                        <h3>Low-latency voice and video feels like you're in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share. </h3>
                     </div>
                     <img onError={onErrorLoadDiscLogoHandler} className='splash-sect-imgs' src={splash5} alt='splash-section'/>
                 </div>
